@@ -2,7 +2,7 @@ package tp;
 
 
 public class ManejarFechas {
-	public static Fecha ParsearFecha(String cadena){
+	public static Fecha parsearFecha(String cadena){
 		Fecha fecha = new Fecha();
 		String anio = new String();
 		String mes = new String();
@@ -36,11 +36,14 @@ public class ManejarFechas {
 	
 	public static void main (String [ ] args) 
     { 	Fecha fecha = new Fecha();
-		fecha = ParsearFecha("1998-03-26");
-		System.out.println(fecha.formato);
-		System.out.println(fecha.anio);System.out.println(fecha.mes);System.out.println(fecha.dia);
+		fecha = parsearFecha("1991-03-27");
+		Fecha otraFecha = new Fecha();
+		otraFecha = parsearFecha("12/07/2001");
+		System.out.println(otraFecha.esMayorQue(fecha));
         return;
      } 
+	
+	
 }
 
 
