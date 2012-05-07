@@ -2,6 +2,20 @@ package tp;
 
 
 public class ManejarFechas {
+
+	public static boolean esISO8601(String cadena) {
+		return (cadena.substring(4,5).equals("-")) && (cadena.substring(7, 8).equals("-"));
+	}
+	
+	public static boolean esLatinoamericano(String cadena) {
+		return (cadena.substring(2, 3).equals("/")) && ((cadena.substring(5, 6).equals("/")));
+	}
+	
+	public static boolean esNorteamericano(String cadena) {
+		return (cadena.substring(2, 3).equals("-")) && ((cadena.substring(5, 6).equals("-")));
+	}	
+	
+	
 	public static Fecha parsearFecha(String cadena){
 		Fecha fecha = new Fecha();
 		String anio = new String();
@@ -9,19 +23,19 @@ public class ManejarFechas {
 		String dia = new String();
 		String formato = new String();
 		cadena = cadena.replaceAll(" ", "");
-		if((cadena.substring(4,5).equals("-")) && (cadena.substring(7, 8).equals("-")) ){
+		if(esISO8601(cadena)){
 			anio = cadena.substring(0, 4);
 			mes = cadena.substring(5, 7);
 			dia = cadena.substring(8,10);
 			formato = "ISO8601";
 			
-		} else if((cadena.substring(2, 3).equals("/")) && ((cadena.substring(5, 6).equals("/")))){
+		} else if(esLatinoamericano(cadena)){
 			dia = cadena.substring(0, 2);
 			mes = cadena.substring(3, 5);
 			anio = cadena.substring(6, 10);
 			formato = "Latinoamericano";
 			System.out.println("latino");
-		} else if((cadena.substring(2, 3).equals("-")) && ((cadena.substring(5, 6).equals("-")))){
+		} else if(esNorteamericano(cadena)){
 			mes = cadena.substring(0, 2);
 			dia = cadena.substring(3, 5);
 			anio = cadena.substring(6, 10);
