@@ -3,15 +3,15 @@ package tp;
 
 public class ManejarFechas {
 
-	public static boolean esISO8601(String cadena) {
+	public static boolean esFormatoISO8601(String cadena) {
 		return (cadena.substring(4,5).equals("-")) && (cadena.substring(7, 8).equals("-"));
 	}
 	
-	public static boolean esLatinoamericano(String cadena) {
+	public static boolean esFormatoLatinoamericano(String cadena) {
 		return (cadena.substring(2, 3).equals("/")) && ((cadena.substring(5, 6).equals("/")));
 	}
 	
-	public static boolean esNorteamericano(String cadena) {
+	public static boolean esFormatoNorteamericano(String cadena) {
 		return (cadena.substring(2, 3).equals("-")) && ((cadena.substring(5, 6).equals("-")));
 	}	
 	
@@ -23,19 +23,17 @@ public class ManejarFechas {
 		String dia = new String();
 		String formato = new String();
 		cadena = cadena.replaceAll(" ", "");
-		if(esISO8601(cadena)){
+		if(esFormatoISO8601(cadena)){
 			anio = cadena.substring(0, 4);
 			mes = cadena.substring(5, 7);
 			dia = cadena.substring(8,10);
 			formato = "ISO8601";
-			
-		} else if(esLatinoamericano(cadena)){
+		} else if(esFormatoLatinoamericano(cadena)){
 			dia = cadena.substring(0, 2);
 			mes = cadena.substring(3, 5);
 			anio = cadena.substring(6, 10);
 			formato = "Latinoamericano";
-			System.out.println("latino");
-		} else if(esNorteamericano(cadena)){
+		} else if(esFormatoNorteamericano(cadena)){
 			mes = cadena.substring(0, 2);
 			dia = cadena.substring(3, 5);
 			anio = cadena.substring(6, 10);
@@ -54,7 +52,7 @@ public class ManejarFechas {
 		Fecha otraFecha = new Fecha();
 		otraFecha = parsearFecha("12/07/2001");
 		System.out.println(otraFecha.esMayorQue(fecha));
-        return;
+		return;
      } 
 	
 	
