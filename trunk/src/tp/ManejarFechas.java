@@ -16,6 +16,7 @@ public class ManejarFechas {
 	}	
 	
 	
+	
 	public static Fecha parsearFecha(String cadena){
 		Fecha fecha = new Fecha();
 		String anio = new String();
@@ -51,7 +52,7 @@ public class ManejarFechas {
 		fecha = parsearFecha("1991-03-27");
 		Fecha otraFecha = new Fecha();
 		otraFecha = parsearFecha("12/07/2001");
-		System.out.println(otraFecha.esMayorQue(fecha));
+		System.out.println(otraFecha.esAnteriorQue(fecha));
 		return;
      } 
 	

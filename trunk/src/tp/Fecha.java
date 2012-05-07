@@ -6,20 +6,23 @@ public class Fecha {
 	int anio;
 	String formato;
 
-	public boolean esMayorQue(Fecha otraFecha){
-		return(this.mayorAnio(otraFecha.anio) || (this.mayorMes(otraFecha)) || (this.mayorDia(otraFecha)));
+	public boolean esAnteriorQue(Fecha otraFecha){
+		return(this.menorAnio(otraFecha.anio) || this.menorMes(otraFecha) || this.menorDia(otraFecha));
 	}
 	
-	public boolean mayorAnio(int otroAnio){
-		return(this.anio > otroAnio);
+	public boolean menorAnio(int otroAnio){
+		return(this.anio < otroAnio);
 	}
 	
-	public boolean mayorMes(Fecha otraFecha){
-		return(this.anio == otraFecha.anio && this.mes > otraFecha.mes);
+	public boolean menorMes(Fecha otraFecha){
+		return(this.anio == otraFecha.anio && this.mes < otraFecha.mes);
 	}
 	
-	public boolean mayorDia(Fecha otraFecha){
-		return(this.anio == otraFecha.anio && this.mes == otraFecha.mes && this.dia > otraFecha.dia);
+	public boolean menorDia(Fecha otraFecha){
+		return(this.anio == otraFecha.anio && this.mes == otraFecha.mes && this.dia < otraFecha.dia);
 	}
+	
+
+	
 }
 
