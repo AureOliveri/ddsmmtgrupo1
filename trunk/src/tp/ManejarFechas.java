@@ -1,49 +1,46 @@
 package tp;
 
-
 public class ManejarFechas {
 
-	public static boolean esFormatoISO8601(String cadena) {
-		return (cadena.substring(4,5).equals("-")) && (cadena.substring(7, 8).equals("-"));
+	public static boolean esFormatoISO8601(String fechaS) {
+		return (fechaS.substring(4,5).equals("-")) && (fechaS.substring(7, 8).equals("-"));
 	}
 	
-	public static boolean esFormatoLatinoamericano(String cadena) {
-		return (cadena.substring(2, 3).equals("/")) && ((cadena.substring(5, 6).equals("/")));
+	public static boolean esFormatoLatinoamericano(String fechaS) {
+		return (fechaS.substring(2, 3).equals("/")) && ((fechaS.substring(5, 6).equals("/")));
 	}
 	
-	public static boolean esFormatoNorteamericano(String cadena) {
-		return (cadena.substring(2, 3).equals("-")) && ((cadena.substring(5, 6).equals("-")));
+	public static boolean esFormatoNorteamericano(String fechaS) {
+		return (fechaS.substring(2, 3).equals("-")) && ((fechaS.substring(5, 6).equals("-")));
 	}	
 	
-	
-	
-	public static Fecha parsearFecha(String cadena){
+	public static Fecha parsearFecha(String fechaString) {
 		Fecha fecha = new Fecha();
 		String anio = new String();
 		String mes = new String();
 		String dia = new String();
 		String formato = new String();
-		cadena = cadena.replaceAll(" ", "");
-		if(esFormatoISO8601(cadena)){
-			anio = cadena.substring(0, 4);
-			mes = cadena.substring(5, 7);
-			dia = cadena.substring(8,10);
+		fechaString = fechaString.replaceAll(" ", "");
+		if(esFormatoISO8601(fechaString)){
+		
+			anio = fechaString.substring(0, 4);
+			mes = fechaString.substring(5, 7);
+			dia = fechaString.substring(8,10);
 			formato = "ISO8601";
-		} else if(esFormatoLatinoamericano(cadena)){
-			dia = cadena.substring(0, 2);
-			mes = cadena.substring(3, 5);
-			anio = cadena.substring(6, 10);
+		} else if(esFormatoLatinoamericano(fechaString)){
+			dia = fechaString.substring(0, 2);
+			mes = fechaString.substring(3, 5);
+			anio = fechaString.substring(6, 10);
 			formato = "Latinoamericano";
-		} else if(esFormatoNorteamericano(cadena)){
-			mes = cadena.substring(0, 2);
-			dia = cadena.substring(3, 5);
-			anio = cadena.substring(6, 10);
+		} else if(esFormatoNorteamericano(fechaString)){
+			mes = fechaString.substring(0, 2);
+			dia = fechaString.substring(3, 5);
+			anio = fechaString.substring(6, 10);
 			formato = "Norteamericano";
 		}
-		fecha.anio = Integer.parseInt(anio);
-		fecha.mes = Integer.parseInt(mes);
-		fecha.dia = Integer.parseInt(dia);
-		fecha.formato = formato;
+		
+		fecha.convertirStringAFecha(anio, mes, dia, formato);
+		
 		return fecha;
 	}
 	
@@ -51,9 +48,12 @@ public class ManejarFechas {
     { 	Fecha fecha = new Fecha();
 		fecha = parsearFecha("1991-03-27");
 		Fecha otraFecha = new Fecha();
-		otraFecha = parsearFecha("12/07/2001");
+		otraFecha = parsearFecha("27/03/1991");
 		System.out.println(otraFecha.esAnteriorQue(fecha));
+		
 		return;
+		
+		
      } 
 	
 	
