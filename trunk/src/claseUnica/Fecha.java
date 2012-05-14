@@ -212,7 +212,7 @@ public class Fecha {
 		  totalDiasOtraFecha = otraFecha.obtenerDias();
 		  difDias = totalDiasFecha - totalDiasOtraFecha;		  
 		  if(this.esAnteriorQue(otraFecha)){
-		   System.out.println("La cantidad de dias entre fechas es: ");
+		   System.out.println("La cantidad de dias entre fechas es: "+ (difDias * -1));
 		   return (difDias * -1);
 		   
 		  }else if(!this.esAnteriorQue(otraFecha)){
