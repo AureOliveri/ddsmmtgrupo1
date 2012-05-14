@@ -74,11 +74,10 @@ public class Fecha {
 			}
 			this.convertirStringAFecha(anioS, mesS, diaS, formatoS);
 			if(mes > 12 || dia > this.diasDelMes(mes)){
-				System.out.println("La fecha ingresada es invalida.");
+				throw new Exception();
 			}
 		} catch (Exception e) {
-			System.out
-					.println("La cadena ingresada no concuerda con ningun formato valido");
+			System.out.println("La cadena ingresada no concuerda con ningun formato valido");
 		}
 	}
 
@@ -231,6 +230,6 @@ public class Fecha {
 		  }else{
 		   return false;
 		  }
-	}
-	
+	}	
+
 }
