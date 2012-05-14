@@ -67,8 +67,7 @@ public class Fecha {
 		String mes = new String();
 		String dia = new String();
 		String formato = new String();
-		
-		fechaString.replaceAll(" ", "");
+		fechaString.replaceAll(" ","");
 		if(esFormatoISO8601((String)fechaString)){
 			
 			anio = fechaString.substring(0, 4);
@@ -85,6 +84,8 @@ public class Fecha {
 			dia = fechaString.substring(3, 5);
 			anio = fechaString.substring(6, 10);
 			formato = "Norteamericano";
+		} else {
+			System.out.println("aca vendria el error el error");
 		}
 		
 		convertirStringAFecha(anio, mes, dia, formato);
