@@ -7,22 +7,10 @@ public class Fecha {
 	private int fechaFinal;
 	private String formato;
 
-	public boolean esAnteriorQue(Fecha otraFecha) {
-		return (this.menorAnio(otraFecha.anio) || this.menorMes(otraFecha) || this
-				.menorDia(otraFecha));
+     public boolean esAnteriorQue(Fecha otraFecha) {
+		return (this.obtenerDias() < otraFecha.obtenerDias());
 	}
 
-	public boolean menorAnio(int otroAnio) {
-		return (this.anio < otroAnio);
-	}
-
-	public boolean menorMes(Fecha otraFecha) {
-		return (this.anio == otraFecha.anio && this.mes < otraFecha.mes);
-	}
-
-	public boolean menorDia(Fecha otraFecha) {
-		return (this.anio == otraFecha.anio && this.mes == otraFecha.mes && this.dia < otraFecha.dia);
-	}
 
 	public int convertirStringAFecha(String anio, String mes, String dia,
 			String formato) {
@@ -63,7 +51,6 @@ public class Fecha {
 
 	public Fecha(String fechaString) {
 		try {
-
 			String anio = new String();
 			String mes = new String();
 			String dia = new String();
@@ -86,8 +73,10 @@ public class Fecha {
 				anio = fechaString.substring(6, 10);
 				formato = "Norteamericano";
 			}
+			if(Integer.parseInt(mes) <= 12 && Integer.parseInt(dia) <= this.DiasDelMes(Integer.parseInt(mes))){
 			convertirStringAFecha(anio, mes, dia, formato);
 			return;
+			}
 		} catch (Exception e) {
 			System.out
 					.println("La cadena ingresada no concuerda con ningun formato valido");
@@ -223,13 +212,12 @@ public class Fecha {
 		  int difDias;
 		  totalDiasFecha = this.obtenerDias();
 		  totalDiasOtraFecha = otraFecha.obtenerDias();
-		  difDias = totalDiasFecha - totalDiasOtraFecha;
-		  
-		  if(difDias < 0){
+		  difDias = totalDiasFecha - totalDiasOtraFecha;		  
+		  if(this.esAnteriorQue(otraFecha)){
 		   System.out.println("La cantidad de dias entre fechas es: ");
 		   return (difDias * -1);
 		   
-		  }else if(difDias > 0){
+		  }else if(!this.esAnteriorQue(otraFecha)){
 		   System.out.println("La cantidad de dias entre fechas es: " + difDias);
 		   return (difDias);
 		  }else{
@@ -245,4 +233,5 @@ public class Fecha {
 		   return false;
 		  }
 	}
+	
 }
