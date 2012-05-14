@@ -63,11 +63,13 @@ public class Fecha {
 	
 	
 	public Fecha (String fechaString) {
-		String anio = new String();
+		try {
+			
+		String anio = new String();		
 		String mes = new String();
 		String dia = new String();
 		String formato = new String();
-		fechaString.replaceAll(" ","");
+		fechaString = fechaString.replaceAll(" ", "");
 		if(esFormatoISO8601((String)fechaString)){
 			
 			anio = fechaString.substring(0, 4);
@@ -84,13 +86,13 @@ public class Fecha {
 			dia = fechaString.substring(3, 5);
 			anio = fechaString.substring(6, 10);
 			formato = "Norteamericano";
-		} else {
-			System.out.println("aca vendria el error el error");
-		}
-		
+		} 		
 		convertirStringAFecha(anio, mes, dia, formato);
 		return;		
+	} catch (Exception e) {
+		System.out.println("La cadena ingresada no concuerda con ningun formato valido");
 	}
+}
 	
 	public static boolean esFormatoISO8601(String fechaS) {
 		return (fechaS.substring(4,5).equals("-")) && (fechaS.substring(7, 8).equals("-"));
@@ -184,6 +186,7 @@ public class Fecha {
 		}
 		return ndias;
    }
+	
 	
 
 }
