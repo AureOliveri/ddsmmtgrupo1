@@ -12,14 +12,13 @@ public class Fecha {
 	}
 
 
-	public int convertirStringAFecha(String anio, String mes, String dia,
+	public void convertirStringAFecha(String anio, String mes, String dia,
 			String formato) {
 		this.anio = Integer.parseInt(anio);
 		this.mes = Integer.parseInt(mes);
 		this.dia = Integer.parseInt(dia);
 		this.setFormato(formato);
-		this.fechaFinal = this.anio * 10000 + this.mes * 100 + this.dia;
-		return fechaFinal;
+		return ;
 	}
 
 	public void setFormato(String formato) {
@@ -51,31 +50,31 @@ public class Fecha {
 
 	public Fecha(String fechaString) {
 		try {
-			String anio = new String();
-			String mes = new String();
-			String dia = new String();
-			String formato = new String();
+			String anioS = new String();
+			String mesS = new String();
+			String diaS = new String();
+			String formatoS = new String();
 			fechaString = fechaString.replaceAll(" ", "");
 			if (esFormatoISO8601((String) fechaString)) {
 
-				anio = fechaString.substring(0, 4);
-				mes = fechaString.substring(5, 7);
-				dia = fechaString.substring(8, 10);
-				formato = "ISO8601";
+				anioS = fechaString.substring(0, 4);
+				mesS = fechaString.substring(5, 7);
+				diaS = fechaString.substring(8, 10);
+				formatoS = "ISO8601";
 			} else if (esFormatoLatinoamericano(fechaString)) {
-				dia = fechaString.substring(0, 2);
-				mes = fechaString.substring(3, 5);
-				anio = fechaString.substring(6, 10);
-				formato = "Latinoamericano";
+				diaS = fechaString.substring(0, 2);
+				mesS = fechaString.substring(3, 5);
+				anioS = fechaString.substring(6, 10);
+				formatoS = "Latinoamericano";
 			} else if (esFormatoNorteamericano(fechaString)) {
-				mes = fechaString.substring(0, 2);
-				dia = fechaString.substring(3, 5);
-				anio = fechaString.substring(6, 10);
-				formato = "Norteamericano";
+				mesS = fechaString.substring(0, 2);
+				diaS = fechaString.substring(3, 5);
+				anioS = fechaString.substring(6, 10);
+				formatoS = "Norteamericano";
 			}
-			if(Integer.parseInt(mes) <= 12 && Integer.parseInt(dia) <= this.DiasDelMes(Integer.parseInt(mes))){
-			convertirStringAFecha(anio, mes, dia, formato);
-			return;
+			this.convertirStringAFecha(anioS, mesS, diaS, formatoS);
+			if(mes > 12 || dia > this.diasDelMes(mes)){
+				System.out.println("La fecha ingresada es invalida.");
 			}
 		} catch (Exception e) {
 			System.out
@@ -148,7 +147,7 @@ public class Fecha {
 		return cont;
 	}
 	*/
-	public int DiasDelMes(int mes) {
+	public int diasDelMes(int mes) {
 		int ndias = 0;
 		int f = 0;
 
@@ -201,7 +200,7 @@ public class Fecha {
 	public int obtenerDias(){
 		int dias = this.getDia() + this.getAnio()*365;
 		for (int i = 0; (i < this.getMes()-1); i++) {
-			dias += DiasDelMes(i);
+			dias += diasDelMes(i);
 		}
 		return dias;
 	}
