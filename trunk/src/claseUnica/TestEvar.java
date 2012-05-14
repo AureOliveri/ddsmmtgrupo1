@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TestEvar {
 	@Test
 	public void tieneFormatoLatinoamericano(){
-		Fecha fecha = new Fecha("27/03/1991");
-		System.out.println(fecha.getAnio());
+		Fecha fecha = new Fecha("29  / 03/19  91");
+		System.out.println("El formato es:"+fecha.getFormato());
 		Assert.assertTrue(fecha.getFormato().equals("Latinoamericano"));
 	}
 }
