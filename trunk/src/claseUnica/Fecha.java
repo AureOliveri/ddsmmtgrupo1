@@ -48,7 +48,7 @@ public class Fecha {
 	public Fecha() {
 	}
 
-	public Fecha(String fechaString) {
+	public Fecha(String fechaString) throws parserException {
 		try {
 			String anioS = new String();
 			String mesS = new String();
@@ -77,7 +77,7 @@ public class Fecha {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			System.out.println("La cadena ingresada no concuerda con ningun formato valido");
+			throw new parserException("La cadena ingresada no concuerda con ningun formato valido" , e);
 		}
 	}
 
@@ -203,7 +203,7 @@ public class Fecha {
 		}
 		return dias;
 	}
-	
+
 	public int diferenciaDeDiasCon(Fecha otraFecha){
 		  int totalDiasFecha;
 		  int totalDiasOtraFecha;
@@ -219,8 +219,8 @@ public class Fecha {
 		   System.out.println("La cantidad de dias entre fechas es: " + difDias);
 		   return (difDias);
 		  }else{
-			 System.out.println("Las fechas son iguales.");
-		   return 0;
+			  System.out.println("Las fechas son iguales.");
+		      return 0;
 		  }
 	}
 	
@@ -231,5 +231,4 @@ public class Fecha {
 		   return false;
 		  }
 	}	
-
 }
