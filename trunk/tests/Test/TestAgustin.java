@@ -5,10 +5,11 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import claseUnica.Fecha;
+import claseUnica.parserException;
 
 public class TestAgustin {
 	@Test
-	public void esElMismoDia(){
+	public void esElMismoDia() throws parserException{
 		int deberiaSerCero;
 		Fecha fecha1 = new Fecha("23-01-2000");
 		Fecha fecha2 = new Fecha("08/23/2000");
