@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import claseUnica.Fecha;
+import claseUnica.parserException;
 
 public class TestPablo {
 
@@ -31,10 +32,14 @@ public class TestPablo {
 			Assert.assertSame(0,fecha2.diferenciaDeDiasCon(fecha1));
 		}
 		
-		@Test (expected=Exception.class)
+		@Test (expected=Exception.class) // error de parseInt("wa") 
 		public void malIngresoFecha() {
 			fecha2.convertirStringAFecha("wa", "e", "2", "no");
 		}
 		
+		@Test (expected=parserException.class) // formato de fecha mal
+		public void malIngresoFecha2() throws parserException {
+			fecha2 = new Fecha("31 - 12 / 1999");
+		}		
 }		
 		
