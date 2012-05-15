@@ -26,15 +26,9 @@ public class TestPablo {
 		}
 
 		@Test
-		public void cadenaAFecha() {
-			fecha2.convertirStringAFecha("2012", "12", "25", "Norteamericano");
-			Assert.assertSame(fecha1.getFecha(),fecha2.getFecha());
-		}
-		
-		@Test
 		public void igualesOtroFormato() {
 			fecha2.convertirStringAFecha("2012", "12", "25", "ISO8601");
-			Assert.assertSame(fecha1.getFecha(),fecha2.getFecha());
+			Assert.assertSame(0,fecha2.diferenciaDeDiasCon(fecha1));
 		}
 		
 		@Test (expected=Exception.class)
