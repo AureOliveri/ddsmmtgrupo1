@@ -3,9 +3,7 @@ package Test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import claseUnica.Fecha;
-import claseUnica.parserException;
 
 public class TestPablo {
 
