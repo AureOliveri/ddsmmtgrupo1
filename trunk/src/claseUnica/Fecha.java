@@ -1,13 +1,67 @@
 package claseUnica;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class Fecha {
 	private int dia;
 	private int mes;
 	private int anio;
 	private int fechaFinal;
 	private String formato;
+	private Map<Integer, Integer> diasPorMes = new HashMap<Integer, Integer>();
 
-     public boolean esAnteriorQue(Fecha otraFecha) {
+	public Fecha(String fechaString) {
+		String anioS = new String();
+		String mesS = new String();
+		String diaS = new String();
+		String formatoS = new String();
+		fechaString = fechaString.replaceAll(" ", "");
+
+		if (esFormatoISO8601(fechaString)) {
+			this.crearFecha(fechaString.substring(0, 4),
+					fechaString.substring(5, 7), fechaString.substring(8, 10),
+					"ISO8601");
+		} else if (esFormatoLatinoamericano(fechaString)) {
+			this.crearFecha(fechaString.substring(6, 10),
+					fechaString.substring(3, 5), fechaString.substring(0, 2),
+					"Latinoamericano");
+		} else if (esFormatoNorteamericano(fechaString)) {
+			mesS = fechaString.substring(0, 2);
+			diaS = fechaString.substring(3, 5);
+			anioS = fechaString.substring(6, 10);
+			formatoS = "Norteamericano";
+		} else {
+			throw new parserException(
+					"La cadena ingresada no concuerda con ningun formato valido");
+		}
+		if (mes > 12 || dia > this.diasPorMes.get(mes)) {
+			throw new RuntimeException();
+		}
+		
+		diasPorMes.put(1, 31);
+		diasPorMes.put(2, 28);
+		diasPorMes.put(3, 31);
+		diasPorMes.put(4, 30);
+		diasPorMes.put(5, 31);
+		diasPorMes.put(6, 30);
+		diasPorMes.put(7, 31);
+		diasPorMes.put(8, 31);
+		diasPorMes.put(9, 30);
+		diasPorMes.put(10, 31);
+		diasPorMes.put(11, 30);
+		diasPorMes.put(12, 31);
+		
+		
+	}
+	
+	private void crearFecha(String anio, String mes, String dia, String formato) {
+		this.convertirStringAFecha(anio, mes, dia, formato);
+		this.formato = formato;
+	}
+
+	public boolean esAnteriorQue(Fecha otraFecha) {
 		return (this.obtenerDias() < otraFecha.obtenerDias());
 	}
 
@@ -48,38 +102,6 @@ public class Fecha {
 	public Fecha() {
 	}
 
-	public Fecha(String fechaString) throws parserException {
-		try {
-			String anioS = new String();
-			String mesS = new String();
-			String diaS = new String();
-			String formatoS = new String();
-			fechaString = fechaString.replaceAll(" ", "");
-			if (esFormatoISO8601((String) fechaString)) {
-
-				anioS = fechaString.substring(0, 4);
-				mesS = fechaString.substring(5, 7);
-				diaS = fechaString.substring(8, 10);
-				formatoS = "ISO8601";
-			} else if (esFormatoLatinoamericano(fechaString)) {
-				diaS = fechaString.substring(0, 2);
-				mesS = fechaString.substring(3, 5);
-				anioS = fechaString.substring(6, 10);
-				formatoS = "Latinoamericano";
-			} else if (esFormatoNorteamericano(fechaString)) {
-				mesS = fechaString.substring(0, 2);
-				diaS = fechaString.substring(3, 5);
-				anioS = fechaString.substring(6, 10);
-				formatoS = "Norteamericano";
-			}
-			this.convertirStringAFecha(anioS, mesS, diaS, formatoS);
-			if(mes > 12 || dia > this.diasDelMes(mes)){
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			throw new parserException("La cadena ingresada no concuerda con ningun formato valido" , e);
-		}
-	}
 
 	public static boolean esFormatoISO8601(String fechaS) {
 		return (fechaS.substring(4, 5).equals("-"))
@@ -96,110 +118,16 @@ public class Fecha {
 				&& ((fechaS.substring(5, 6).equals("-")));
 	}
 
-	/*public int cantidadDiasEntreFechas(Fecha f2) {
-
-		int cont = 1;
-
-		int anioMayor = this.getAnio();
-		int mesMayor = this.getMes();
-		int diaMayor = this.getDia();
-		int anioMenor = f2.getAnio();
-		int mesMenor = f2.getMes();
-		int diaMenor = f2.getDia();
-
-		int FMayor = (anioMayor * 10000 + mesMayor * 100 + diaMayor);
-		int Fmenor = (anioMenor * 10000 + mesMenor * 100 + diaMenor);
-		if (FMayor >= Fmenor) {
-			int mesMaux = mesMayor;
-			int diaMaux = diaMayor;
-
-			while (anioMenor <= anioMayor) {
-
-				if (anioMenor < anioMayor) {
-					mesMayor = 12;
-					diaMayor = 31;
-				} else {
-					mesMayor = mesMaux;
-					diaMayor = diaMaux;
-				}
-
-				while (mesMenor <= mesMayor) {
-					int DiasDelMes = 0;
-					if (mesMenor == mesMayor) {
-						DiasDelMes = diaMayor;
-					} else {
-						DiasDelMes = DiasDelMes(anioMenor, mesMenor);
-					}
-
-					while (diaMenor <= DiasDelMes) {
-						cont++;
-						diaMenor++;
-					}
-					diaMenor = 1;
-					mesMenor++;
-				}
-				mesMenor = 1;
-				anioMenor++;
-			}
-
-		}
-		return cont;
-	}
-	*/
-	public int diasDelMes(int mes) {
-		int ndias = 0;
-		int f = 0;
-
-		if (this.esBiciesto()) {
-			f = 29;
-		} else {
-			f = 28;
-		}
-		switch (mes) {
-		case 1:
-			ndias = 31;
-			break;
-		case 2:
-			ndias = f;
-			break;
-		case 3:
-			ndias = 31;
-			break;
-		case 4:
-			ndias = 30;
-			break;
-		case 5:
-			ndias = 31;
-			break;
-		case 6:
-			ndias = 30;
-			break;
-		case 7:
-			ndias = 31;
-			break;
-		case 8:
-			ndias = 31;
-			break;
-		case 9:
-			ndias = 30;
-			break;
-		case 10:
-			ndias = 31;
-			break;
-		case 11:
-			ndias = 30;
-			break;
-		case 12:
-			ndias = 31;
-			break;
-		}
-		return ndias;
-	}
 	
+
 	public int obtenerDias(){
 		int dias = this.getDia() + this.getAnio()*365;
+		dias += ((this.getAnio()-1) % 4);
 		for (int i = 0; (i < this.getMes()-1); i++) {
-			dias += diasDelMes(i);
+			dias += diasPorMes.get(i);
+			if(i == 2 && esBiciesto()){
+				dias += 1;
+			}
 		}
 		return dias;
 	}
@@ -225,10 +153,7 @@ public class Fecha {
 	}
 	
 	public boolean esBiciesto(){
-		  if(this.anio % 4 ==0){
-		   return true;
-		  }else{
-		   return false;
-		  }
+		   return (this.anio % 4 ==0);
 	}	
+	
 }
