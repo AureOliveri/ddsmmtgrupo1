@@ -13,10 +13,7 @@ public class Fecha {
 	private Map<Integer, Integer> diasPorMes = new HashMap<Integer, Integer>();
 
 	public Fecha(String fechaString) {
-		String anioS = new String();
-		String mesS = new String();
-		String diaS = new String();
-		String formatoS = new String();
+		
 		fechaString = fechaString.replaceAll(" ", "");
 
 		if (esFormatoISO8601(fechaString)) {
@@ -28,10 +25,9 @@ public class Fecha {
 					fechaString.substring(3, 5), fechaString.substring(0, 2),
 					"Latinoamericano");
 		} else if (esFormatoNorteamericano(fechaString)) {
-			mesS = fechaString.substring(0, 2);
-			diaS = fechaString.substring(3, 5);
-			anioS = fechaString.substring(6, 10);
-			formatoS = "Norteamericano";
+			this.crearFecha(fechaString.substring(0,2), 
+					fechaString.substring(0, 2), fechaString.substring(6, 10), 
+					"Norteamericano");
 		} else {
 			throw new parserException(
 					"La cadena ingresada no concuerda con ningun formato valido");
