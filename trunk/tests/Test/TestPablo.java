@@ -22,7 +22,7 @@ public class TestPablo {
 		}
 		
 		@Test
-		public void añoBiciesto() {
+		public void anioBiciesto() {
 			Assert.assertTrue(fecha1.esBiciesto());
 		}
 
@@ -42,4 +42,4 @@ public class TestPablo {
 			fecha2 = new Fecha("31 - 12 / 1999");
 		}		
 }		
-		
+}// esta de mas para q no corra y de rojo =)
