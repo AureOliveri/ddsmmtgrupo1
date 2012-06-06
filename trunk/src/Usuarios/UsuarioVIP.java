@@ -1,10 +1,13 @@
 package Usuarios;
 
-public class UsuarioVIP implements Usuario {
+public class UsuarioVIP extends Usuario {
 
 	@Override
 	public String getTipoUsuario() {
 		return "VIP";
 	}
 
+	public UsuarioVIP(){
+		
+	}
 }

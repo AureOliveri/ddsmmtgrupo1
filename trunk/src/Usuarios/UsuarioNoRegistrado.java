@@ -1,6 +1,6 @@
 package Usuarios;
 
-public class UsuarioNoRegistrado implements Usuario {
+public class UsuarioNoRegistrado extends Usuario {
 
 	@Override
 	public String getTipoUsuario() {

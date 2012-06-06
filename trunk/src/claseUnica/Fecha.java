@@ -28,7 +28,10 @@ public class Fecha {
 			this.crearFecha(fechaString.substring(0,2), 
 					fechaString.substring(0, 2), fechaString.substring(6, 10), 
 					"Norteamericano");
-		} else {
+		} elseif (esFormatoLanchita(fechaString)){
+			this.crearFecha(fechaString.substring(6,8), fechaString.substring(4,6), fechaString.substring(0,4), "Lanchita");
+		}
+		else {
 			throw new parserException(
 					"La cadena ingresada no concuerda con ningun formato valido");
 		}
@@ -51,7 +54,7 @@ public class Fecha {
 		
 		
 	}
-	
+
 	private void crearFecha(String anio, String mes, String dia, String formato) {
 		this.convertirStringAFecha(anio, mes, dia, formato);
 		this.formato = formato;
@@ -97,19 +100,23 @@ public class Fecha {
 
 	public Fecha() {
 	}
+	private  boolean esFormatoLanchita(String fechaString) {
 
+		return (! this.esFormatoISO8601(fechaString) && ! this.esFormatoLatinoamericano(fechaString) &&
+				! this.esFormatoNorteamericano(fechaString));
+	}
 
-	public static boolean esFormatoISO8601(String fechaS) {
+	public boolean esFormatoISO8601(String fechaS) {
 		return (fechaS.substring(4, 5).equals("-"))
 				&& (fechaS.substring(7, 8).equals("-"));
 	}
 
-	public static boolean esFormatoLatinoamericano(String fechaS) {
+	public boolean esFormatoLatinoamericano(String fechaS) {
 		return (fechaS.substring(2, 3).equals("/"))
 				&& ((fechaS.substring(5, 6).equals("/")));
 	}
 
-	public static boolean esFormatoNorteamericano(String fechaS) {
+	public boolean esFormatoNorteamericano(String fechaS) {
 		return (fechaS.substring(2, 3).equals("-"))
 				&& ((fechaS.substring(5, 6).equals("-")));
 	}

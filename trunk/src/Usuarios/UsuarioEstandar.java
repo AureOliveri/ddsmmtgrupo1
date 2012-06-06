@@ -1,7 +1,7 @@
 package Usuarios;
 
 
-public class UsuarioEstandar implements Usuario {
+public class UsuarioEstandar extends Usuario {
 
 	@Override
 	public String getTipoUsuario() {

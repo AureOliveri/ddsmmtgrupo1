@@ -1,7 +1,17 @@
 package Usuarios;
 
-public interface Usuario {
+import java.util.Collection;
+
+import Vuelos.Vuelo;
+
+public abstract class Usuario {
 	
-	public String getTipoUsuario();
+	public abstract String getTipoUsuario();
 	
+	Collection<Busqueda> historial;
+	
+	public void compraVuelo(Vuelo unVuelo){
+		unVuelo.yaNoEstasDisponible();
+	}
+
 }
