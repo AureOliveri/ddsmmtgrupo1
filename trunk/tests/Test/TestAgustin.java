@@ -4,8 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import Usuarios.Usuario;
-import Usuarios.UsuarioEstandar;
 
 import claseUnica.Fecha;
 import claseUnica.parserException;
@@ -21,13 +19,7 @@ public class TestAgustin {
 		System.out.println("Es el mismo dia, por q la diferencia de dias es: " + deberiaSerCero);
 	
 	}
-	@Test
-	public void esEstandar(){
 	
-		Usuario unUsuario = new UsuarioEstandar();
-		String tipoDeUsuario = unUsuario.getTipoUsuario();
-		System.out.println(tipoDeUsuario);
-		Assert.assertEquals(tipoDeUsuario, "Estandar");
 	}
 	
 

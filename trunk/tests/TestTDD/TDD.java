@@ -4,7 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import Usuarios.UsuarioVIP;
+import Usuarios.*;
 import Vuelos.Vuelo;
 
 public class TDD {
@@ -16,6 +16,19 @@ public class TDD {
 		Assert.assertFalse(unVuelo.estaDisponible());
 		
 	}
-	
-	
+	public void unUsuarioEstandarCompraUnoDeLosVuelos(){
+		UsuarioEstandar unUsuario = new UsuarioEstandar();
+		Vuelo unVuelo = new Vuelo();
+		unUsuario.compraVuelo(unVuelo);
+		Assert.assertFalse(unVuelo.estaDisponible());
+	}
+	public void unUsuarioNoRegistradoCompraUnoDeLosVuelos(){
+		UsuarioNoRegistrado unUsuario = new UsuarioNoRegistrado();
+		Vuelo unVuelo = new Vuelo();
+		unUsuario.compraVuelo(unVuelo);
+		Assert.assertFalse(unVuelo.estaDisponible());
+	}
+
+
 }
+
