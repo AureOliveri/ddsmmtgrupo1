@@ -28,8 +28,6 @@ public class Fecha {
 			this.crearFecha(fechaString.substring(0,2), 
 					fechaString.substring(0, 2), fechaString.substring(6, 10), 
 					"Norteamericano");
-		} elseif (esFormatoLanchita(fechaString)){
-			this.crearFecha(fechaString.substring(6,8), fechaString.substring(4,6), fechaString.substring(0,4), "Lanchita");
 		}
 		else {
 			throw new parserException(
@@ -99,11 +97,6 @@ public class Fecha {
 	}
 
 	public Fecha() {
-	}
-	private  boolean esFormatoLanchita(String fechaString) {
-
-		return (! this.esFormatoISO8601(fechaString) && ! this.esFormatoLatinoamericano(fechaString) &&
-				! this.esFormatoNorteamericano(fechaString));
 	}
 
 	public boolean esFormatoISO8601(String fechaS) {
