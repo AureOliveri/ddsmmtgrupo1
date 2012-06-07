@@ -11,8 +11,12 @@ public abstract class Usuario {
 	
 	Collection<Busqueda> historial;
 	
-	public void compraVuelo(Asiento unAsiento, Vuelo unVuelo){
-		unVuelo.yaNoEstasDisponible(unAsiento);
+	public void compraAsiento(Asiento unAsiento, Vuelo unVuelo){
+		if(unVuelo.yaNoEstasDisponible(unAsiento)){
+			System.out.println("El asiento " + unAsiento + " del vuelo " + unVuelo + " no esta disponible.");
+		}else {
+			unAsiento.ocupate();
+		}
 	}
 
 }
