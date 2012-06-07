@@ -14,8 +14,8 @@ public class TDD {
 		UsuarioVIP unUsuario = new UsuarioVIP();
 		Vuelo unVuelo = new Vuelo();
 		Asiento unAsiento = new Asiento();
-		unUsuario.compraVuelo(unVuelo);
-		Assert.assertFalse(unVuelo.estaDisponible(unAsiento));
+		unUsuario.compraVuelo(unAsiento, unVuelo);
+		Assert.assertFalse(unVuelo.yaNoEstasDisponible(unAsiento));
 		
 	}
 	@Test
@@ -23,16 +23,16 @@ public class TDD {
 		UsuarioEstandar unUsuario = new UsuarioEstandar();
 		Vuelo unVuelo = new Vuelo();
 		Asiento unAsiento = new Asiento();
-		unUsuario.compraVuelo(unVuelo);
-		Assert.assertFalse(unVuelo.estaDisponible(unAsiento));
+		unUsuario.compraVuelo(unAsiento, unVuelo);
+		Assert.assertFalse(unVuelo.yaNoEstasDisponible(unAsiento));
 	}
 	@Test
 	public void unUsuarioNoRegistradoCompraUnoDeLosVuelos(){
 		UsuarioNoRegistrado unUsuario = new UsuarioNoRegistrado();
 		Vuelo unVuelo = new Vuelo();
 		Asiento unAsiento = new Asiento();
-		unUsuario.compraVuelo(unVuelo);
-		Assert.assertFalse(unVuelo.estaDisponible(unAsiento));
+		unUsuario.compraVuelo(unAsiento, unVuelo);
+		Assert.assertFalse(unVuelo.yaNoEstasDisponible(unAsiento));
 	}
 
 
