@@ -15,9 +15,9 @@ public class Vuelo {
 	public Vuelo(){
 		
 	}
-	
-	public boolean estaDisponible(Asiento unAsiento){
-		return (unAsiento.disponibilidad == "D");
+
+	public boolean yaNoEstasDisponible(Asiento unAsiento) {
+		return (unAsiento.disponibilidad == "O");
 		
 	}
 }

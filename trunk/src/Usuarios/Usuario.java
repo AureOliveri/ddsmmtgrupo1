@@ -2,6 +2,7 @@ package Usuarios;
 
 import java.util.Collection;
 
+import Vuelos.Asiento;
 import Vuelos.Vuelo;
 
 public abstract class Usuario {
@@ -10,8 +11,8 @@ public abstract class Usuario {
 	
 	Collection<Busqueda> historial;
 	
-	public void compraVuelo(Vuelo unVuelo){
-		unVuelo.yaNoEstasDisponible();
+	public void compraVuelo(Asiento unAsiento, Vuelo unVuelo){
+		unVuelo.yaNoEstasDisponible(unAsiento);
 	}
 
 }
