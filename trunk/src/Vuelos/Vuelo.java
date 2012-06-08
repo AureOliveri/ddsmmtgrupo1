@@ -4,20 +4,20 @@ import java.util.Collection;
 
 public class Vuelo {
 
-	String origen;
-	String fechaSalida;
-	String horaSalida;
-	String destino;
-	String fechaLlegada;
-	String horaLlegada;
-	Collection<Asiento> asientos;
+	private String origen;
+	private String fechaSalida;
+	private String horaSalida;
+	private String destino;
+	private String fechaLlegada;
+	private String horaLlegada;
+	private Collection<Asiento> asientos;
 	
 	public Vuelo(){
 		
 	}
 
 	public boolean yaNoEstasDisponible(Asiento unAsiento) {
-		return (unAsiento.disponibilidad == "O");
+		return (unAsiento.getDisponibilidad() == "O");
 		
 	}
 	 
