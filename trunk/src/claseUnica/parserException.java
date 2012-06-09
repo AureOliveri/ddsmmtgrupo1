@@ -8,6 +8,6 @@ public class parserException extends RuntimeException {
 
 	public parserException(String mensaje) {
 		super(mensaje);
-		// TODO Auto-generated constructor stub
+		
 	}
 }

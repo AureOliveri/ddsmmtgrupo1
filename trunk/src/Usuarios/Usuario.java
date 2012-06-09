@@ -2,12 +2,17 @@ package Usuarios;
 
 import java.util.Collection;
 
+import Busquedas.Busqueda;
 import Vuelos.Asiento;
 import Vuelos.Vuelo;
 
 public abstract class Usuario {
 	
-	public abstract String getTipoUsuario();
+	private String tipoUsuario;
+	
+	public String getTipoUsuario(){
+		return tipoUsuario;
+	}
 	
 	Collection<Busqueda> historial;
 	
