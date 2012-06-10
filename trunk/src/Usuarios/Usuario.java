@@ -8,7 +8,7 @@ import Vuelos.Vuelo;
 
 public abstract class Usuario {
 	
-	private String tipoUsuario;
+	protected String tipoUsuario;
 	
 	public String getTipoUsuario(){
 		return tipoUsuario;
