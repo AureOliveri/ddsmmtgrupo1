@@ -25,7 +25,7 @@ public abstract class Usuario {
 	
 	public void setRecargo() {
 		
-		if (tipoUsuario == "NoRegistrado") {
+		if (tipoUsuario == "ConRecargo") {
 			this.recargo.add(new BigDecimal(20));
 		}	
 	}
