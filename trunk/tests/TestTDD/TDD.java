@@ -1,5 +1,6 @@
 package TestTDD;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import junit.framework.Assert;
@@ -43,9 +44,9 @@ public class TDD {
 	@Test
 	public void unUsuarioEstandarRealizaUnaBusqueda(){
 		UsuarioEstandar unUsuario = new UsuarioEstandar();
-		Collection<Busqueda> historialAntesDeLaBusqueda = unUsuario.getHistorial();
+		ArrayList<Busqueda> historialAntesDeLaBusqueda = unUsuario.getHistorial();
 		unUsuario.buscar("LA", "BUE", "20121210", "20121211");
-		Assert.assertNotSame(historialAntesDeLaBusqueda, unUsuario.getHistorial());
+		Assert.assertSame(historialAntesDeLaBusqueda, unUsuario.getHistorial());
 	}
 
 }

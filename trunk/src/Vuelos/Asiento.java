@@ -22,7 +22,7 @@ public class Asiento {
 	}
 
 	public void ocupate() {
-		this.setDisponibilidad("O");
+		this.setDisponibilidad("R");
 		
 	}
 
@@ -64,6 +64,8 @@ public class Asiento {
 	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto) {
 		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto);
 	}
+	
+	
 	
 	/* GETTERS*/
 	

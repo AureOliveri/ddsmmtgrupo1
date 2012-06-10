@@ -1,13 +1,12 @@
 package Busquedas;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Busqueda {
 	
 	/* ATRIBUTOS */
 	
-	Collection<String> resultado;
+	ArrayList<String> resultado;
 	private String origen;
 	private String fechaSalida;
 	private String horaSalida;
