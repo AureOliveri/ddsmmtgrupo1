@@ -2,6 +2,7 @@ package Vuelos;
 
 import java.math.BigDecimal;
 
+
 public class Asiento {
 	
 	private String numeroDeVuelo;
@@ -20,6 +21,44 @@ public class Asiento {
 	public void ocupate() {
 		this.setDisponibilidad("O");
 		
+	}
+
+	public boolean esPrimeraClase(){
+		return (claseDeAsiento == "primera");
+	}
+	
+	public boolean esClaseEjecutiva(){
+		return (claseDeAsiento == "ejecutivo");
+	}
+	
+	public boolean esClaseTurista(){
+		return (claseDeAsiento == "turista");
+	}
+	
+	public boolean esSuperOferta(BigDecimal impuesto){
+		return (this.esSuperOfertaPrimera(impuesto) || this.esSuperOfertaEjecutiva(impuesto)); 
+	}
+	
+	private BigDecimal precioTotal(BigDecimal impuesto) {
+		return precio.add(precio.multiply(impuesto)); //Falta agregar recargo.	
+	}
+	
+	public boolean esOfertaPrimera(BigDecimal impuesto) {
+		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
+		return this.precioTotal(impuesto).compareTo(ofertaPrimeraClase) < 0;
+	}
+
+	public boolean esOfertaEjecutiva(BigDecimal impuesto) {
+		BigDecimal ofertaClaseEjecutiva = new BigDecimal(4000);
+		return this.precioTotal(impuesto).compareTo(ofertaClaseEjecutiva) < 0;
+	}
+	
+	public boolean esSuperOfertaPrimera(BigDecimal impuesto) {
+		return this.esPrimeraClase() && this.esOfertaPrimera(impuesto);
+	}
+	
+	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto) {
+		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto);
 	}
 	
 	/* GETTERS*/
