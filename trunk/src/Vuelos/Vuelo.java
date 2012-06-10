@@ -17,7 +17,7 @@ public class Vuelo {
 	}
 
 	public boolean yaNoEstasDisponible(Asiento unAsiento) {
-		return (unAsiento.getDisponibilidad() == "O");
+		return (unAsiento.getDisponibilidad() == "R");
 		
 	}
 	 
