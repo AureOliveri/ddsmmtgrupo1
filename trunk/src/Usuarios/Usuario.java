@@ -1,5 +1,6 @@
 package Usuarios;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import Busquedas.Busqueda;
@@ -9,12 +10,10 @@ import Vuelos.Vuelo;
 public abstract class Usuario {
 	
 	protected String tipoUsuario;
-	
-	public String getTipoUsuario(){
-		return tipoUsuario;
-	}
-	
+	private BigDecimal recargo;	
 	Collection<Busqueda> historial;
+	
+	
 	
 	public void compraAsiento(Asiento unAsiento, Vuelo unVuelo){
 		if(unVuelo.yaNoEstasDisponible(unAsiento)){
@@ -22,6 +21,21 @@ public abstract class Usuario {
 		}else {
 			unAsiento.ocupate();
 		}
+	}
+	
+	public void setRecargo() {
+		
+		if (tipoUsuario == "NoRegistrado") {
+			this.recargo.add(new BigDecimal(20));
+		}	
+	}
+	
+	public String getTipoUsuario(){
+		return tipoUsuario;
+	}
+	
+	public BigDecimal getRecargo() {
+		return recargo;
 	}
 
 }

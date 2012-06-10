@@ -2,6 +2,8 @@ package Vuelos;
 
 import java.math.BigDecimal;
 
+import Usuarios.Usuario;
+
 
 public class Asiento {
 	
@@ -12,6 +14,7 @@ public class Asiento {
 	private String ubicacion;
 	private String disponibilidad;
 	private String codigoAsiento;
+	private Usuario usuario;
 	
 	public void transformarCodigoANumeroDeAsientoYNumeroDeVuelo(String codigoAsiento){
 		this.numeroDeVuelo = this.codigoAsiento.substring(0, 6);
@@ -40,7 +43,8 @@ public class Asiento {
 	}
 	
 	private BigDecimal precioTotal(BigDecimal impuesto) {
-		return precio.add(precio.multiply(impuesto)); //Falta agregar recargo.	
+		precio.add(usuario.getRecargo());
+		return precio.add(precio.multiply(impuesto));	
 	}
 	
 	public boolean esOfertaPrimera(BigDecimal impuesto) {
