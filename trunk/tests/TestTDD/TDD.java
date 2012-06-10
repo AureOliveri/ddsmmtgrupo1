@@ -30,7 +30,7 @@ public class TDD {
 	}
 	@Test
 	public void unUsuarioNoRegistradoCompraUnoDeLosVuelos(){
-		UsuarioNoRegistrado unUsuario = new UsuarioNoRegistrado();
+		UsuarioConRecargo unUsuario = new UsuarioConRecargo();
 		Vuelo unVuelo = new Vuelo();
 		Asiento unAsiento = new Asiento();
 		unAsiento.setDisponibilidad("D");
