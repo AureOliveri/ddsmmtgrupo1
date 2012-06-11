@@ -16,6 +16,19 @@ public class Asiento {
 	private String codigoAsiento;
 	private Usuario usuario;
 	
+	public Asiento(String[] asiento) {
+		this();
+		this.codigoAsiento = asiento[0];
+		this.precio = new BigDecimal(asiento[1]);
+		this.claseDeAsiento = asiento[2];
+		this.ubicacion = asiento[3];
+		this.disponibilidad = asiento[4];
+	}
+
+	public Asiento() {
+		super();
+	}
+	
 	public void transformarCodigoANumeroDeAsientoYNumeroDeVuelo(String codigoAsiento){
 		this.numeroDeVuelo = this.codigoAsiento.substring(0, 6);
 		this.numeroDeAsiento = this.codigoAsiento.substring(7, 9);

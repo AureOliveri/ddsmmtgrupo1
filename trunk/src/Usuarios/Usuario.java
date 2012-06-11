@@ -12,7 +12,7 @@ public abstract class Usuario {
 	protected String tipoUsuario;
 	private BigDecimal recargo;
 	private BigDecimal montoCompras;
-	private ArrayList<Busqueda> historialBusquedas;
+	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
 
 	
 	public void compraAsiento(Asiento unAsiento, Vuelo unVuelo){
