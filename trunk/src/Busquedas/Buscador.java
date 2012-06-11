@@ -2,28 +2,36 @@ package Busquedas;
 
 import java.util.ArrayList;
 
-import aerolineas.Aerolinea;
+import aerolineas.AerolineaLancha;
 
 import Usuarios.Usuario;
 import Vuelos.Asiento;
 
 public class Buscador {
 
-	private Aerolinea aerolineaLanchita;
+	private AerolineaLancha aerolineaLanchita;
 	private ArrayList<Asiento> asientos;
 		
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
-		aerolineaLanchita.busquedaDeAsientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
-											busqueda.getFechaSalida(), busqueda.getFechaLlegada());
+		return this.armarListaAsientos(aerolineaLanchita.busquedaDeAsientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
+											busqueda.getFechaSalida(), busqueda.getFechaLlegada()));
+
+	}
 	
-		
-		return asientos;
-		
+	private ArrayList<Asiento> armarListaAsientos(String[][] asientosRecibidos) {
+
+		ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>();
+
+		for (int i = 0; i < asientosRecibidos.length; i++) {
+            asientos.add(new Asiento(asientosRecibidos[i]));
+		}
+
+		return listaAsientos;
 	}
 
-	public boolean hayAsientosDisponibles(ArrayList<Asiento> asientos) {
-		return asientos != null;
+	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
+		return asientos == null;
 	}
 	
 	

@@ -40,13 +40,7 @@ public class TDD {
 		unUsuario.compraAsiento(unAsiento, unVuelo);
 		Assert.assertTrue(unVuelo.yaNoEstasDisponible(unAsiento));
 	}
-/*	@Test
-	public void unUsuarioEstandarRealizaUnaBusqueda(){
-		UsuarioEstandar unUsuario = new UsuarioEstandar();
-		ArrayList<Busqueda> historialAntesDeLaBusqueda = unUsuario.getHistorial();
-		unUsuario.buscarAsientos("LA", "BUE", "20121210", "20121211");
-		Assert.assertSame(historialAntesDeLaBusqueda, unUsuario.getHistorial());
-	} */
+
 
 }
 
