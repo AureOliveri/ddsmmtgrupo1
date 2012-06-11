@@ -35,5 +35,41 @@ public class Buscador {
 	}
 	
 	
+	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos) {
+		ArrayList<Asiento> asientosSuper = new ArrayList<Asiento>();
+		
+		for(Asiento asiento: asientos) {
+			if(asiento.esSuperOferta(aerolineaLanchita.getImpuesto())) {
+				asientosSuper.add(asiento);
+			}
+		}
+		return asientosSuper;
+		
+	}
+	
+	public ArrayList<Asiento> buscarAsientosPorClase(ArrayList<Asiento> asientos, String clase) {
+		ArrayList<Asiento> asientosPorClase = new ArrayList<Asiento>();
+		
+		for(Asiento asiento: asientos) {
+			if(asiento.getClaseDeAsiento().equals(clase)) {
+				asientosPorClase.add(asiento);
+			}
+		}
+		return asientosPorClase;
+		
+	}
+	
+	public ArrayList<Asiento> buscarAsientosPorUbicacion(ArrayList<Asiento> asientos, String ubicacion) {
+		ArrayList<Asiento> asientosUbicacion = new ArrayList<Asiento>();
+		
+		for(Asiento asiento: asientos) {
+			if(asiento.getClaseDeAsiento().equals(ubicacion)) {
+				asientosUbicacion.add(asiento);
+			}
+		}
+		return asientosUbicacion;
+		
+	}
+	
 	
 }
