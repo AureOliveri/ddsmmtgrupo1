@@ -2,6 +2,8 @@ package Busquedas;
 
 import java.util.ArrayList;
 
+import com.lanchita.AerolineaLanchita;
+
 import aerolineas.AerolineaLancha;
 
 import Usuarios.Usuario;
@@ -14,22 +16,30 @@ public class Buscador {
 		
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
-		return this.armarListaAsientos(aerolineaLanchita.busquedaDeAsientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
-											busqueda.getFechaSalida(), busqueda.getFechaLlegada()));
+		String[][] asientosDisponibles;
+		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+		AerolineaLanchita aerolineaAux = AerolineaLanchita.getInstance();
+		asientosDisponibles = aerolineaAux.asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(), busqueda.getFechaSalida(), null, busqueda.getFechaLlegada(), null);
+		int i;
+		for(i=0; i<asientosDisponibles.length; i++){
+			Asiento asiento = new Asiento(asientosDisponibles[i]);
+			asientos.add(asiento);
+		}
+		return asientos;
 
 	}
 	
 	private ArrayList<Asiento> armarListaAsientos(String[][] asientosRecibidos) {
 
 		ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>();
-
+		if(listaAsientos.size() == 0) System.out.println("se creo bien la lista");
 		for (int i = 0; i < asientosRecibidos.length; i++) {
-            listaAsientos.add(new Asiento(asientosRecibidos[i]));
+			Asiento asientoAInsertar = new Asiento(asientosRecibidos[i]);
+			listaAsientos.add(asientoAInsertar);
 		}
-
+		if(listaAsientos.size() != 0) System.out.println("se cargaron elementos a la lista");
 		return listaAsientos;
 	}
-
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;
 	}
@@ -39,7 +49,7 @@ public class Buscador {
 		ArrayList<Asiento> asientosSuper = new ArrayList<Asiento>();
 		
 		for(Asiento asiento: asientos) {
-			if(asiento.esSuperOferta(aerolineaLanchita.getImpuesto())) {
+			if(asiento.esSuperOferta( aerolineaLanchita.getImpuesto())) {
 				asientosSuper.add(asiento);
 			}
 		}
