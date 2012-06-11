@@ -19,9 +19,10 @@ public class AerolineaLancha implements Aerolinea {
 	public String[][] busquedaDeAsientosDisponibles(String unOrigen,
 			String unDestino, String unaFechaDeSalida, String unaFechaDeLlegada) {
 	
-		return aerolinea.asientosDisponibles(unOrigen, unDestino, unaFechaDeSalida, null, 
+		String[][] asientosDisp = aerolinea.asientosDisponibles(unOrigen, unDestino, unaFechaDeSalida, null, 
 				unaFechaDeLlegada, null);
 		
+		return asientosDisp;
 	}
 
 	public BigDecimal getImpuesto() {

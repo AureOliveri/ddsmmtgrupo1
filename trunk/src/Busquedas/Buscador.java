@@ -21,6 +21,10 @@ public class Buscador {
 		return asientos;
 		
 	}
+
+	public boolean hayAsientosDisponibles(ArrayList<Asiento> asientos) {
+		return asientos != null;
+	}
 	
 	
 	
