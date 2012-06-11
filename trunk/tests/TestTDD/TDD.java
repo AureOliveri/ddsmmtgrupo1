@@ -1,12 +1,10 @@
 package TestTDD;
 
-import java.util.ArrayList;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import Busquedas.Busqueda;
+
 import Usuarios.*;
 import Vuelos.Asiento;
 import Vuelos.Vuelo;

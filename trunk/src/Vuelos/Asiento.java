@@ -29,6 +29,10 @@ public class Asiento {
 		super();
 	}
 	
+	public void imprimir(){
+		System.out.println(this.ubicacion);
+	}
+	
 	public void transformarCodigoANumeroDeAsientoYNumeroDeVuelo(String codigoAsiento){
 		this.numeroDeVuelo = this.codigoAsiento.substring(0, 6);
 		this.numeroDeAsiento = this.codigoAsiento.substring(7, 9);
