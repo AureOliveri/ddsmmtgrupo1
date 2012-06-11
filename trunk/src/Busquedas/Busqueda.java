@@ -31,6 +31,9 @@ public class Busqueda {
 		
 	}
 	
+	
+	
+	
 	/* SETTERS*/
 	 
 	 public void setOrigen(String origenASetear){

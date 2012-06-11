@@ -1,6 +1,5 @@
 package Vuelos;
 
-import java.util.Collection;
 
 public class Vuelo {
 
@@ -10,7 +9,6 @@ public class Vuelo {
 	private String destino;
 	private String fechaLlegada;
 	private String horaLlegada;
-	private Collection<Asiento> asientos;
 	
 	public Vuelo(){
 		

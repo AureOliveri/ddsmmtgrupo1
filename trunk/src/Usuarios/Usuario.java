@@ -3,8 +3,6 @@ package Usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import aerolineas.Aerolinea;
-
 import Busquedas.Busqueda;
 import Vuelos.Asiento;
 import Vuelos.Vuelo;
@@ -12,9 +10,10 @@ import Vuelos.Vuelo;
 public abstract class Usuario {
 	
 	protected String tipoUsuario;
-	private BigDecimal recargo;	
-	private ArrayList<Busqueda> historial;
-	private Aerolinea aerolineaLanchita;
+	private BigDecimal recargo;
+	private BigDecimal montoCompras;
+	private ArrayList<Busqueda> historialBusquedas;
+
 	
 	public void compraAsiento(Asiento unAsiento, Vuelo unVuelo){
 		if(unVuelo.yaNoEstasDisponible(unAsiento)){
@@ -40,12 +39,22 @@ public abstract class Usuario {
 	}
 	
 	public ArrayList<Busqueda> getHistorial(){
-		return historial;
+		return historialBusquedas;
 	}
 	
-	public ArrayList<Busqueda> buscar(String unOrigen, String unDestino,String unaFechaDeSalida, String unaFechaDeLlegada){
-		historial = aerolineaLanchita.busquedaDeAsientosDisponibles(unOrigen, unDestino, unaFechaDeSalida, unaFechaDeLlegada);
-		return historial;
-		
+
+
+	public void setMontoCompras(BigDecimal montoCompras) {
+		this.montoCompras = montoCompras;
 	}
+
+	public BigDecimal getMontoCompras() {
+		return montoCompras;
+	}
+
+	public void guardarBusqueda(Busqueda busqueda) {
+		historialBusquedas.add(busqueda);	
+	}
+
 }
+
