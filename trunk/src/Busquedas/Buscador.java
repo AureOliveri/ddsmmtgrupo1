@@ -16,8 +16,12 @@ public class Buscador {
 		usuario.guardarBusqueda(busqueda);
 		aerolineaLanchita.busquedaDeAsientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
 											busqueda.getFechaSalida(), busqueda.getFechaLlegada());
+	
+		
 		return asientos;
 		
 	}
+	
+	
 	
 }

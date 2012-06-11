@@ -1,12 +1,9 @@
 package Busquedas;
 
-import java.util.ArrayList;
-
 public class Busqueda {
 	
 	/* ATRIBUTOS */
 	
-	ArrayList<String> resultado;
 	private String origen;
 	private String fechaSalida;
 	private String horaSalida;
@@ -24,14 +21,8 @@ public class Busqueda {
 		this.setFechaLlegada(fechaLlegada);
 		this.setHoraLlegada(horaLlegada);
 	}
-	
-	public ArrayList<ArrayList<String>> resultadoDeBusqueda(String unOrigen, String unDestino,
-			String unaFechaDeSalida, String unaFechaDeLlegada){
-				return null;
-		
-	}
-	
-	
+
+
 	
 	
 	/* SETTERS*/
