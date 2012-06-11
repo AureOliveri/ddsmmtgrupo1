@@ -6,20 +6,16 @@ public class Busqueda {
 	
 	private String origen;
 	private String fechaSalida;
-	private String horaSalida;
 	private String destino;
 	private String fechaLlegada;
-	private String horaLlegada;
 	
 	
 	/* METODOS*/ 
-	public Busqueda(String origen,String fechaSalida, String horaSalida, String destino, String fechaLlegada, String horaLlegada){
+	public Busqueda(String origen,String fechaSalida, String destino, String fechaLlegada){
 		this.setOrigen(origen);
-		this.setFechaSalida(fechaSalida);
-		this.setHoraSalida(horaLlegada);
+		this.setFechaSalida(fechaSalida);		
 		this.setDestino(destino);
 		this.setFechaLlegada(fechaLlegada);
-		this.setHoraLlegada(horaLlegada);
 	}
 
 
@@ -42,15 +38,7 @@ public class Busqueda {
 	 public void setFechaLlegada(String fechaASetear){
 	  this.fechaLlegada = fechaASetear;
 	 }
-	 
-	 public void setHoraSalida(String horaASetear){
-	  this.horaSalida = horaASetear;
-	 }
-	 
-	 public void setHoraLlegada(String horaASetear){
-	  this.horaLlegada = horaASetear;
-	 }
-	 
+
 
 	 /*GETTERS*/
 	 public String getOrigen(){
@@ -68,12 +56,5 @@ public class Busqueda {
 	 public String getFechaLlegada(){
 	  return this.fechaLlegada;
 	 }
-	 
-	 public String getHoraSalida(){
-	  return this.horaSalida;
-	 }
-	 
-	 public String getHoraLlegada(){
-	  return this.horaLlegada;
-	 }
+
 }

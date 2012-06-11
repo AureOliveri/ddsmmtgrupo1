@@ -16,8 +16,8 @@ public class testBuscador {
 	public void unUsuarioBuscaAsientosDisponiblesYNoHay(){ //TODO revisar que da rojo.
 		Buscador buscador = new Buscador();
 		UsuarioEstandar usuario = new UsuarioEstandar();
-		Busqueda busqueda = new Busqueda("ECO344-42", "20121010", null
-						,"LA", null, null);
+		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
+						,null);
 		Assert.assertTrue(buscador.noHayAsientosDisponibles
 					(buscador.buscarAsientos(busqueda, usuario)));
 	}

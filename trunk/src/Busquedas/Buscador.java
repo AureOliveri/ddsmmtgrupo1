@@ -24,7 +24,7 @@ public class Buscador {
 		ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>();
 
 		for (int i = 0; i < asientosRecibidos.length; i++) {
-            asientos.add(new Asiento(asientosRecibidos[i]));
+            listaAsientos.add(new Asiento(asientosRecibidos[i]));
 		}
 
 		return listaAsientos;
