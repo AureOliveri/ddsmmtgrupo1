@@ -7,9 +7,9 @@ import Busquedas.Busqueda;
 import Vuelos.Asiento;
 
 
-public abstract class Usuario {
+public class Usuario {
 	
-	protected String tipoUsuario;
+	protected TipoUsuario tipoUsuario;
 	protected BigDecimal recargo = new BigDecimal(20);
 	private BigDecimal montoCompras = new BigDecimal(0);
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
@@ -19,7 +19,7 @@ public abstract class Usuario {
 		
 	}
 	
-	public String getTipoUsuario(){
+	public TipoUsuario getTipoUsuario(){
 		return tipoUsuario;
 	}
 	
@@ -43,6 +43,11 @@ public abstract class Usuario {
 
 	public void guardarBusqueda(Busqueda busqueda) {
 		historialBusquedas.add(busqueda);	
+	}
+
+	public ArrayList<Asiento> getAsientosQueLeCorreponden(ArrayList<Asiento> asientos) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
