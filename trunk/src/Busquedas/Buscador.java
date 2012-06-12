@@ -1,5 +1,6 @@
 package Busquedas;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.lanchita.AerolineaLanchita;
@@ -28,6 +29,17 @@ public class Buscador {
 
 	}
 	
+	public ArrayList<BigDecimal> buscarAsientosYMostrarPrecio(Busqueda busqueda, Usuario usuario){
+		ArrayList<BigDecimal> precios = new ArrayList<BigDecimal>();
+		ArrayList<Asiento> asientos = this.buscarAsientos(busqueda, usuario);
+		int i;
+		for(i=0; i<asientos.size(); i++ ){
+			BigDecimal precio = asientos.get(i).getPrecio();
+			precios.add(precio);
+		}
+		
+		return precios;
+	}
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;
