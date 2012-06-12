@@ -52,41 +52,42 @@ public class Asiento {
 		return (claseDeAsiento == "turista");
 	}
 	
-	public boolean esSuperOferta(BigDecimal impuesto){
-		return (this.esSuperOfertaPrimera(impuesto) || this.esSuperOfertaEjecutiva(impuesto)); 
+	public boolean esSuperOferta(BigDecimal impuesto, Usuario usuario){
+		return (this.esSuperOfertaPrimera(impuesto, usuario) || this.esSuperOfertaEjecutiva(impuesto, usuario)); 
 	}
 	
-	private BigDecimal precioTotal(BigDecimal impuesto) {
-		precio.add(usuario.getRecargo());
-		return precio.add(precio.multiply(impuesto));	
+	public BigDecimal precioTotal(BigDecimal impuesto, Usuario usuario) {
+		BigDecimal pTotal = precio.add(precio.multiply(impuesto)).setScale(2, BigDecimal.ROUND_UP);
+		pTotal = pTotal.add(usuario.getRecargo());
+		return pTotal;	
 	}
 	
-	public boolean esOfertaPrimera(BigDecimal impuesto) {
+	public boolean esOfertaPrimera(BigDecimal impuesto, Usuario usuario) {
 		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
-		return this.precioTotal(impuesto).compareTo(ofertaPrimeraClase) < 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) < 0;
 	}
 
-	public boolean esOfertaEjecutiva(BigDecimal impuesto) {
+	public boolean esOfertaEjecutiva(BigDecimal impuesto, Usuario usuario) {
 		BigDecimal ofertaClaseEjecutiva = new BigDecimal(4000);
-		return this.precioTotal(impuesto).compareTo(ofertaClaseEjecutiva) < 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) < 0;
 	}
 	
-	public boolean esSuperOfertaPrimera(BigDecimal impuesto) {
-		return this.esPrimeraClase() && this.esOfertaPrimera(impuesto);
+	public boolean esSuperOfertaPrimera(BigDecimal impuesto, Usuario usuario) {
+		return this.esPrimeraClase() && this.esOfertaPrimera(impuesto, usuario);
 	}
 	
-	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto) {
-		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto);
+	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto, Usuario usuario) {
+		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto, usuario);
 	}
 	
 
 
-	public ArrayList<String> mostrarAsiento(Asiento unAsiento){
+	public ArrayList<String> mostrarAsiento(Asiento unAsiento, BigDecimal impuesto, Usuario usuario) {
 		
 		ArrayList<String> asientoString = new ArrayList<String>();
 		
 		asientoString.add(unAsiento.getCodigoDeAsiento());
-		asientoString.add(unAsiento.getPrecio().toString());
+		asientoString.add(unAsiento.precioTotal(impuesto, usuario).toString());
 		asientoString.add(unAsiento.getClaseDeAsiento());
 		asientoString.add(unAsiento.getUbicacion());
 		asientoString.add(unAsiento.getDisponibilidad());

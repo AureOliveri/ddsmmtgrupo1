@@ -29,7 +29,7 @@ public class testBuscador {
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 						,null);
 		ArrayList<Asiento> asientosBuscados = buscador.buscarAsientos(busqueda, usuario);
-		System.out.println(buscador.mostrarAsientosBusqueda(asientosBuscados));
+		System.out.println(buscador.mostrarAsientosBusqueda(asientosBuscados, usuario));
 		Assert.assertNotNull(asientosBuscados);
 		}
 	@Test
@@ -75,7 +75,7 @@ public class testBuscador {
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 						,null);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
-		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(asientos, "V");
+		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(busqueda, "V", usuario);
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
 	}
 	@Test 
@@ -95,7 +95,7 @@ public class testBuscador {
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 							,null);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
-		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos);
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario);
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 	@Test 
@@ -105,9 +105,9 @@ public class testBuscador {
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 							,null);
 		Asiento unAsiento = buscador.buscarAsientos(busqueda, usuario).get(0);
-		System.out.println(unAsiento.mostrarAsiento(unAsiento));
+		System.out.println(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario));
 		
-		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento));
+		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario));
 		
 	}
 }

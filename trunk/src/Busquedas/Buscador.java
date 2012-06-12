@@ -13,6 +13,7 @@ import Vuelos.Asiento;
 public class Buscador {
 
 	private AerolineaLancha aerolineaLanchita = new AerolineaLancha();
+	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
 		
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
@@ -35,8 +36,8 @@ public class Buscador {
 		ArrayList<Asiento> asientos = this.buscarAsientos(busqueda, usuario);
 		int i;
 		for(i=0; i<asientos.size(); i++ ){
-			BigDecimal precio = (asientos.get(i).getPrecio().multiply(aerolineaLanchita.getImpuesto())).add(usuario.getRecargo());
-			precio = precio.setScale(2, BigDecimal.ROUND_UP);
+			Asiento asiento = asientos.get(i);
+			BigDecimal precio = (asiento.precioTotal(this.impuesto, usuario));
 			precios.add(precio);
 		}
 		
@@ -49,11 +50,11 @@ public class Buscador {
 	}
 	
 	
-	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos) {
+	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos, Usuario usuario) {
 		ArrayList<Asiento> asientosSuper = new ArrayList<Asiento>();
 		
 		for(Asiento asiento: asientos) {
-			if(asiento.esSuperOferta( aerolineaLanchita.getImpuesto())) {
+			if(asiento.esSuperOferta(this.impuesto, usuario)) {
 				asientosSuper.add(asiento);
 			}
 		}
@@ -73,10 +74,11 @@ public class Buscador {
 		
 	}
 	
-	public ArrayList<Asiento> buscarAsientosPorUbicacion(ArrayList<Asiento> asientos, String ubicacion) {
+	public ArrayList<Asiento> buscarAsientosPorUbicacion(Busqueda busqueda, String ubicacion, Usuario usuario) {
 		ArrayList<Asiento> asientosUbicacion = new ArrayList<Asiento>();
+		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
 		
-		for(Asiento asiento: asientos) {
+		for(Asiento asiento: asientosDeBusqueda) {
 			if(asiento.getClaseDeAsiento().equals(ubicacion)) {
 				asientosUbicacion.add(asiento);
 			}
@@ -84,13 +86,17 @@ public class Buscador {
 		return asientosUbicacion;
 		
 	}
-	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos){
+	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario){
 		ArrayList<ArrayList<String>> asientosBusquedaLindos = new ArrayList<ArrayList<String>>();
 		int i;
 		for(i=0; i<asientos.size(); i++){
-			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i));
+			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario);
 			asientosBusquedaLindos.add(valores);
 		}
 		return asientosBusquedaLindos;
+	}
+	
+	public BigDecimal getImpuesto(){
+		return this.impuesto;
 	}
 }
