@@ -1,14 +1,15 @@
 package Vuelos;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
+import com.sun.xml.internal.fastinfoset.util.StringArray;
 
 import Usuarios.Usuario;
 
 
 public class Asiento {
 	
-	private String numeroDeVuelo;
-	private String numeroDeAsiento;
 	private BigDecimal precio;
 	private String claseDeAsiento;
 	private String ubicacion;
@@ -33,10 +34,6 @@ public class Asiento {
 		System.out.println(this.ubicacion);
 	}
 	
-	public void transformarCodigoANumeroDeAsientoYNumeroDeVuelo(String codigoAsiento){
-		this.numeroDeVuelo = this.codigoAsiento.substring(0, 6);
-		this.numeroDeAsiento = this.codigoAsiento.substring(7, 9);
-	}
 
 	public void ocupate() {
 		this.setDisponibilidad("R");
@@ -82,15 +79,37 @@ public class Asiento {
 		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto);
 	}
 	
+
+
+	public ArrayList<String> mostrarAsiento(Asiento unAsiento){
+		
+		ArrayList<String> asientoString = new ArrayList<String>();
+		
+		asientoString.add(unAsiento.getCodigoDeAsiento());
+		asientoString.add(unAsiento.getPrecio().toString());
+		asientoString.add(unAsiento.getClaseDeAsiento());
+		asientoString.add(unAsiento.getUbicacion());
+		asientoString.add(unAsiento.getDisponibilidad());
+
+		
+		
+/*		asientoString[0] = unAsiento.getCodigoDeAsiento();
+		asientoString[1] = ;
+		asientoString[2] = ;
+		asientoString[3] = ;
+		asientoString[4] = ;*/
+		
+		return asientoString;
+
+	}
 	
 	
+	
+
 	/* GETTERS*/
 	
-	public String getNumeroDeVuelo(){
-		return this.numeroDeVuelo;
-	}
-	public String getNumeroDeAsiento(){
-		return this.numeroDeAsiento;
+	public String getCodigoDeAsiento() {
+		return this.codigoAsiento;
 	}
 	public BigDecimal getPrecio(){
 		return this.precio;
@@ -105,12 +124,7 @@ public class Asiento {
 		return this.disponibilidad;
 	}
 	/* SETTERS*/
-	public void setNumeroDeVuelo(String numVuelo){
-		this.numeroDeVuelo = numVuelo;
-	}
-	public void setNumeroDeAsiento(String numAsiento){
-		this.numeroDeAsiento = numAsiento;
-	}
+	
 	public void setPrecio(BigDecimal unPrecio){
 		this.precio =unPrecio;
 	}

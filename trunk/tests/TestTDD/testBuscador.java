@@ -96,4 +96,16 @@ public class testBuscador {
 		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos);
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
+	@Test 
+	public void mostrarUnAsiento(){
+		Buscador buscador = new Buscador();
+		UsuarioEstandar usuario = new UsuarioEstandar();
+		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
+							,null);
+		Asiento unAsiento = buscador.buscarAsientos(busqueda, usuario).get(0);
+		System.out.println(unAsiento.mostrarAsiento(unAsiento));
+		
+		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento));
+		
+	}
 }

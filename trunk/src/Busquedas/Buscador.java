@@ -41,6 +41,7 @@ public class Buscador {
 		
 		return precios;
 	}
+	
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;

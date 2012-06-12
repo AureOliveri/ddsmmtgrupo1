@@ -11,7 +11,7 @@ public abstract class Usuario {
 	
 	protected String tipoUsuario;
 	protected BigDecimal recargo = new BigDecimal(20);
-	private BigDecimal montoCompras;
+	private BigDecimal montoCompras = new BigDecimal(0);
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
 
 	public void comprarAsiento(Asiento unAsiento){
