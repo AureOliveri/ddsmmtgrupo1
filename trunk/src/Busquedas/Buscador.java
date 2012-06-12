@@ -1,7 +1,6 @@
 package Busquedas;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 
 import com.lanchita.AerolineaLanchita;
@@ -83,6 +82,5 @@ public class Buscador {
 		return asientosUbicacion;
 		
 	}
-	
 	
 }

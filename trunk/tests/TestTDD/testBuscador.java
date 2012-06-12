@@ -2,16 +2,10 @@ package TestTDD;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
-
-import com.lanchita.AerolineaLanchita;
-
 import Usuarios.*;
 import Vuelos.Asiento;
-
 import Busquedas.Busqueda;
 import Busquedas.Buscador;
 
@@ -72,5 +66,34 @@ public class testBuscador {
 		System.out.println(precios);
 		Assert.assertNotNull(precios);
 		}
-	
+	@Test
+	public void buscarAsientosPorUbicacion(){
+		Buscador buscador = new Buscador();
+		UsuarioVIP usuario = new UsuarioVIP();
+		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
+						,null);
+		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
+		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(asientos, "V");
+		Assert.assertNotNull(asientosSegunUbicacionElegida);
+	}
+	@Test 
+	public void buscarAsientosPorClase(){
+		Buscador buscador = new Buscador();
+		UsuarioVIP usuario = new UsuarioVIP();
+		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
+						,null);
+		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
+		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(asientos, "T");
+		Assert.assertNotNull(asientosPorClase);
+	}
+	@Test
+	public void buscarAsientosSuperOfertaConUsuarioEstandar(){
+		Buscador buscador = new Buscador();
+		UsuarioEstandar usuario = new UsuarioEstandar();
+		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
+							,null);
+		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos);
+		Assert.assertEquals("[]", asientosSuperOferta.toString());
+	}
 }
