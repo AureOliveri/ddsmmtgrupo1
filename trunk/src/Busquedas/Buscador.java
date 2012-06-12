@@ -24,6 +24,7 @@ public class Buscador {
 		for(i=0; i<asientosDisponibles.length; i++){
 			Asiento asiento = new Asiento(asientosDisponibles[i]);
 			asientos.add(asiento);
+			
 		}
 		return asientos;
 
@@ -60,10 +61,10 @@ public class Buscador {
 		
 	}
 	
-	public ArrayList<Asiento> buscarAsientosPorClase(ArrayList<Asiento> asientos, String clase) {
+	public ArrayList<Asiento> buscarAsientosPorClase(Busqueda busqueda, String clase, Usuario usuario) {
 		ArrayList<Asiento> asientosPorClase = new ArrayList<Asiento>();
-		
-		for(Asiento asiento: asientos) {
+		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
+		for(Asiento asiento: asientosDeBusqueda) {
 			if(asiento.getClaseDeAsiento().equals(clase)) {
 				asientosPorClase.add(asiento);
 			}
@@ -83,5 +84,13 @@ public class Buscador {
 		return asientosUbicacion;
 		
 	}
-	
+	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos){
+		ArrayList<ArrayList<String>> asientosBusquedaLindos = new ArrayList<ArrayList<String>>();
+		int i;
+		for(i=0; i<asientos.size(); i++){
+			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i));
+			asientosBusquedaLindos.add(valores);
+		}
+		return asientosBusquedaLindos;
+	}
 }

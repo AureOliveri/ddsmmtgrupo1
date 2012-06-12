@@ -28,7 +28,9 @@ public class testBuscador {
 		UsuarioEstandar usuario = new UsuarioEstandar();
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 						,null);
-		Assert.assertNotNull(buscador.buscarAsientos(busqueda, usuario));
+		ArrayList<Asiento> asientosBuscados = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println(buscador.mostrarAsientosBusqueda(asientosBuscados));
+		Assert.assertNotNull(asientosBuscados);
 		}
 	@Test
 	public void unUsuarioConRecargoBuscaAsientos(){
@@ -82,8 +84,8 @@ public class testBuscador {
 		UsuarioVIP usuario = new UsuarioVIP();
 		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA"
 						,null);
-		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
-		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(asientos, "T");
+		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(busqueda, "T",usuario);
+		
 		Assert.assertNotNull(asientosPorClase);
 	}
 	@Test

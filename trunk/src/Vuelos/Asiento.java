@@ -91,14 +91,6 @@ public class Asiento {
 		asientoString.add(unAsiento.getUbicacion());
 		asientoString.add(unAsiento.getDisponibilidad());
 
-		
-		
-/*		asientoString[0] = unAsiento.getCodigoDeAsiento();
-		asientoString[1] = ;
-		asientoString[2] = ;
-		asientoString[3] = ;
-		asientoString[4] = ;*/
-		
 		return asientoString;
 
 	}
