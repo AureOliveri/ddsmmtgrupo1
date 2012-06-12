@@ -20,14 +20,24 @@ public class Buscador {
 		String[][] asientosDisponibles;
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
 		AerolineaLanchita aerolineaAux = AerolineaLanchita.getInstance();
+		ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();
 		asientosDisponibles = aerolineaAux.asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(), busqueda.getFechaSalida(), null, busqueda.getFechaLlegada(), null);
 		int i;
 		for(i=0; i<asientosDisponibles.length; i++){
 			Asiento asiento = new Asiento(asientosDisponibles[i]);
 			asientos.add(asiento);
-			
+		
 		}
-		return asientos;
+		if(usuario.getTipoUsuario()!="VIP"){
+			for(Asiento asiento : asientos){
+				
+				if (!asiento.esSuperOferta(this.impuesto, usuario))
+					asientosNoVip.add(asiento);
+			}
+			return asientosNoVip;
+		} else {
+			return asientos;
+		}
 
 	}
 	
