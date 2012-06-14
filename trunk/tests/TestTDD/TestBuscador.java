@@ -14,47 +14,57 @@ import Busquedas.Buscador;
 public class TestBuscador {
 
 	private Buscador buscador;
+	private Usuario usuario;
+	private TipoUsuario vip;
+	private TipoUsuario conRecargo;
+	private TipoUsuario estandar;
+	private Busqueda busqueda;
 
 	@Before
 	public void inicializador() {
 		buscador = new Buscador();
+		usuario = new Usuario();
+		vip = new UsuarioVIP();
+		conRecargo = new UsuarioConRecargo();
+		estandar = new UsuarioEstandar();
+		busqueda = new Busqueda("BUE", "20121010", "LA", null);
 	}
 
+// TODO Falta ver si hay que diferenciar clases y ubicaciones de asientos.
 	@Test
 	public void unUsuarioBuscaAsientosDisponiblesYNoHay() {
-		UsuarioEstandar usuario = new UsuarioEstandar();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(estandar);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Normal:   " + buscador.mostrarAsientosBusqueda(asientos, usuario));
 		Assert.assertFalse(buscador.noHayAsientosDisponibles(asientos));
 	}
 
 	@Test
 	public void unUsuarioEstandarBuscaAsientos() {
-		UsuarioEstandar usuario = new UsuarioEstandar();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(estandar);
 		ArrayList<Asiento> asientosBuscados = buscador.buscarAsientos(busqueda, usuario);
-		System.out.println(buscador.mostrarAsientosBusqueda(asientosBuscados, usuario));
+		System.out.println("Estandar: " + buscador.mostrarAsientosBusqueda(asientosBuscados, usuario));
 		Assert.assertNotNull(asientosBuscados);
 	}
-
+	
 	@Test
 	public void unUsuarioConRecargoBuscaAsientos() {
-		UsuarioConRecargo usuario = new UsuarioConRecargo();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(conRecargo);
+		System.out.println("Recargo:  " + buscador.mostrarAsientosBusqueda(buscador.buscarAsientos(busqueda, usuario), usuario));
 		Assert.assertNotNull(buscador.buscarAsientos(busqueda, usuario));
 	}
 
 	@Test
 	public void unUsuarioVIPBuscaAsientos() {
-		UsuarioVIP usuario = new UsuarioVIP();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
-		Assert.assertNotNull(buscador.buscarAsientos(busqueda, usuario));
+		usuario.setTipoUsuario(vip);
+		ArrayList<Asiento> asientosBuscados = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Vip:      " + buscador.mostrarAsientosBusqueda(asientosBuscados, usuario));
+		Assert.assertNotNull(asientosBuscados);
 	}
 
 	@Test
 	public void mostrarPrecioDeUnAsiento() {
-		UsuarioConRecargo usuario = new UsuarioConRecargo();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(conRecargo);
 		BigDecimal precio1 = buscador.buscarAsientos(busqueda, usuario).get(1).getPrecio().add(new BigDecimal(20));
 		System.out.println(precio1);
 		Assert.assertNotNull(precio1);
@@ -62,8 +72,7 @@ public class TestBuscador {
 
 	@Test
 	public void unUsuarioConRecargoBuscaAsientosPorPrecio() {
-		UsuarioConRecargo usuario = new UsuarioConRecargo();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(conRecargo);
 		ArrayList<BigDecimal> precios = buscador.buscarAsientosYMostrarPrecio(busqueda, usuario);
 		System.out.println(precios);
 		Assert.assertNotNull(precios);
@@ -71,38 +80,33 @@ public class TestBuscador {
 
 	@Test
 	public void buscarAsientosPorUbicacion() {
-		UsuarioVIP usuario = new UsuarioVIP();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(vip);
 		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(busqueda, "V", usuario);
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
 	}
 
 	@Test
 	public void buscarAsientosPorClase() {
-		UsuarioVIP usuario = new UsuarioVIP();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
-		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(busqueda, "T", usuario);
-
+		usuario.setTipoUsuario(vip);
+		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(busqueda, "E", usuario);
+		System.out.println(buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
 		Assert.assertNotNull(asientosPorClase);
 	}
 
 	@Test
 	public void buscarAsientosSuperOfertaConUsuarioEstandar() {
-		UsuarioEstandar usuario = new UsuarioEstandar();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(estandar);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
-		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario);
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario.getTipoUsuario());
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 
 	@Test
 	public void mostrarUnAsiento() {
-		UsuarioEstandar usuario = new UsuarioEstandar();
-		Busqueda busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		usuario.setTipoUsuario(estandar);
 		Asiento unAsiento = buscador.buscarAsientos(busqueda, usuario).get(0);
-		System.out.println(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario));
-
-		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario));
+		System.out.println(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario.getTipoUsuario()));
+		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario.getTipoUsuario()));
 
 	}
 }

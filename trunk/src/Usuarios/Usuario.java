@@ -45,10 +45,15 @@ public class Usuario {
 		historialBusquedas.add(busqueda);	
 	}
 
-	public ArrayList<Asiento> getAsientosQueLeCorreponden(ArrayList<Asiento> asientos) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Asiento> getAsientosQueLeCorreponden(ArrayList<Asiento> asientos, BigDecimal impuesto) {
+		
+		return this.tipoUsuario.getAsientosQueLeCorresponden(asientos, impuesto);
+
 	}
 
+	public void setTipoUsuario(TipoUsuario tipo) {
+		this.tipoUsuario = tipo;
+		
+	}
 }
 

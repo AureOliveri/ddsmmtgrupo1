@@ -7,7 +7,9 @@ import com.lanchita.AerolineaLanchita;
 
 import aerolineas.AerolineaLancha;
 
+import Usuarios.TipoUsuario;
 import Usuarios.Usuario;
+import Usuarios.UsuarioVIP;
 import Vuelos.Asiento;
 
 public class Buscador {
@@ -28,20 +30,8 @@ public class Buscador {
 			asientos.add(asiento);
 		}
 		
-		return usuario.getAsientosQueLeCorreponden(asientos);
+		return usuario.getAsientosQueLeCorreponden(asientos, this.impuesto);
 		
-//		if (usuario.getTipoUsuario() != "VIP") {
-//			ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();
-//			for (Asiento asiento : asientos) {
-//
-//				if (!asiento.esSuperOferta(this.impuesto, usuario))
-//					asientosNoVip.add(asiento);
-//			}
-//			return asientosNoVip;
-//		} else {
-//			return asientos;
-//		}
-
 	}
 
 	public ArrayList<BigDecimal> buscarAsientosYMostrarPrecio(Busqueda busqueda, Usuario usuario) {
@@ -50,7 +40,7 @@ public class Buscador {
 		int i;
 		for (i = 0; i < asientos.size(); i++) {
 			Asiento asiento = asientos.get(i);
-			BigDecimal precio = (asiento.precioTotal(this.impuesto, usuario));
+			BigDecimal precio = (asiento.precioTotal(this.impuesto, usuario.getTipoUsuario()));
 			precios.add(precio);
 		}
 
@@ -61,7 +51,7 @@ public class Buscador {
 		return asientos == null;
 	}
 
-	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos, Usuario usuario) {
+	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos, TipoUsuario usuario) {
 		ArrayList<Asiento> asientosSuper = new ArrayList<Asiento>();
 
 		for (Asiento asiento : asientos) {
@@ -102,7 +92,7 @@ public class Buscador {
 		ArrayList<ArrayList<String>> asientosBusquedaLindos = new ArrayList<ArrayList<String>>();
 		int i;
 		for (i = 0; i < asientos.size(); i++) {
-			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario);
+			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario.getTipoUsuario());
 			asientosBusquedaLindos.add(valores);
 		}
 		return asientosBusquedaLindos;

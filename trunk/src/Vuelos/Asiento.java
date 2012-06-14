@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import com.sun.xml.internal.fastinfoset.util.StringArray;
 
+import Usuarios.TipoUsuario;
 import Usuarios.Usuario;
+import Usuarios.UsuarioVIP;
 
 
 public class Asiento {
@@ -41,48 +43,48 @@ public class Asiento {
 	}
 
 	public boolean esPrimeraClase(){
-		return (claseDeAsiento == "primera");
+		return (claseDeAsiento == "P");
 	}
 	
 	public boolean esClaseEjecutiva(){
-		return (claseDeAsiento == "ejecutivo");
+		return (claseDeAsiento == "E");
 	}
 	
 	public boolean esClaseTurista(){
-		return (claseDeAsiento == "turista");
+		return (claseDeAsiento == "T");
 	}
 	
-	public boolean esSuperOferta(BigDecimal impuesto, Usuario usuario){
+	public boolean esSuperOferta(BigDecimal impuesto, TipoUsuario usuario){
 		return (this.esSuperOfertaPrimera(impuesto, usuario) || this.esSuperOfertaEjecutiva(impuesto, usuario)); 
 	}
 	
-	public BigDecimal precioTotal(BigDecimal impuesto, Usuario usuario) {
+	public BigDecimal precioTotal(BigDecimal impuesto, TipoUsuario usuario) {
 		BigDecimal pTotal = precio.add(precio.multiply(impuesto)).setScale(2, BigDecimal.ROUND_UP);
 		pTotal = pTotal.add(usuario.getRecargo());
 		return pTotal;	
 	}
 	
-	public boolean esOfertaPrimera(BigDecimal impuesto, Usuario usuario) {
+	public boolean esOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
 		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) < 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) > 0;
 	}
 
-	public boolean esOfertaEjecutiva(BigDecimal impuesto, Usuario usuario) {
+	public boolean esOfertaEjecutiva(BigDecimal impuesto, TipoUsuario usuario) {
 		BigDecimal ofertaClaseEjecutiva = new BigDecimal(4000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) < 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) > 0;
 	}
 	
-	public boolean esSuperOfertaPrimera(BigDecimal impuesto, Usuario usuario) {
+	public boolean esSuperOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
 		return this.esPrimeraClase() && this.esOfertaPrimera(impuesto, usuario);
 	}
 	
-	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto, Usuario usuario) {
+	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto, TipoUsuario usuario) {
 		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto, usuario);
 	}
 	
 
 
-	public ArrayList<String> mostrarAsiento(Asiento unAsiento, BigDecimal impuesto, Usuario usuario) {
+	public ArrayList<String> mostrarAsiento(Asiento unAsiento, BigDecimal impuesto, TipoUsuario usuario) {
 		
 		ArrayList<String> asientoString = new ArrayList<String>();
 		
