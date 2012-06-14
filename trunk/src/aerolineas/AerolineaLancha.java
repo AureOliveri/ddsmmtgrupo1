@@ -8,7 +8,7 @@ import com.lanchita.AerolineaLanchita;
 
 public class AerolineaLancha implements Aerolinea {
 
-	private BigDecimal impuesto = new BigDecimal(1.15);
+	private BigDecimal impuesto = new BigDecimal(0.15);
 	private AerolineaLanchita aerolinea = AerolineaLanchita.getInstance();
 	
 	@Override
