@@ -1,13 +1,14 @@
-package Vuelos;
+package vuelos;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import usuarios.TipoUsuario;
+import usuarios.Usuario;
+import usuarios.UsuarioVIP;
+
 import com.sun.xml.internal.fastinfoset.util.StringArray;
 
-import Usuarios.TipoUsuario;
-import Usuarios.Usuario;
-import Usuarios.UsuarioVIP;
 
 
 public class Asiento {

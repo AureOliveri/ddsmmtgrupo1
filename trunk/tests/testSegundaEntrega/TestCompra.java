@@ -1,4 +1,4 @@
-package TestTDD;
+package testSegundaEntrega;
 
 import java.math.BigDecimal;
 
@@ -6,8 +6,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import Usuarios.UsuarioConRecargo;
-import Usuarios.UsuarioVIP;
+import usuarios.UsuarioConRecargo;
+import usuarios.UsuarioVIP;
+
 
 public class TestCompra {
 	

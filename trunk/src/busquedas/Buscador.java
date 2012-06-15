@@ -1,16 +1,17 @@
-package Busquedas;
+package busquedas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import usuarios.TipoUsuario;
+import usuarios.Usuario;
+import usuarios.UsuarioVIP;
+import vuelos.Asiento;
 
 import com.lanchita.AerolineaLanchita;
 
 import aerolineas.AerolineaLancha;
 
-import Usuarios.TipoUsuario;
-import Usuarios.Usuario;
-import Usuarios.UsuarioVIP;
-import Vuelos.Asiento;
 
 public class Buscador {
 

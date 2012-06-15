@@ -1,27 +1,25 @@
-package Busquedas;
+package vuelos;
 
-public class Busqueda {
-	
-	/* ATRIBUTOS */
-	
+
+public class Vuelo {
+
 	private String origen;
 	private String fechaSalida;
+	private String horaSalida;
 	private String destino;
 	private String fechaLlegada;
+	private String horaLlegada;
 	
-	
-	/* METODOS*/ 
-	public Busqueda(String origen,String fechaSalida, String destino, String fechaLlegada){
-		this.setOrigen(origen);
-		this.setFechaSalida(fechaSalida);		
-		this.setDestino(destino);
-		this.setFechaLlegada(fechaLlegada);
+	public Vuelo(){
+		
 	}
 
-
-	
-	
-	/* SETTERS*/
+	public boolean yaNoEstasDisponible(Asiento unAsiento) {
+		return (unAsiento.getDisponibilidad() == "R");
+		
+	}
+	 
+	 /* SETTERS*/
 	 
 	 public void setOrigen(String origenASetear){
 	  this.origen = origenASetear;
@@ -38,7 +36,15 @@ public class Busqueda {
 	 public void setFechaLlegada(String fechaASetear){
 	  this.fechaLlegada = fechaASetear;
 	 }
-
+	 
+	 public void setHoraSalida(String horaASetear){
+	  this.horaSalida = horaASetear;
+	 }
+	 
+	 public void setHoraLlegada(String horaASetear){
+	  this.horaLlegada = horaASetear;
+	 }
+	 
 
 	 /*GETTERS*/
 	 public String getOrigen(){
@@ -56,5 +62,12 @@ public class Busqueda {
 	 public String getFechaLlegada(){
 	  return this.fechaLlegada;
 	 }
-
+	 
+	 public String getHoraSalida(){
+	  return this.horaSalida;
+	 }
+	 
+	 public String getHoraLlegada(){
+	  return this.horaLlegada;
+	 }
 }

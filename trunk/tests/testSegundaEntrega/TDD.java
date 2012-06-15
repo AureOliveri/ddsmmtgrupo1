@@ -1,13 +1,14 @@
-package TestTDD;
+package testSegundaEntrega;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
+import usuarios.*;
+import vuelos.Asiento;
+import vuelos.Vuelo;
 
-import Usuarios.*;
-import Vuelos.Asiento;
-import Vuelos.Vuelo;
+
 //TODO VER SI NO SIRVE Y BORRAR
 public class TDD {
 	@Test

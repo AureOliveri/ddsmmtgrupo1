@@ -1,6 +1,6 @@
 package aerolineas;
 
-import Vuelos.Asiento;
+import vuelos.Asiento;
 
 public interface Aerolinea {
 

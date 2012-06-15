@@ -2,8 +2,9 @@ package aerolineas;
 
 import java.math.BigDecimal;
 
-import Usuarios.Usuario;
-import Vuelos.Asiento;
+import usuarios.Usuario;
+import vuelos.Asiento;
+
 import com.lanchita.AerolineaLanchita;
 
 public class AerolineaLancha implements Aerolinea {

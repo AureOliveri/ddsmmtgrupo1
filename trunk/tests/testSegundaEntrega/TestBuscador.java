@@ -1,4 +1,4 @@
-package TestTDD;
+package testSegundaEntrega;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,10 +6,12 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import Usuarios.*;
-import Vuelos.Asiento;
-import Busquedas.Busqueda;
-import Busquedas.Buscador;
+
+import usuarios.*;
+import vuelos.Asiento;
+
+import busquedas.Buscador;
+import busquedas.Busqueda;
 
 public class TestBuscador {
 

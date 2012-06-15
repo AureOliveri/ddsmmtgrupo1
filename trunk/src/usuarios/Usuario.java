@@ -1,10 +1,12 @@
-package Usuarios;
+package usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import Busquedas.Busqueda;
-import Vuelos.Asiento;
+import vuelos.Asiento;
+
+import busquedas.Busqueda;
+
 
 
 public class Usuario {
@@ -31,7 +33,6 @@ public class Usuario {
 		return historialBusquedas;
 	}
 	
-
 
 	public void setMontoCompras(BigDecimal montoCompras) {
 		this.montoCompras = montoCompras;
