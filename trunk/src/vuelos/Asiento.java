@@ -13,16 +13,18 @@ import com.sun.xml.internal.fastinfoset.util.StringArray;
 
 public class Asiento {
 	
+	private Vuelo vuelo;
+	private BigDecimal numeroDeAsiento;
+	private String codigoAsiento;
 	private BigDecimal precio;
 	private String claseDeAsiento;
 	private String ubicacion;
 	private String disponibilidad;
-	private String codigoAsiento;
 	private Usuario usuario;
 	
 	public Asiento(String[] asiento) {
 		this();
-		this.codigoAsiento = asiento[0];
+		this.setCodigoAsiento(asiento[0]);
 		this.precio = new BigDecimal(asiento[1]);
 		this.claseDeAsiento = asiento[2];
 		this.ubicacion = asiento[3];
@@ -40,7 +42,6 @@ public class Asiento {
 
 	public void ocupate() {
 		this.setDisponibilidad("R");
-		
 	}
 
 	public boolean esPrimeraClase(){
@@ -67,12 +68,12 @@ public class Asiento {
 	
 	public boolean esOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
 		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) > 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) < 0;
 	}
 
 	public boolean esOfertaEjecutiva(BigDecimal impuesto, TipoUsuario usuario) {
 		BigDecimal ofertaClaseEjecutiva = new BigDecimal(4000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) > 0;
+		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) < 0;
 	}
 	
 	public boolean esSuperOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
@@ -83,13 +84,11 @@ public class Asiento {
 		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto, usuario);
 	}
 	
-
-
 	public ArrayList<String> mostrarAsiento(Asiento unAsiento, BigDecimal impuesto, TipoUsuario usuario) {
 		
 		ArrayList<String> asientoString = new ArrayList<String>();
 		
-		asientoString.add(unAsiento.getCodigoDeAsiento());
+		asientoString.add(unAsiento.getCodigoAsiento());
 		asientoString.add(unAsiento.precioTotal(impuesto, usuario).toString());
 		asientoString.add(unAsiento.getClaseDeAsiento());
 		asientoString.add(unAsiento.getUbicacion());
@@ -99,13 +98,16 @@ public class Asiento {
 
 	}
 	
-	
-	
-
 	/* GETTERS*/
-	
-	public String getCodigoDeAsiento() {
-		return this.codigoAsiento;
+
+	public Vuelo getVuelo() {
+		return vuelo;
+	}
+	public BigDecimal getNumeroDeAsiento() {
+		return numeroDeAsiento;
+	}
+	public String getCodigoAsiento() {
+		return codigoAsiento;
 	}
 	public BigDecimal getPrecio(){
 		return this.precio;
@@ -119,7 +121,9 @@ public class Asiento {
 	public String getDisponibilidad(){
 		return this.disponibilidad;
 	}
+	
 	/* SETTERS*/
+	
 	
 	public void setPrecio(BigDecimal unPrecio){
 		this.precio =unPrecio;
@@ -132,5 +136,14 @@ public class Asiento {
 	}
 	public void setDisponibilidad(String disp){
 		this.disponibilidad = disp;
+	}
+	public void setVuelo(Vuelo vuelo) {
+		this.vuelo = vuelo;
+	}
+	public void setNumeroDeAsiento(BigDecimal numeroDeAsiento) {
+		this.numeroDeAsiento = numeroDeAsiento;
+	}
+	public void setCodigoAsiento(String codigoAsiento) {
+		this.codigoAsiento = codigoAsiento;
 	}
 }

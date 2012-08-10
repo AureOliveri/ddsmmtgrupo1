@@ -1,5 +1,9 @@
 package vuelos;
 
+import java.util.ArrayList;
+
+import busquedas.Busqueda;
+
 
 public class Vuelo {
 
@@ -9,6 +13,8 @@ public class Vuelo {
 	private String destino;
 	private String fechaLlegada;
 	private String horaLlegada;
+	private String numeroDeVuelo;
+	private ArrayList<Asiento> asientos = new ArrayList<Asiento>();
 	
 	public Vuelo(){
 		
@@ -44,6 +50,10 @@ public class Vuelo {
 	 public void setHoraLlegada(String horaASetear){
 	  this.horaLlegada = horaASetear;
 	 }
+
+	 public void setNumeroDeVuelo(String numeroDeVuelo) {
+			this.numeroDeVuelo = numeroDeVuelo;
+	}
 	 
 
 	 /*GETTERS*/
@@ -68,6 +78,10 @@ public class Vuelo {
 	 }
 	 
 	 public String getHoraLlegada(){
-	  return this.horaLlegada;
+		 return this.horaLlegada;
+	 }
+
+	 public String getNumeroDeVuelo() {
+		 return numeroDeVuelo;
 	 }
 }

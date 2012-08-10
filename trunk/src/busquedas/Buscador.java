@@ -81,7 +81,7 @@ public class Buscador {
 		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
 
 		for (Asiento asiento : asientosDeBusqueda) {
-			if (asiento.getClaseDeAsiento().equals(ubicacion)) {
+			if (asiento.getUbicacion().equals(ubicacion)) {
 				asientosUbicacion.add(asiento);
 			}
 		}
@@ -90,13 +90,13 @@ public class Buscador {
 	}
 
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-		ArrayList<ArrayList<String>> asientosBusquedaLindos = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
 		int i;
 		for (i = 0; i < asientos.size(); i++) {
 			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario.getTipoUsuario());
-			asientosBusquedaLindos.add(valores);
+			asientosBusqueda.add(valores);
 		}
-		return asientosBusquedaLindos;
+		return asientosBusqueda;
 	}
 
 	public BigDecimal getImpuesto() {

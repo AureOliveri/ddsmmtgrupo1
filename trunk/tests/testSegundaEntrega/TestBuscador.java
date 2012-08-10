@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import usuarios.*;
 import vuelos.Asiento;
+import vuelos.Vuelo;
 
 import busquedas.Buscador;
 import busquedas.Busqueda;
@@ -21,6 +22,7 @@ public class TestBuscador {
 	private TipoUsuario conRecargo;
 	private TipoUsuario estandar;
 	private Busqueda busqueda;
+	private Vuelo vuelo;
 
 	@Before
 	public void inicializador() {
@@ -29,6 +31,7 @@ public class TestBuscador {
 		vip = new UsuarioVIP();
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
+		vuelo = new Vuelo();
 		busqueda = new Busqueda("BUE", "20121010", "LA", null);
 	}
 
@@ -84,6 +87,7 @@ public class TestBuscador {
 	public void buscarAsientosPorUbicacion() {
 		usuario.setTipoUsuario(vip);
 		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(busqueda, "V", usuario);
+		System.out.println(buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
 	}
 
@@ -100,6 +104,7 @@ public class TestBuscador {
 		usuario.setTipoUsuario(estandar);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
 		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario.getTipoUsuario());
+		System.out.println(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 
