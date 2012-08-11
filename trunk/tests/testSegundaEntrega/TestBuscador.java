@@ -22,6 +22,8 @@ public class TestBuscador {
 	private TipoUsuario conRecargo;
 	private TipoUsuario estandar;
 	private Busqueda busqueda;
+	private BigDecimal precioMin;
+	private BigDecimal precioMax;
 	private Vuelo vuelo;
 
 	@Before
@@ -32,7 +34,9 @@ public class TestBuscador {
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
 		vuelo = new Vuelo();
-		busqueda = new Busqueda("BUE", "20121010", "LA", null);
+		precioMin = new BigDecimal(200.00);
+		precioMax = new BigDecimal(461.00);
+		busqueda = new Busqueda("BUE", "20121010", "LA");
 	}
 
 // TODO Falta ver si hay que diferenciar clases y ubicaciones de asientos.
@@ -68,50 +72,57 @@ public class TestBuscador {
 	}
 
 	@Test
-	public void mostrarPrecioDeUnAsiento() {
-		usuario.setTipoUsuario(conRecargo);
-		BigDecimal precio1 = buscador.buscarAsientos(busqueda, usuario).get(1).getPrecio().add(new BigDecimal(20));
-		System.out.println(precio1);
-		Assert.assertNotNull(precio1);
-	}
-
-	@Test
-	public void unUsuarioConRecargoBuscaAsientosPorPrecio() {
-		usuario.setTipoUsuario(conRecargo);
-		ArrayList<BigDecimal> precios = buscador.buscarAsientosYMostrarPrecio(busqueda, usuario);
-		System.out.println(precios);
-		Assert.assertNotNull(precios);
-	}
-
-	@Test
-	public void buscarAsientosPorUbicacion() {
+	public void usuarioVipBuscaAsientosPorUbicacion() {
 		usuario.setTipoUsuario(vip);
 		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientosPorUbicacion(busqueda, "V", usuario);
-		System.out.println(buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
+		System.out.println("Vip Ubic. Ventana " + buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
 	}
 
 	@Test
-	public void buscarAsientosPorClase() {
+	public void usuarioVipBuscaAsientosPorClase() {
 		usuario.setTipoUsuario(vip);
 		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientosPorClase(busqueda, "E", usuario);
-		System.out.println(buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
+		System.out.println("Vip clase Ejecutiva " + buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
 		Assert.assertNotNull(asientosPorClase);
 	}
+	
+	@Test
+	public void usuarioConRecargoBuscaAsientosPorPrecio() {
+		usuario.setTipoUsuario(conRecargo);
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientosPorPrecio(busqueda, usuario, precioMin, precioMax);
+		System.out.println("ConRecargo precio entre 100 y 461: " + buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		Assert.assertNotNull(asientosPorPrecio);
+	}
 
+	@Test
+	public void usuarioEstandarBuscaAsientosPorPrecio() {
+		usuario.setTipoUsuario(estandar);
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientosPorPrecio(busqueda, usuario, precioMin, precioMax);
+		System.out.println("Estandar precio entre 100 y 461: " + buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		Assert.assertNotNull(asientosPorPrecio);
+	}
+	
+	@Test
+	public void usuarioVipBuscaAsientosPorPrecio() {
+		usuario.setTipoUsuario(vip);
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientosPorPrecio(busqueda, usuario, precioMin, precioMax);
+		System.out.println("Vip precio entre 100 y 461: " + buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		Assert.assertNotNull(asientosPorPrecio);
+	}
 	@Test
 	public void buscarAsientosSuperOfertaConUsuarioEstandar() {
 		usuario.setTipoUsuario(estandar);
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(busqueda, usuario);
-		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario.getTipoUsuario());
-		System.out.println(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientosSuperOferta(asientos, usuario);
+		System.out.println("Estandar busca SuperOferta: " + buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 
 	@Test
 	public void mostrarUnAsiento() {
 		usuario.setTipoUsuario(estandar);
-		Asiento unAsiento = buscador.buscarAsientos(busqueda, usuario).get(0);
+		Asiento unAsiento = buscador.buscarAsientos(busqueda, usuario).get(1);
 		System.out.println(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario.getTipoUsuario()));
 		Assert.assertNotNull(unAsiento.mostrarAsiento(unAsiento, buscador.getImpuesto(), usuario.getTipoUsuario()));
 

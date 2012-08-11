@@ -24,7 +24,7 @@ public class Buscador {
 		AerolineaLanchita aerolineaAux = AerolineaLanchita.getInstance();
 
 		String[][] asientosDisponibles = aerolineaAux.asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
-				busqueda.getFechaSalida(), null, busqueda.getFechaLlegada(), null);
+				busqueda.getFechaViaje(), null, null, null);
 		int i;
 		for (i = 0; i < asientosDisponibles.length; i++) {
 			Asiento asiento = new Asiento(asientosDisponibles[i]);
@@ -35,8 +35,9 @@ public class Buscador {
 		
 	}
 
+	//TODO Creo que este metodo esta de mas. Esta el metodo buscar asientos por precio de la entrega 3, borre su test.
 	public ArrayList<BigDecimal> buscarAsientosYMostrarPrecio(Busqueda busqueda, Usuario usuario) {
-		ArrayList<BigDecimal> precios = new ArrayList<BigDecimal>();
+		ArrayList<BigDecimal> precios = new ArrayList<BigDecimal>();								
 		ArrayList<Asiento> asientos = this.buscarAsientos(busqueda, usuario);
 		int i;
 		for (i = 0; i < asientos.size(); i++) {
@@ -52,11 +53,11 @@ public class Buscador {
 		return asientos == null;
 	}
 
-	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos, TipoUsuario usuario) {
+	public ArrayList<Asiento> buscarAsientosSuperOferta(ArrayList<Asiento> asientos, Usuario usuario) {
 		ArrayList<Asiento> asientosSuper = new ArrayList<Asiento>();
 
 		for (Asiento asiento : asientos) {
-			if (asiento.esSuperOferta(this.impuesto, usuario)) {
+			if (asiento.esSuperOferta(this.impuesto, usuario.getTipoUsuario())) {
 				asientosSuper.add(asiento);
 			}
 		}
@@ -86,9 +87,21 @@ public class Buscador {
 			}
 		}
 		return asientosUbicacion;
-
 	}
 
+	public ArrayList<Asiento> buscarAsientosPorPrecio(Busqueda busqueda, Usuario usuario, BigDecimal precioMin, BigDecimal precioMax) {
+		ArrayList<Asiento> asientosPorPrecio = new ArrayList<Asiento>();
+		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
+
+		for (Asiento asiento : asientosDeBusqueda) {
+			BigDecimal precioTotal = asiento.precioTotal(this.impuesto , usuario.getTipoUsuario());
+			if ((precioTotal.compareTo(precioMin) >= 0 ) && (precioTotal.compareTo(precioMax) <= 0)) {
+				asientosPorPrecio.add(asiento);
+			}
+		}
+		return asientosPorPrecio;
+	}
+	
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
 		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
 		int i;
