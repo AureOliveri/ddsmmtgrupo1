@@ -1,6 +1,5 @@
 package busquedas;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import usuarios.Usuario;
