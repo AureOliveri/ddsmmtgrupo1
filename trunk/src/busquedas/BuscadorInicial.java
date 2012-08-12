@@ -7,17 +7,19 @@ import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import usuarios.UsuarioVIP;
 import vuelos.Asiento;
+import busquedas.BuscadorFinal;
 
 import com.lanchita.AerolineaLanchita;
 
 import aerolineas.AerolineaLancha;
 
 
-public class Buscador {
+public class BuscadorInicial implements BuscadorFinal{
 
 	private AerolineaLancha aerolineaLanchita = new AerolineaLancha();
 	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
 
+	@Override
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
@@ -65,29 +67,17 @@ public class Buscador {
 
 	}
 
-	public ArrayList<Asiento> buscarAsientosPorClase(Busqueda busqueda, String clase, Usuario usuario) {
-		ArrayList<Asiento> asientosPorClase = new ArrayList<Asiento>();
-		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
-		for (Asiento asiento : asientosDeBusqueda) {
-			if (asiento.getClaseDeAsiento().equals(clase)) {
-				asientosPorClase.add(asiento);
-			}
-		}
-		return asientosPorClase;
-
-	}
-
-	public ArrayList<Asiento> buscarAsientosPorUbicacion(Busqueda busqueda, String ubicacion, Usuario usuario) {
-		ArrayList<Asiento> asientosUbicacion = new ArrayList<Asiento>();
-		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario);
-
-		for (Asiento asiento : asientosDeBusqueda) {
-			if (asiento.getUbicacion().equals(ubicacion)) {
-				asientosUbicacion.add(asiento);
-			}
-		}
-		return asientosUbicacion;
-	}
+//	public ArrayList<Asiento> buscarAsientosPorClase(Busqueda busqueda, String clase, Usuario usuario) {
+//		ArrayList<Asiento> asientosPorClase = new ArrayList<Asiento>();
+//		ArrayList<Asiento> asientosDeBusqueda = this.buscarAsientos(busqueda, usuario, null, null);
+//		for (Asiento asiento : asientosDeBusqueda) {
+//			if (asiento.getClaseDeAsiento().equals(clase)) {
+//				asientosPorClase.add(asiento);
+//			}
+//		}
+//		return asientosPorClase;
+//
+//	}
 
 	public ArrayList<Asiento> buscarAsientosPorPrecio(Busqueda busqueda, Usuario usuario, BigDecimal precioMin, BigDecimal precioMax) {
 		ArrayList<Asiento> asientosPorPrecio = new ArrayList<Asiento>();
