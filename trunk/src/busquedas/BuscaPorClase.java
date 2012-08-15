@@ -27,6 +27,20 @@ public class BuscaPorClase extends BuscadorDecorado {
 		return asientosPorClase;
 
 	}
+
+
+	@Override
+	public void setCriterio(CriterioBusqueda precioDes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public CriterioBusqueda getCriterio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

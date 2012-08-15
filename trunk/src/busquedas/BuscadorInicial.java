@@ -16,6 +16,7 @@ public class BuscadorInicial implements BuscadorFinal{
 
 	private AerolineaLancha aerolineaLanchita = new AerolineaLancha();
 	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
+	protected CriterioBusqueda criterio;
 
 	@Override
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
@@ -35,35 +36,31 @@ public class BuscadorInicial implements BuscadorFinal{
 		
 	}
 
-	//TODO Creo que este metodo esta de mas. Esta el metodo buscar asientos por precio de la entrega 3, borre su test.
-	public ArrayList<BigDecimal> buscarAsientosYMostrarPrecio(Busqueda busqueda, Usuario usuario) {
-		ArrayList<BigDecimal> precios = new ArrayList<BigDecimal>();								
-		ArrayList<Asiento> asientos = this.buscarAsientos(busqueda, usuario);
-		int i;
-		for (i = 0; i < asientos.size(); i++) {
-			Asiento asiento = asientos.get(i);
-			BigDecimal precio = (asiento.precioTotal(this.impuesto, usuario.getTipoUsuario()));
-			precios.add(precio);
-		}
-
-		return precios;
-	}
-
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;
 	}
 
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
-		int i;
-		for (i = 0; i < asientos.size(); i++) {
-			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario.getTipoUsuario());
-			asientosBusqueda.add(valores);
-		}
-		return asientosBusqueda;
+
+		return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario, impuesto);
+		//		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
+//		int i;
+//		for (i = 0; i < asientos.size(); i++) {
+//			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario.getTipoUsuario());
+//			asientosBusqueda.add(valores);
+//		}
+//		return asientosBusqueda;
 	}
 
 	public BigDecimal getImpuesto() {
 		return this.impuesto;
+	}
+
+	public void setCriterio(CriterioBusqueda criterio) {
+		this.criterio = criterio;
+	}
+
+	public CriterioBusqueda getCriterio() {
+		return criterio;
 	}
 }

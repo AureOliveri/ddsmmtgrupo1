@@ -15,4 +15,8 @@ public interface BuscadorFinal {
 	public BigDecimal getImpuesto();
 	
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario);
+
+	public void setCriterio(CriterioBusqueda precioDes);
+
+	public CriterioBusqueda getCriterio();
 }
