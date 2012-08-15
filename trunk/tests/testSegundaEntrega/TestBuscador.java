@@ -18,6 +18,9 @@ import busquedas.BuscaPorUbicacion;
 import busquedas.BuscadorFinal;
 import busquedas.BuscadorInicial;
 import busquedas.Busqueda;
+import busquedas.CriterioBusqueda;
+import busquedas.CriterioPrecioAscendente;
+import busquedas.CriterioPrecioDescendente;
 
 public class TestBuscador {
 
@@ -26,6 +29,8 @@ public class TestBuscador {
 	private BuscaPorUbicacion buscadorPU;
 	private BuscaPorPrecio buscadorPP;
 	private BuscaPorSuperOferta buscadorPSO;
+	private CriterioBusqueda precioDes;
+	private CriterioBusqueda precioAsc;
 	private Usuario usuario;
 	private TipoUsuario vip;
 	private TipoUsuario conRecargo;
@@ -42,12 +47,14 @@ public class TestBuscador {
 		buscadorPU = new BuscaPorUbicacion(buscador);
 		buscadorPP = new BuscaPorPrecio(buscador);
 		buscadorPSO = new BuscaPorSuperOferta(buscador);
+		precioDes = new CriterioPrecioDescendente();
+		precioAsc = new CriterioPrecioAscendente();
 		usuario = new Usuario();
 		vip = new UsuarioVIP();
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
 		vuelo = new Vuelo();
-		precioMin = new BigDecimal(200.00);
+		precioMin = new BigDecimal(100.00);
 		precioMax = new BigDecimal(461.00);
 		busqueda = new Busqueda("BUE", "20121010", "LA", "P", "E", null, null, "P", null, precioMin, precioMax);
 	}
@@ -118,8 +125,18 @@ public class TestBuscador {
 	}
 	
 	@Test
-	public void usuarioVipBuscaAsientosPorPrecio() {
+	public void usuarioVipBuscaAsientosPorPrecioDescendente() {
 		usuario.setTipoUsuario(vip);
+		buscador.setCriterio(precioDes);
+		ArrayList<Asiento> asientosPorPrecio = buscadorPP.buscarAsientos(busqueda, usuario);
+		System.out.println("Vip precio entre 100 y 461: " + buscadorPP.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		Assert.assertNotNull(asientosPorPrecio);
+	}
+	
+	@Test
+	public void usuarioVipBuscaAsientosPorPrecioAscendente() {
+		usuario.setTipoUsuario(vip);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosPorPrecio = buscadorPP.buscarAsientos(busqueda, usuario);
 		System.out.println("Vip precio entre 100 y 461: " + buscadorPP.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
 		Assert.assertNotNull(asientosPorPrecio);

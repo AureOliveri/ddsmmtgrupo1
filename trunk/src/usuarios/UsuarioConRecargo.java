@@ -12,6 +12,7 @@ public class UsuarioConRecargo extends TipoUsuario {
 		return new BigDecimal(20);
 	}
 
+	@Override
 	protected ArrayList<Asiento> getAsientosQueLeCorresponden(
 			ArrayList<Asiento> asientos, BigDecimal impuesto) {
 		ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();

@@ -9,6 +9,7 @@ import vuelos.Asiento;
 public class UsuarioVIP extends TipoUsuario {
 
 
+	@Override
 	public ArrayList<Asiento> getAsientosQueLeCorresponden(ArrayList<Asiento> asientos,
 			BigDecimal impuesto) {
 		return asientos;
