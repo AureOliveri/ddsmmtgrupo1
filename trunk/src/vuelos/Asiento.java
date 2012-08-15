@@ -8,8 +8,7 @@ import usuarios.Usuario;
 import usuarios.UsuarioVIP;
 
 import com.sun.xml.internal.fastinfoset.util.StringArray;
-
-
+import java.util.Queue;
 
 public class Asiento {
 	
@@ -21,6 +20,8 @@ public class Asiento {
 	private String ubicacion;
 	private String disponibilidad;
 	private Usuario usuario;
+	private Queue<Reserva> reservas;
+	private Boolean reservado = false;
 	
 	public Asiento(String[] asiento) {
 		this();
@@ -98,6 +99,21 @@ public class Asiento {
 
 	}
 	
+	public void reservar(String dni){
+		Reserva nuevaReserva = new Reserva(this.codigoAsiento, dni);
+		this.reservas.add(nuevaReserva);
+		this.reservado = true;
+	}
+	
+	public void eliminarReservas(){
+		while (this.reservas != null){
+			this.reservas.poll();
+		}
+	}
+	
+	public Boolean noEstaReservado(){
+		return (!this.reservado);
+	}
 	/* GETTERS*/
 
 	public Vuelo getVuelo() {
@@ -120,6 +136,14 @@ public class Asiento {
 	}
 	public String getDisponibilidad(){
 		return this.disponibilidad;
+	}
+	
+	public Boolean getReservado(){
+		return this.reservado;
+	}
+	
+	public Reserva getPrimeraReserva(){
+		return this.reservas.peek();
 	}
 	
 	/* SETTERS*/
