@@ -94,6 +94,7 @@ public class TestBuscador {
 	@Test
 	public void usuarioVipBuscaAsientosPorUbicacion() {
 		usuario.setTipoUsuario(vip);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosSegunUbicacionElegida = buscadorPU.buscarAsientos(busqueda, usuario);
 		System.out.println("Vip Ubic. Ventana " + buscadorPU.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
@@ -102,6 +103,7 @@ public class TestBuscador {
 	@Test
 	public void usuarioVipBuscaAsientosPorClase() {
 		usuario.setTipoUsuario(vip);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosPorClase = buscadorPC.buscarAsientos(busqueda, usuario);
 		System.out.println("Vip clase Ejecutiva " + buscadorPC.mostrarAsientosBusqueda(asientosPorClase, usuario));
 		Assert.assertNotNull(asientosPorClase);
@@ -110,6 +112,7 @@ public class TestBuscador {
 	@Test
 	public void usuarioConRecargoBuscaAsientosPorPrecio() {
 		usuario.setTipoUsuario(conRecargo);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosPorPrecio = buscadorPP.buscarAsientos(busqueda, usuario);
 		System.out.println("ConRecargo precio entre 100 y 461: " + buscadorPP.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
 		Assert.assertNotNull(asientosPorPrecio);
@@ -119,6 +122,7 @@ public class TestBuscador {
 	@Test
 	public void usuarioEstandarBuscaAsientosPorPrecio() {
 		usuario.setTipoUsuario(estandar);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosPorPrecio = buscadorPP.buscarAsientos(busqueda, usuario);
 		System.out.println("Estandar precio entre 100 y 461: " + buscadorPP.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
 		Assert.assertNotNull(asientosPorPrecio);
@@ -145,6 +149,7 @@ public class TestBuscador {
 	@Test
 	public void buscarAsientosSuperOfertaConUsuarioEstandar() {
 		usuario.setTipoUsuario(estandar);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosSuperOferta = buscadorPSO.buscarAsientos(busqueda, usuario);
 		System.out.println("Estandar busca SuperOferta: " + buscadorPSO.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
@@ -153,6 +158,7 @@ public class TestBuscador {
 	@Test
 	public void buscarAsientosSuperOfertaConUsuarioVip() {
 		usuario.setTipoUsuario(vip);
+		buscador.setCriterio(precioAsc);
 		ArrayList<Asiento> asientosSuperOferta = buscadorPSO.buscarAsientos(busqueda, usuario);
 		System.out.println("Vip busca SuperOferta: " + buscadorPSO.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertNotNull(asientosSuperOferta);
