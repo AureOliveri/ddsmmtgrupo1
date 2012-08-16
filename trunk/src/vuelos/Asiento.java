@@ -105,6 +105,13 @@ public class Asiento {
 		this.reservado = true;
 	}
 	
+	public void expirarReserva(){
+		this.reservas.poll();
+		if(this.reservas.isEmpty()){
+			this.reservado = false;
+		}
+	}
+	
 	public void eliminarReservas(){
 		while (this.reservas != null){
 			this.reservas.poll();
