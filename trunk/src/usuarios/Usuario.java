@@ -3,36 +3,43 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import excepciones.asientoReservadoException;
+
 import vuelos.Asiento;
 
 import busquedas.Busqueda;
 
-
-
 public class Usuario {
-	
+
 	protected TipoUsuario tipoUsuario;
 	protected BigDecimal recargo = new BigDecimal(20);
 	private BigDecimal montoCompras = new BigDecimal(0);
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
 
-	public void comprarAsiento(Asiento unAsiento){
-		unAsiento.setDisponibilidad("R");
-		
+	public void comprarAsiento(Asiento unAsiento) {
+		if (noTieneReserva(unAsiento)) {
+			unAsiento.setDisponibilidad("R");
+		} else {
+			throw new asientoReservadoException(("el asiento "
+					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
+		}
 	}
-	
-	public TipoUsuario getTipoUsuario(){
+
+	public Boolean noTieneReserva(Asiento unAsiento) {
+		return (unAsiento.getReservado().equals(false));
+	}
+
+	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
-	
+
 	public BigDecimal getRecargo() {
 		return recargo;
 	}
-	
-	public ArrayList<Busqueda> getHistorial(){
+
+	public ArrayList<Busqueda> getHistorial() {
 		return historialBusquedas;
 	}
-	
 
 	public void setMontoCompras(BigDecimal montoCompras) {
 		this.montoCompras = montoCompras;
@@ -43,18 +50,19 @@ public class Usuario {
 	}
 
 	public void guardarBusqueda(Busqueda busqueda) {
-		historialBusquedas.add(busqueda);	
+		historialBusquedas.add(busqueda);
 	}
 
-	public ArrayList<Asiento> getAsientosQueLeCorreponden(ArrayList<Asiento> asientos, BigDecimal impuesto) {
-		
-		return this.tipoUsuario.getAsientosQueLeCorresponden(asientos, impuesto);
+	public ArrayList<Asiento> getAsientosQueLeCorreponden(
+			ArrayList<Asiento> asientos, BigDecimal impuesto) {
+
+		return this.tipoUsuario
+				.getAsientosQueLeCorresponden(asientos, impuesto);
 
 	}
 
 	public void setTipoUsuario(TipoUsuario tipo) {
 		this.tipoUsuario = tipo;
-		
+
 	}
 }
-

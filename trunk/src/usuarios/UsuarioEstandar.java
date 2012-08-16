@@ -3,7 +3,10 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import excepciones.asientoReservadoException;
+
 import vuelos.Asiento;
+import vuelos.Reserva;
 
 
 
@@ -28,9 +31,21 @@ public class UsuarioEstandar extends TipoUsuario {
 	}
 
 	public void comprarAsiento(Asiento unAsiento) {
-		// TODO Auto-generated method stub
+		if(puedeComprar(unAsiento)){
+			unAsiento.setDisponibilidad("R");
+		} else {
+			throw new asientoReservadoException(("el asiento "
+					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
+		}
 		
 	}
-
+	
+	public Boolean puedeComprar(Asiento unAsiento){
+		return (unAsiento.noEstaReservado() || esTuReserva(unAsiento.getPrimeraReserva()));
+	}
+	
+	public Boolean esTuReserva(Reserva reserva){
+		return reserva.getDni().equals(this.getDni());
+	}
 
 }
