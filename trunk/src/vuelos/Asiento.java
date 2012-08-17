@@ -5,19 +5,21 @@ import java.util.ArrayList;
 
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
-import usuarios.UsuarioVIP;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
+
+import enumeraciones.ClaseDeAsiento;
+import enumeraciones.UbicacionDeAsiento;
+
 import java.util.Queue;
 
 public class Asiento {
 	
+	private ClaseDeAsiento claseDeAsiento;
+	private UbicacionDeAsiento ubicacion;
 	private Vuelo vuelo;
 	private BigDecimal numeroDeAsiento;
 	private String codigoAsiento;
 	private BigDecimal precio;
-	private String claseDeAsiento;
-	private String ubicacion;
 	private String disponibilidad;
 	private Usuario usuario;
 	private Queue<Reserva> reservas;
@@ -27,9 +29,10 @@ public class Asiento {
 		this();
 		this.setCodigoAsiento(asiento[0]);
 		this.precio = new BigDecimal(asiento[1]);
-		this.claseDeAsiento = asiento[2];
-		this.ubicacion = asiento[3];
 		this.disponibilidad = asiento[4];
+		this.claseDeAsiento = ClaseDeAsiento.obtenerClase(asiento[2]);
+		this.ubicacion = UbicacionDeAsiento.obtenerUbicacion(asiento[3]);
+		
 	}
 
 	public Asiento() {
@@ -40,21 +43,20 @@ public class Asiento {
 		System.out.println(this.ubicacion);
 	}
 	
-
 	public void ocupate() {
 		this.setDisponibilidad("R");
 	}
 
 	public boolean esPrimeraClase(){
-		return (claseDeAsiento == "P");
+		return (this.claseDeAsiento.equals(ClaseDeAsiento.PRIMERA));
 	}
 	
 	public boolean esClaseEjecutiva(){
-		return (claseDeAsiento == "E");
+		return (this.claseDeAsiento.equals(ClaseDeAsiento.EJECUTIVA));
 	}
 	
 	public boolean esClaseTurista(){
-		return (claseDeAsiento == "T");
+		return (this.claseDeAsiento.equals(ClaseDeAsiento.TURISTA));
 	}
 	
 	public boolean esSuperOferta(BigDecimal impuesto, TipoUsuario usuario){
@@ -91,8 +93,8 @@ public class Asiento {
 		
 		asientoString.add(unAsiento.getCodigoAsiento());
 		asientoString.add(unAsiento.precioTotal(impuesto, usuario).toString());
-		asientoString.add(unAsiento.getClaseDeAsiento());
-		asientoString.add(unAsiento.getUbicacion());
+		asientoString.add(unAsiento.getClaseDeAsiento().getCodigo());
+		asientoString.add(unAsiento.getUbicacion().getCodigo());
 		asientoString.add(unAsiento.getDisponibilidad());
 
 		return asientoString;
@@ -121,6 +123,7 @@ public class Asiento {
 	public Boolean noEstaReservado(){
 		return (!this.reservado);
 	}
+	
 	/* GETTERS*/
 
 	public Vuelo getVuelo() {
@@ -135,10 +138,10 @@ public class Asiento {
 	public BigDecimal getPrecio(){
 		return this.precio;
 	}
-	public String getClaseDeAsiento(){
+	public ClaseDeAsiento getClaseDeAsiento(){
 		return this.claseDeAsiento;
 	}
-	public String getUbicacion(){
+	public UbicacionDeAsiento getUbicacion(){
 		return this.ubicacion;
 	}
 	public String getDisponibilidad(){
@@ -158,12 +161,6 @@ public class Asiento {
 	
 	public void setPrecio(BigDecimal unPrecio){
 		this.precio =unPrecio;
-	}
-	public void setClaseDeAsiento(String clasAsiento){
-		this.claseDeAsiento = clasAsiento;
-	}
-	public void setUbicacion(String ubi){
-		this.ubicacion = ubi;
 	}
 	public void setDisponibilidad(String disp){
 		this.disponibilidad = disp;
