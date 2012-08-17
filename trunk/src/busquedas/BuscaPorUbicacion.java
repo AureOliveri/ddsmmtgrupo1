@@ -16,14 +16,17 @@ public class BuscaPorUbicacion extends BuscadorDecorado {
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {  
 		ArrayList<Asiento> asientosPorUbicacion = new ArrayList<Asiento>();
 		ArrayList<Asiento> asientosDeBusqueda = this.buscadorF.buscarAsientos(busqueda, usuario);
+		int filtro = 0;
 		for (Asiento asiento : asientosDeBusqueda) {
-			boolean ventana = asiento.getUbicacion().equals(busqueda.getVentana());
-			boolean pasillo = asiento.getUbicacion().equals(busqueda.getPasillo());
-			boolean centro = asiento.getUbicacion().equals(busqueda.getCentro());
+			boolean ventana = asiento.getUbicacion().equals(busqueda.getOpcionales().getVentana());
+			boolean pasillo = asiento.getUbicacion().equals(busqueda.getOpcionales().getPasillo());
+			boolean centro = asiento.getUbicacion().equals(busqueda.getOpcionales().getCentro());
 			if (ventana || pasillo || centro) {
 				asientosPorUbicacion.add(asiento);
+				filtro++;
 			}
-		}
+		}		
+		if (filtro == 0) return asientosDeBusqueda;
 		return asientosPorUbicacion;
 	}
 

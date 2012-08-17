@@ -16,16 +16,18 @@ public class BuscaPorClase extends BuscadorDecorado {
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {  
 		ArrayList<Asiento> asientosPorClase = new ArrayList<Asiento>();
 		ArrayList<Asiento> asientosDeBusqueda = this.buscadorF.buscarAsientos(busqueda, usuario);
+		int filtro = 0;
 		for (Asiento asiento : asientosDeBusqueda) {
-			boolean claseP = asiento.getClaseDeAsiento().equals(busqueda.getClaseP());
-			boolean claseE = asiento.getClaseDeAsiento().equals(busqueda.getClaseT());
-			boolean claseT = asiento.getClaseDeAsiento().equals(busqueda.getClaseE());
+			boolean claseP = asiento.getClaseDeAsiento().equals(busqueda.getOpcionales().getPrimera());
+			boolean claseE = asiento.getClaseDeAsiento().equals(busqueda.getOpcionales().getEjecutiva());
+			boolean claseT = asiento.getClaseDeAsiento().equals(busqueda.getOpcionales().getTurista());
 			if (claseP || claseE || claseT) {
 				asientosPorClase.add(asiento);
+				filtro++;
 			}
 		}
+		if (filtro == 0) return asientosDeBusqueda;
 		return asientosPorClase;
-
 	}
 
 

@@ -30,8 +30,8 @@ public class UsuarioEstandar extends TipoUsuario {
 		return new BigDecimal(0);
 	}
 
-	public void comprarAsiento(Asiento unAsiento) {
-		if(puedeComprar(unAsiento)){
+	public void comprarAsiento(Asiento unAsiento, String dni) {
+		if(puedeComprar(unAsiento, dni)){
 			unAsiento.setDisponibilidad("R");
 		} else {
 			throw new asientoReservadoException(("el asiento "
@@ -40,12 +40,12 @@ public class UsuarioEstandar extends TipoUsuario {
 		
 	}
 	
-	public Boolean puedeComprar(Asiento unAsiento){
-		return (unAsiento.noEstaReservado() || esTuReserva(unAsiento.getPrimeraReserva()));
+	public Boolean puedeComprar(Asiento unAsiento, String dni){
+		return (unAsiento.noEstaReservado() || esTuReserva(unAsiento.getPrimeraReserva(), dni));
 	}
 	
-	public Boolean esTuReserva(Reserva reserva){
-		return reserva.getDni().equals(this.getDni());
+	public Boolean esTuReserva(Reserva reserva, String dni){
+		return reserva.getDni().equals(dni);
 	}
 
 }

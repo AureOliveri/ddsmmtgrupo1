@@ -19,8 +19,8 @@ public class BuscaPorPrecio extends BuscadorDecorado {
 		ArrayList<Asiento> asientosDeBusqueda = this.buscadorF.buscarAsientos(busqueda, usuario);
 		for (Asiento asiento : asientosDeBusqueda) {
 			BigDecimal precioTotal = asiento.precioTotal(super.getImpuesto(), usuario.getTipoUsuario());
-			boolean precioMin = precioTotal.compareTo(busqueda.getPrecioMin()) >= 0;
-			boolean precioMax = precioTotal.compareTo(busqueda.getPrecioMax()) <= 0;
+			boolean precioMin = precioTotal.compareTo(busqueda.getOpcionales().getPrecioMin()) >= 0;
+			boolean precioMax = precioTotal.compareTo(busqueda.getOpcionales().getPrecioMax()) <= 0;
 			
 			if (precioMin && precioMax) {
 				asientosPorPrecio.add(asiento);

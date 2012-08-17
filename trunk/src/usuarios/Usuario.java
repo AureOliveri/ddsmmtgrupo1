@@ -11,6 +11,7 @@ import busquedas.Busqueda;
 
 public class Usuario {
 
+	private String dni;
 	protected TipoUsuario tipoUsuario;
 	protected BigDecimal recargo = new BigDecimal(20);
 	private BigDecimal montoCompras = new BigDecimal(0);
@@ -64,5 +65,13 @@ public class Usuario {
 	public void setTipoUsuario(TipoUsuario tipo) {
 		this.tipoUsuario = tipo;
 
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getDni() {
+		return dni;
 	}
 }
