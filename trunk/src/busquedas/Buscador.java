@@ -6,16 +6,12 @@ import java.util.ArrayList;
 
 import usuarios.Usuario;
 import vuelos.Asiento;
-import busquedas.BuscadorFinal;
 
-import com.lanchita.AerolineaLanchita;
+import aerolineas.AerolineaLanchita;
 
-import aerolineas.AerolineaLancha;
+public class Buscador{
 
-
-public class BuscadorInicial{
-
-	private AerolineaLancha aerolineaLanchita = new AerolineaLancha();
+	private AerolineaLanchita aerolineaLanchita = new AerolineaLanchita();
 	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
 	protected CriterioBusqueda criterio;
 	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
@@ -23,14 +19,8 @@ public class BuscadorInicial{
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		AerolineaLanchita aerolineaAux = AerolineaLanchita.getInstance();
+		asientos = aerolineaLanchita.getAsientosAerolinea();
 
-		String[][] asientosDisponibles = aerolineaAux.asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
-				busqueda.getFechaViaje(), null, null, null);
-		for (int i = 0; i < asientosDisponibles.length; i++) {
-			Asiento asiento = new Asiento(asientosDisponibles[i]);
-			asientos.add(asiento);
-		}
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
 
 		if (getFiltros().isEmpty()) {
@@ -75,10 +65,6 @@ public class BuscadorInicial{
 		this.filtros = filtros;
 	}
 	
-	public void setFiltro(Filtro f) {
-		this.filtros.add(f);
-	}
-
 	public ArrayList<Filtro> getFiltros() {
 		return filtros;
 	}
