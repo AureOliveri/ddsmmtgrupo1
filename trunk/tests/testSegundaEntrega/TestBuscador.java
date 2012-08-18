@@ -2,34 +2,35 @@ package testSegundaEntrega;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import enumeraciones.ClaseDeAsiento;
-
-import usuarios.*;
+import usuarios.TipoUsuario;
+import usuarios.Usuario;
+import usuarios.UsuarioConRecargo;
+import usuarios.UsuarioEstandar;
+import usuarios.UsuarioVIP;
 import vuelos.Asiento;
 import vuelos.Vuelo;
-
-import busquedas.BuscaPorClase;
 import busquedas.BuscaPorPrecio;
 import busquedas.BuscaPorSuperOferta;
-import busquedas.BuscaPorUbicacion;
-import busquedas.BuscadorFinal;
 import busquedas.BuscadorInicial;
 import busquedas.Busqueda;
 import busquedas.CriterioBusqueda;
 import busquedas.CriterioPrecioAscendente;
 import busquedas.CriterioPrecioDescendente;
+import busquedas.FiltroClase;
+import busquedas.FiltroUbicacion;
 import busquedas.Opcionales;
+import enumeraciones.ClaseDeAsiento;
+import enumeraciones.UbicacionDeAsiento;
 
 public class TestBuscador {
 
-	private BuscadorFinal buscador;
-	private BuscaPorClase buscadorPC;
-	private BuscaPorUbicacion buscadorPU;
+	private BuscadorInicial buscador;
 	private BuscaPorPrecio buscadorPP;
 	private BuscaPorSuperOferta buscadorPSO;
 	private CriterioBusqueda precioDes;
@@ -42,18 +43,21 @@ public class TestBuscador {
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
 	private Opcionales opciones;
-	private ArrayList<String> clases;
-	private ArrayList<String> ubicaciones;
+	private ArrayList<ClaseDeAsiento> clases;
+	private ArrayList<UbicacionDeAsiento> ubicaciones;
 	private Vuelo vuelo;
+	private FiltroClase fC;
+	private FiltroUbicacion fU;
+	
 
 	@Before
 	public void inicializador() {
 		opciones = new Opcionales();
 		buscador = new BuscadorInicial();
-		buscadorPC = new BuscaPorClase(buscador);
-		buscadorPU = new BuscaPorUbicacion(buscador);
-		buscadorPP = new BuscaPorPrecio(buscador);
-		buscadorPSO = new BuscaPorSuperOferta(buscador);
+//		buscadorPC = new BuscaPorClase(buscador);
+//		buscadorPU = new BuscaPorUbicacion(buscador);
+//		buscadorPP = new BuscaPorPrecio(buscador);
+//		buscadorPSO = new BuscaPorSuperOferta(buscador);
 		precioDes = new CriterioPrecioDescendente();
 		precioAsc = new CriterioPrecioAscendente();
 		usuario = new Usuario();
@@ -63,9 +67,11 @@ public class TestBuscador {
 		vuelo = new Vuelo();
 		precioMin = new BigDecimal(100.00);
 		precioMax = new BigDecimal(461.00);
-		clases = new ArrayList<String>();
-		ubicaciones = new ArrayList<String>();
+		clases = new ArrayList<ClaseDeAsiento>();
+		ubicaciones = new ArrayList<UbicacionDeAsiento>();
 		busqueda = new Busqueda("BUE", "20121010", "LA", opciones);
+		fC = new FiltroClase();
+		fU = new FiltroUbicacion();
 	
 	}
 
@@ -105,10 +111,15 @@ public class TestBuscador {
 	public void usuarioVipBuscaAsientosPorUbicacion() {
 		usuario.setTipoUsuario(vip);
 		buscador.setCriterio(precioAsc);
-		ubicaciones.add("C");
+		buscador.setFiltro(fU);
+		buscador.setFiltro(fC);
+		ubicaciones.add(UbicacionDeAsiento.VENTANA);
+		ubicaciones.add(UbicacionDeAsiento.PASILLO);
+		clases.add(ClaseDeAsiento.PRIMERA);
+		clases.add(ClaseDeAsiento.EJECUTIVA);
 		opciones.setOpcionales(clases, ubicaciones, precioMin, precioMax);
-		ArrayList<Asiento> asientosSegunUbicacionElegida = buscadorPU.buscarAsientos(busqueda, usuario);
-		System.out.println("Vip Ubic. Ventana " + buscadorPU.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
+		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Vip Ubic. Ventana " + buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
 		Assert.assertNotNull(asientosSegunUbicacionElegida);
 	}
 
@@ -116,11 +127,13 @@ public class TestBuscador {
 	public void usuarioVipBuscaAsientosPorClase() {
 		usuario.setTipoUsuario(vip);
 		buscador.setCriterio(precioAsc);
-		clases.add("P");
-//		clases.add("E");
+//		clases.add("P");
+//		ubicaciones.add("C");
+//		buscador.setFiltro(fC);
+		buscador.setFiltro(fU);
 		opciones.setOpcionales(clases, ubicaciones, precioMin, precioMax); 
-		ArrayList<Asiento> asientosPorClase = buscadorPC.buscarAsientos(busqueda, usuario);
-		System.out.println("Vip clase Ejecutiva " + buscadorPC.mostrarAsientosBusqueda(asientosPorClase, usuario));
+		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Vip clase Ejecutiva " + buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
 		Assert.assertNotNull(asientosPorClase);
 	}
 	
@@ -165,8 +178,8 @@ public class TestBuscador {
 	public void buscarAsientosSuperOfertaConUsuarioEstandar() {
 		usuario.setTipoUsuario(estandar);
 		buscador.setCriterio(precioAsc);
-		ArrayList<Asiento> asientosSuperOferta = buscadorPSO.buscarAsientos(busqueda, usuario);
-		System.out.println("Estandar busca SuperOferta: " + buscadorPSO.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Estandar busca SuperOferta: " + buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 	
@@ -174,8 +187,8 @@ public class TestBuscador {
 	public void buscarAsientosSuperOfertaConUsuarioVip() {
 		usuario.setTipoUsuario(vip);
 		buscador.setCriterio(precioAsc);
-		ArrayList<Asiento> asientosSuperOferta = buscadorPSO.buscarAsientos(busqueda, usuario);
-		System.out.println("Vip busca SuperOferta: " + buscadorPSO.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busqueda, usuario);
+		System.out.println("Vip busca SuperOferta: " + buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
 		Assert.assertNotNull(asientosSuperOferta);
 	}
 

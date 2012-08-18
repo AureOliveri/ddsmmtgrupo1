@@ -1,6 +1,7 @@
 package busquedas;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.ArrayList;
 
 import usuarios.Usuario;
@@ -12,13 +13,13 @@ import com.lanchita.AerolineaLanchita;
 import aerolineas.AerolineaLancha;
 
 
-public class BuscadorInicial implements BuscadorFinal{
+public class BuscadorInicial{
 
 	private AerolineaLancha aerolineaLanchita = new AerolineaLancha();
 	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
 	protected CriterioBusqueda criterio;
+	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
 
-	@Override
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
@@ -26,14 +27,28 @@ public class BuscadorInicial implements BuscadorFinal{
 
 		String[][] asientosDisponibles = aerolineaAux.asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(),
 				busqueda.getFechaViaje(), null, null, null);
-		int i;
-		for (i = 0; i < asientosDisponibles.length; i++) {
+		for (int i = 0; i < asientosDisponibles.length; i++) {
 			Asiento asiento = new Asiento(asientosDisponibles[i]);
 			asientos.add(asiento);
 		}
-		
-		return usuario.getAsientosQueLeCorreponden(asientos, this.impuesto);
-		
+		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
+
+		if (getFiltros().isEmpty()) {
+			return usuario.getAsientosQueLeCorreponden(asientos, this.impuesto);
+		} else {
+			for(Asiento asiento : asientos) {
+				boolean cumple = true;
+				Filtro filtro = null;
+				for (Iterator<Filtro> itFiltros = filtros.iterator(); itFiltros.hasNext() && cumple; ) {
+					filtro = itFiltros.next();
+					cumple = filtro.aplicarFiltro(busqueda, usuario, asiento);
+				}
+				if(cumple) {
+					asientosDeBusqueda.add(asiento);
+				}
+			}
+			return usuario.getAsientosQueLeCorreponden(asientosDeBusqueda, this.impuesto);
+		}
 	}
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
@@ -41,15 +56,7 @@ public class BuscadorInicial implements BuscadorFinal{
 	}
 
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-
 		return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario, impuesto);
-		//		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
-//		int i;
-//		for (i = 0; i < asientos.size(); i++) {
-//			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), this.impuesto, usuario.getTipoUsuario());
-//			asientosBusqueda.add(valores);
-//		}
-//		return asientosBusqueda;
 	}
 
 	public BigDecimal getImpuesto() {
@@ -62,5 +69,17 @@ public class BuscadorInicial implements BuscadorFinal{
 
 	public CriterioBusqueda getCriterio() {
 		return criterio;
+	}
+	
+	public void setFiltros(ArrayList<Filtro> filtros) {
+		this.filtros = filtros;
+	}
+	
+	public void setFiltro(Filtro f) {
+		this.filtros.add(f);
+	}
+
+	public ArrayList<Filtro> getFiltros() {
+		return filtros;
 	}
 }

@@ -2,44 +2,25 @@ package busquedas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import enumeraciones.ClaseDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
 public class Opcionales {
-	
-	private ClaseDeAsiento primera;
-	private ClaseDeAsiento ejecutiva;
-	private ClaseDeAsiento turista;
-	private UbicacionDeAsiento ventana;
-	private UbicacionDeAsiento pasillo;
-	private UbicacionDeAsiento centro;
+	private List<ClaseDeAsiento> clases;
+	private List<UbicacionDeAsiento> ubicaciones;
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
 	
-	public void setOpcionales(ArrayList<String> clases, ArrayList<String> ubicaciones,
+	public void setOpcionales(ArrayList<ClaseDeAsiento> clases, ArrayList<UbicacionDeAsiento> ubicaciones,
 			BigDecimal precioMin, BigDecimal precioMax) {
-		for (int j = 0; j < clases.size(); j++) {
-			String clase = clases.get(j);
-			if (clase.equals(ClaseDeAsiento.PRIMERA.getCodigo()))
-				setPrimera(ClaseDeAsiento.PRIMERA);
-			if (clase.equals(ClaseDeAsiento.EJECUTIVA.getCodigo()))
-				setEjecutiva(ClaseDeAsiento.EJECUTIVA);
-			if (clase.equals(ClaseDeAsiento.TURISTA.getCodigo()))
-				setTurista(ClaseDeAsiento.TURISTA);
-		}
-		for (int k = 0; k < ubicaciones.size(); k++) {
-			String ubicacion = ubicaciones.get(k);
-			if (ubicacion.equals(UbicacionDeAsiento.VENTANA.getCodigo()))
-				setVentana(UbicacionDeAsiento.VENTANA);
-			if (ubicacion.equals(UbicacionDeAsiento.PASILLO.getCodigo()))
-				setPasillo(UbicacionDeAsiento.PASILLO);
-			if (ubicacion.equals(UbicacionDeAsiento.CENTRO.getCodigo()))
-				setCentro(UbicacionDeAsiento.CENTRO);
-		}
+
+		this.setClases(clases);
+		this.setUbicaciones(ubicaciones);
 		setPrecioMin(precioMin);
 		setPrecioMax(precioMax);
 	}
-	
+
 	public void setPrecioMin(BigDecimal precioMin) {
 		this.precioMin = precioMin;
 	}
@@ -53,54 +34,21 @@ public class Opcionales {
 		return precioMax;
 	}
 
-	public void setPrimera(ClaseDeAsiento primera) {
-		this.primera = primera;
+	public void setClases(List<ClaseDeAsiento> clases) {
+		this.clases = clases;
 	}
 
-	public ClaseDeAsiento getPrimera() {
-		return primera;
+	public List<ClaseDeAsiento> getClases() {
+		return clases;
 	}
 
-	public void setEjecutiva(ClaseDeAsiento ejecutiva) {
-		this.ejecutiva = ejecutiva;
+	public void setUbicaciones(List<UbicacionDeAsiento> ubicaciones) {
+		this.ubicaciones = ubicaciones;
 	}
 
-	public ClaseDeAsiento getEjecutiva() {
-		return ejecutiva;
+	public List<UbicacionDeAsiento> getUbicaciones() {
+		return ubicaciones;
 	}
 
-	public void setTurista(ClaseDeAsiento turista) {
-		this.turista = turista;
-	}
-
-	public ClaseDeAsiento getTurista() {
-		return turista;
-	}
-
-	public void setVentana(UbicacionDeAsiento ventana) {
-		this.ventana = ventana;
-	}
-
-	public UbicacionDeAsiento getVentana() {
-		return ventana;
-	}
-
-	public void setPasillo(UbicacionDeAsiento pasillo) {
-		this.pasillo = pasillo;
-	}
-
-	public UbicacionDeAsiento getPasillo() {
-		return pasillo;
-	}
-
-	public void setCentro(UbicacionDeAsiento centro) {
-		this.centro = centro;
-	}
-
-	public UbicacionDeAsiento getCentro() {
-		return centro;
-	}
-	
-	
-	
+		
 }
