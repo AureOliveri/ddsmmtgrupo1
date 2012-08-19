@@ -15,13 +15,12 @@ import usuarios.UsuarioConRecargo;
 import usuarios.UsuarioEstandar;
 import usuarios.UsuarioVIP;
 import vuelos.Asiento;
-import vuelos.Vuelo;
-import aerolineas.AerolineaLanchita;
 import busquedas.Buscador;
 import busquedas.Busqueda;
 import busquedas.CriterioBusqueda;
 import busquedas.CriterioPrecioAscendente;
 import busquedas.CriterioPrecioDescendente;
+import busquedas.CriterioTiempoDeVuelo;
 import busquedas.FiltroClase;
 import busquedas.FiltroPrecio;
 import busquedas.FiltroSuperOferta;
@@ -36,6 +35,7 @@ public class TestBuscador {
 	private Buscador buscador;
 	private CriterioBusqueda precioDes;
 	private CriterioBusqueda precioAsc;
+	private CriterioBusqueda tiempoVuelo;
 	private Usuario usuario;
 	private TipoUsuario vip;
 	private TipoUsuario conRecargo;
@@ -46,7 +46,6 @@ public class TestBuscador {
 	private Opcionales opciones;
 	private ArrayList<ClaseDeAsiento> clases;
 	private ArrayList<UbicacionDeAsiento> ubicaciones;
-	private Vuelo vuelo;
 	private FiltroClase fC;
 	private FiltroUbicacion fU;
 	private FiltroPrecio fP;
@@ -60,12 +59,11 @@ public class TestBuscador {
 		buscador = new Buscador();
 		precioDes = new CriterioPrecioDescendente();
 		precioAsc = new CriterioPrecioAscendente();
+		tiempoVuelo = new CriterioTiempoDeVuelo();
 		usuario = new Usuario();
 		vip = new UsuarioVIP();
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
-		vuelo = new Vuelo();
-		vuelo.setAerolinea(new AerolineaLanchita());
 		precioMin = new BigDecimal(100.00);
 		precioMax = new BigDecimal(460.00);
 		clases = new ArrayList<ClaseDeAsiento>();
@@ -200,7 +198,7 @@ public class TestBuscador {
 	@Test
 	public void buscarAsientosSuperOfertaConUsuarioVip() {
 		usuario.setTipoUsuario(vip);
-		buscador.setCriterio(precioAsc);
+		buscador.setCriterio(tiempoVuelo);
 		buscador.getFiltros().add(fSO);
 		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busqueda, usuario);
 		System.out.println("Vip busca SuperOferta: " + buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));

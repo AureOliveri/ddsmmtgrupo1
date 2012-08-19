@@ -11,6 +11,7 @@ import enumeraciones.ClaseDeAsiento;
 import enumeraciones.DisponibilidadDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
 import fechas.Fecha;
+import fechas.Hora;
 
 public class Asiento {
 	
@@ -26,8 +27,8 @@ public class Asiento {
 	private Queue<Reserva> reservas;
 	private Boolean reservado = false;
 	private String dni;
-	private String horaSalida;
-	private String horaLlegada;
+	private Hora horaSalida;
+	private Hora horaLlegada;
 	private String origen;
 	private String destino;
 	private Fecha fechaSalida;
@@ -43,8 +44,8 @@ public class Asiento {
 		ubicacion = UbicacionDeAsiento.obtenerUbicacion(asiento[3]);
 		setDisponibilidad(DisponibilidadDeAsiento.obtenerDisponibilidad(asiento[4]));
 		dni = asiento[5];
-		horaSalida = asiento[6];
-		horaLlegada = asiento[7];
+		setHoraSalida(new Hora(asiento[6]));
+		setHoraLlegada(new Hora(asiento[7]));
 		origen = asiento[8];
 		destino = asiento[9];
 		setFechaSalida(new Fecha(asiento[10]));
@@ -213,22 +214,6 @@ public class Asiento {
 		this.reservas = reservas;
 	}
 
-	public String getHoraSalida() {
-		return horaSalida;
-	}
-
-	public void setHoraSalida(String horaSalida) {
-		this.horaSalida = horaSalida;
-	}
-
-	public String getHoraLlegada() {
-		return horaLlegada;
-	}
-
-	public void setHoraLlegada(String horaLlegada) {
-		this.horaLlegada = horaLlegada;
-	}
-
 	public String getOrigen() {
 		return origen;
 	}
@@ -287,6 +272,22 @@ public class Asiento {
 
 	public DisponibilidadDeAsiento getDisponibilidad() {
 		return disponibilidad;
+	}
+
+	public Hora getHoraSalida() {
+		return horaSalida;
+	}
+
+	public void setHoraSalida(Hora horaSalida) {
+		this.horaSalida = horaSalida;
+	}
+
+	public Hora getHoraLlegada() {
+		return horaLlegada;
+	}
+
+	public void setHoraLlegada(Hora horaLlegada) {
+		this.horaLlegada = horaLlegada;
 	}
 	
 }

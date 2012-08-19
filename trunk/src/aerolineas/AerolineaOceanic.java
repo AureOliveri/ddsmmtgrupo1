@@ -3,25 +3,37 @@ package aerolineas;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import com.oceanic.AsientoDTO;
 
 import usuarios.Usuario;
 import vuelos.Asiento;
 import vuelos.Vuelo;
 
-public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements Aerolinea {
+public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements Aerolinea {
 
 	private BigDecimal impuesto = new BigDecimal(0.15);
 	private ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
 	
-	public AerolineaLanchita() {
+	public AerolineaOceanic() {
 		
-		String[][] asientosAerolinea = getAsientos();
-		ArrayList<String[]> asientosLanchita = new ArrayList<String[]>();
+		List<AsientoDTO> asientosAerolinea = getAsientosDisponibles();
+		ArrayList<String[]> asientosOceanic = new ArrayList<String[]>();
 		
-		asientosLanchita = transformarAsientos(asientosAerolinea);
-				
-		for (String[] asientoLanchita : asientosLanchita) {
-			Asiento asiento = new Asiento(asientoLanchita);
+		asientosOceanic = transformarAsiento(asientosAerolinea);
+		
+//		int j = 0;
+//		AsientoDTO asientoDto = null;
+//		for (Iterator<AsientoDTO> itAsientoDto = asientosAerolinea.iterator(); itAsientoDto.hasNext() && j < asientosAerolinea.size(); j++) {
+//			asientoDto = itAsientoDto.next();
+//			String[] asiento = transformarAsiento(itAsientoDto);
+//			asientosOceanic[j] = asiento;
+//		}
+						
+		for (int i = 0; i < asientosAerolinea.size(); i++) {
+			Asiento asiento = new Asiento(asientosOceanic[i]);
 			String numeroDeVuelo = asiento.getNumeroDeVuelo();
 			Vuelo vuelo = null;
 			for(Vuelo vueloA : vuelos) {
@@ -40,12 +52,16 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 		
 	}
 	
-	
-	private ArrayList<String[]> transformarAsientos(String[][] asientosAerolinea) {
-		ArrayList<String[]> asientos = new ArrayList<String[]>();
-		Collections.addAll(asientos, asientosAerolinea);
-		return asientos;
+	private ArrayList<String> transformarAsiento(List<AsientoDTO> asientosAerolinea) {
+		ArrayList<String> asientos = new ArrayList<String>();
+		String[][] asientosF;
+		for(AsientoDTO asiento : asientosAerolinea) {
+			asientos.add(asiento != null ? asiento.toString() : null);
+		}
+		
+		return null;
 	}
+
 
 
 	@Override
@@ -56,8 +72,8 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	@Override
 	public String[][] busquedaDeAsientosDisponibles(String unOrigen,
 			String unDestino, String unaFecha) {
-			return this.asientosDisponibles(unOrigen, unDestino, unaFecha, null, null, null);
-	}
+			return this.asientosDisponiblesParaOrigenYDestino(unOrigen, unDestino, unaFecha);
+//	}
 
 	public BigDecimal getImpuesto() {
 		return impuesto;
