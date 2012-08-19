@@ -2,6 +2,7 @@ package vuelos;
 
 import java.util.ArrayList;
 
+import enumeraciones.DisponibilidadDeAsiento;
 import fechas.Fecha;
 
 import aerolineas.Aerolinea;
@@ -36,7 +37,7 @@ public class Vuelo {
 	}
 
 	public boolean yaNoEstasDisponible(Asiento unAsiento) {
-		return (unAsiento.getDisponibilidad() == "R");
+		return (unAsiento.getDisponibilidad() == DisponibilidadDeAsiento.RESERVADO);
 	}
 	
 	public void addAsiento(Asiento a) {

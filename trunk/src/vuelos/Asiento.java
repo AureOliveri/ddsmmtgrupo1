@@ -8,6 +8,7 @@ import java.util.Queue;
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import enumeraciones.ClaseDeAsiento;
+import enumeraciones.DisponibilidadDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
 import fechas.Fecha;
 
@@ -20,7 +21,7 @@ public class Asiento {
 	private String numeroDeVuelo;
 	private String codigoAsiento;
 	private BigDecimal precio;
-	private String disponibilidad;
+	private DisponibilidadDeAsiento disponibilidad;
 	private Usuario usuario;
 	private Queue<Reserva> reservas;
 	private Boolean reservado = false;
@@ -40,7 +41,7 @@ public class Asiento {
 		precio = new BigDecimal(asiento[1]);
 		claseDeAsiento = ClaseDeAsiento.obtenerClase(asiento[2]);
 		ubicacion = UbicacionDeAsiento.obtenerUbicacion(asiento[3]);
-		disponibilidad = asiento[4];
+		setDisponibilidad(DisponibilidadDeAsiento.obtenerDisponibilidad(asiento[4]));
 		dni = asiento[5];
 		horaSalida = asiento[6];
 		horaLlegada = asiento[7];
@@ -59,7 +60,7 @@ public class Asiento {
 	}
 	
 	public void ocupate() {
-		this.setDisponibilidad("R");
+		this.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 	}
 
 	public boolean esPrimeraClase(){
@@ -110,7 +111,7 @@ public class Asiento {
 		asientoString.add(unAsiento.precioTotal(impuesto, usuario).toString());
 		asientoString.add(unAsiento.getClaseDeAsiento().getCodigo());
 		asientoString.add(unAsiento.getUbicacion().getCodigo());
-		asientoString.add(unAsiento.getDisponibilidad());
+		asientoString.add(unAsiento.getDisponibilidad().getCodigo());
 
 		return asientoString;
 
@@ -157,9 +158,6 @@ public class Asiento {
 	public UbicacionDeAsiento getUbicacion(){
 		return ubicacion;
 	}
-	public String getDisponibilidad(){
-		return disponibilidad;
-	}
 	
 	public Boolean getReservado(){
 		return reservado;
@@ -183,9 +181,6 @@ public class Asiento {
 	
 	public void setPrecio(BigDecimal unPrecio){
 		this.precio =unPrecio;
-	}
-	public void setDisponibilidad(String disp){
-		this.disponibilidad = disp;
 	}
 	public void setVuelo(Vuelo vuelo) {
 		this.vuelo = vuelo;
@@ -284,6 +279,14 @@ public class Asiento {
 
 	public Fecha getFechaLlegada() {
 		return fechaLlegada;
+	}
+
+	public void setDisponibilidad(DisponibilidadDeAsiento disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+
+	public DisponibilidadDeAsiento getDisponibilidad() {
+		return disponibilidad;
 	}
 	
 }

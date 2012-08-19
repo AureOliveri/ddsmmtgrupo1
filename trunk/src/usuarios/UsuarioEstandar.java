@@ -3,6 +3,7 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import enumeraciones.DisponibilidadDeAsiento;
 import excepciones.asientoReservadoException;
 
 import vuelos.Asiento;
@@ -32,7 +33,7 @@ public class UsuarioEstandar extends TipoUsuario {
 
 	public void comprarAsiento(Asiento unAsiento, String dni) {
 		if(puedeComprar(unAsiento, dni)){
-			unAsiento.setDisponibilidad("R");
+			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 		} else {
 			throw new asientoReservadoException(("el asiento "
 					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));

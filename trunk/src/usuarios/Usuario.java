@@ -3,6 +3,7 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import enumeraciones.DisponibilidadDeAsiento;
 import excepciones.asientoReservadoException;
 
 import vuelos.Asiento;
@@ -19,7 +20,7 @@ public class Usuario {
 
 	public void comprarAsiento(Asiento unAsiento) {
 		if (noTieneReserva(unAsiento)) {
-			unAsiento.setDisponibilidad("R");
+			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 		} else {
 			throw new asientoReservadoException(("el asiento "
 					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
