@@ -1,19 +1,21 @@
 package busquedas;
 
+import fechas.Fecha;
+
 public class Busqueda {
 
 	/* ATRIBUTOS */
 
 	private String origen;
 	private String destino;
-	private String fechaV;
+	private Fecha fechaV;
 	private Opcionales opcionales = new Opcionales();
 	
 	/* METODOS*/ 
-	public Busqueda(String origen,String fecha, String destino, Opcionales opcionales){
+	public Busqueda(String origen,Fecha fecha, String destino, Opcionales opcionales){
 		this.setOrigen(origen);
 		this.setDestino(destino);
-		this.setFechaViaje(fecha);
+		this.setFechaV(fecha);
 		this.setOpcionales(opcionales);
 	}
 
@@ -28,10 +30,6 @@ public class Busqueda {
 		this.destino = destinoAsetear;
 	} 
 
-	public void setFechaViaje(String fechaASetear){
-		this.fechaV = fechaASetear;
-	}
-
 	/*GETTERS*/
 	public String getOrigen(){
 		return this.origen;
@@ -41,16 +39,22 @@ public class Busqueda {
 		return this.destino;
 	} 
 
-	public String getFechaViaje(){
-		return this.fechaV;
-	}
-
 	public void setOpcionales(Opcionales opcionales) {
 		this.opcionales = opcionales;
 	}
 
 	public Opcionales getOpcionales() {
 		return opcionales;
+	}
+
+
+	public void setFechaV(Fecha fechaV) {
+		this.fechaV = fechaV;
+	}
+
+
+	public Fecha getFechaV() {
+		return fechaV;
 	}
 
 }

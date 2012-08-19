@@ -5,8 +5,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-import claseUnica.Fecha;
-import claseUnica.parserException;
+import fechas.Fecha;
+import fechas.parserException;
 
 public class TestAgustin {
 	@Test

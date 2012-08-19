@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Queue;
 
+
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import enumeraciones.ClaseDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
+import fechas.Fecha;
 
 public class Asiento {
 	
@@ -27,8 +29,8 @@ public class Asiento {
 	private String horaLlegada;
 	private String origen;
 	private String destino;
-	private String fechaSalida;
-	private String fechaLlegada;
+	private Fecha fechaSalida;
+	private Fecha fechaLlegada;
 	
 	public Asiento(String[] asiento) {
 		this();
@@ -44,8 +46,8 @@ public class Asiento {
 		horaLlegada = asiento[7];
 		origen = asiento[8];
 		destino = asiento[9];
-		fechaSalida = asiento[10];
-		fechaLlegada = asiento[11];
+		setFechaSalida(new Fecha(asiento[10]));
+		setFechaLlegada(new Fecha(asiento[11]));
 	}
 
 	public Asiento() {
@@ -248,22 +250,6 @@ public class Asiento {
 		this.destino = destino;
 	}
 
-	public String getFechaSalida() {
-		return fechaSalida;
-	}
-
-	public void setFechaSalida(String fechaSalida) {
-		this.fechaSalida = fechaSalida;
-	}
-
-	public String getFechaLlegada() {
-		return fechaLlegada;
-	}
-
-	public void setFechaLlegada(String fechaLlegada) {
-		this.fechaLlegada = fechaLlegada;
-	}
-
 	public void setClaseDeAsiento(ClaseDeAsiento claseDeAsiento) {
 		this.claseDeAsiento = claseDeAsiento;
 	}
@@ -282,6 +268,22 @@ public class Asiento {
 	
 	public void setNumeroDeAsiento(String codigoDeAsiento) {
 		this.numeroDeAsiento = codigoDeAsiento.substring(14, 15);
+	}
+
+	public void setFechaSalida(Fecha fechaSalida) {
+		this.fechaSalida = fechaSalida;
+	}
+
+	public Fecha getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public void setFechaLlegada(Fecha fechaLlegada) {
+		this.fechaLlegada = fechaLlegada;
+	}
+
+	public Fecha getFechaLlegada() {
+		return fechaLlegada;
 	}
 	
 }

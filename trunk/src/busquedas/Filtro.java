@@ -1,7 +1,5 @@
 package busquedas;
 
-import java.util.ArrayList;
-
 import usuarios.Usuario;
 import vuelos.Asiento;
 

@@ -2,10 +2,9 @@ package vuelos;
 
 import java.util.ArrayList;
 
+import fechas.Fecha;
+
 import aerolineas.Aerolinea;
-import aerolineas.AerolineaLanchita;
-import busquedas.Busqueda;
-import busquedas.Filtro;
 
 
 public class Vuelo {
@@ -14,8 +13,8 @@ public class Vuelo {
 	private String horaSalida;
 	private String origen;
 	private String destino;
-	private String fechaLlegada;
-	private String fechaSalida;
+	private Fecha fechaLlegada;
+	private Fecha fechaSalida;
 	private String numeroDeVuelo;
 	private Aerolinea aerolinea;
 	private ArrayList<Asiento> asientos = new ArrayList<Asiento>();
@@ -23,15 +22,15 @@ public class Vuelo {
 	public Vuelo() {}
 	
 	public Vuelo(String horaLlegada, String horaSalida, String origen,
-			String destino, String fechaLlegada, String fechaSalida,
+			String destino, Fecha fechaLlegada, Fecha fechaSalida,
 			String numeroDeVuelo, Aerolinea aerolinea) {
 		super();
 		this.horaLlegada = horaLlegada;
 		this.horaSalida = horaSalida;
 		this.origen = origen;
 		this.destino = destino;
-		this.fechaLlegada = fechaLlegada;
-		this.fechaSalida = fechaSalida;
+		this.setFechaLlegada(fechaLlegada);
+		this.setFechaSalida(fechaSalida);
 		this.numeroDeVuelo = numeroDeVuelo;
 		this.aerolinea = aerolinea;
 	}
@@ -54,14 +53,6 @@ public class Vuelo {
 	  this.destino = destinoAsetear;
 	 } 
 	 
-	 public void setFechaSalida(String fechaASetear){
-	  this.fechaSalida = fechaASetear;
-	 }
-	 
-	 public void setFechaLlegada(String fechaASetear){
-	  this.fechaLlegada = fechaASetear;
-	 }
-	 
 	 public void setHoraSalida(String horaASetear){
 	  this.horaSalida = horaASetear;
 	 }
@@ -83,14 +74,6 @@ public class Vuelo {
 	 public String getDestino(){
 	  return this.destino;
 	 } 
-	 
-	 public String getFechaSalida(){
-	  return this.fechaSalida;
-	 }
-
-	 public String getFechaLlegada(){
-	  return this.fechaLlegada;
-	 }
 	 
 	 public String getHoraSalida(){
 	  return this.horaSalida;
@@ -118,5 +101,21 @@ public class Vuelo {
 
 	public ArrayList<Asiento> getAsientos() {
 		return asientos;
+	}
+
+	public void setFechaLlegada(Fecha fechaLlegada) {
+		this.fechaLlegada = fechaLlegada;
+	}
+
+	public Fecha getFechaLlegada() {
+		return fechaLlegada;
+	}
+
+	public void setFechaSalida(Fecha fechaSalida) {
+		this.fechaSalida = fechaSalida;
+	}
+
+	public Fecha getFechaSalida() {
+		return fechaSalida;
 	}
 }

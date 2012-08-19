@@ -19,14 +19,19 @@ public class Buscador{
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+		ArrayList<Asiento> asientosB = new ArrayList<Asiento>();
 		asientos = aerolineaLanchita.getAsientosAerolinea();
+		for(Asiento asiento : asientos){
+			if(cumpleBusqueda(busqueda, asiento))
+				asientosB.add(asiento);
+		}
 
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
 
 		if (getFiltros().isEmpty()) {
-			return usuario.getAsientosQueLeCorreponden(asientos, this.impuesto);
+			return usuario.getAsientosQueLeCorreponden(asientosB, this.impuesto);
 		} else {
-			for(Asiento asiento : asientos) {
+			for(Asiento asiento : asientosB) {
 				boolean cumple = true;
 				Filtro filtro = null;
 				for (Iterator<Filtro> itFiltros = filtros.iterator(); itFiltros.hasNext() && cumple; ) {
@@ -39,6 +44,16 @@ public class Buscador{
 			}
 			return usuario.getAsientosQueLeCorreponden(asientosDeBusqueda, this.impuesto);
 		}
+	}
+
+	private boolean cumpleBusqueda(Busqueda busqueda, Asiento asiento) {
+		boolean cumpleOrigen = asiento.getOrigen().equals(busqueda.getOrigen());
+		boolean cumpleDestino = asiento.getDestino().equals(busqueda.getDestino());
+		boolean cumpleFechaS = asiento.getFechaSalida().esMenorIgualQue((busqueda.getFechaV()));
+		boolean cumpleFechaD = asiento.getFechaLlegada().esMayorIgualQue((busqueda.getFechaV()));
+		if(cumpleOrigen && cumpleDestino && cumpleFechaS && cumpleFechaD)
+			return true;
+		return false;
 	}
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {

@@ -1,4 +1,4 @@
-package claseUnica;
+package fechas;
 
 public class parserException extends RuntimeException {
 

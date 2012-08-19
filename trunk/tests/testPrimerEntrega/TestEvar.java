@@ -2,8 +2,9 @@ package testPrimerEntrega;
 
 import org.junit.Assert;
 import org.junit.Test;
-import claseUnica.Fecha;
-import claseUnica.parserException;
+
+import fechas.Fecha;
+import fechas.parserException;
 
 
 public class TestEvar {
