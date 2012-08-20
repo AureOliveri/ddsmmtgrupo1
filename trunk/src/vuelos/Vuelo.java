@@ -1,7 +1,6 @@
 package vuelos;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import enumeraciones.DisponibilidadDeAsiento;
 import fechas.Fecha;
@@ -21,6 +20,7 @@ public class Vuelo {
 	private String numeroDeVuelo;
 	private Aerolinea aerolinea;
 	private TiempoDeVuelo tiempoDeVuelo;
+	private int popularidad;
 	private ArrayList<Asiento> asientos = new ArrayList<Asiento>();
 	
 	public Vuelo() {}
@@ -131,6 +131,14 @@ public class Vuelo {
 
 	public TiempoDeVuelo getTiempoDeVuelo() {
 		return tiempoDeVuelo;
+	}
+
+	public void setPopularidad(int popularidad) {
+		this.popularidad = popularidad;
+	}
+
+	public int getPopularidad() {
+		return popularidad;
 	}
 
 }
