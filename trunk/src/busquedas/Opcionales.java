@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import enumeraciones.ClaseDeAsiento;
+import enumeraciones.DisponibilidadDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
 public class Opcionales {
 	private List<ClaseDeAsiento> clases;
 	private List<UbicacionDeAsiento> ubicaciones;
+	private List<DisponibilidadDeAsiento> disponibilidades;
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
 	
 	public void setOpcionales(ArrayList<ClaseDeAsiento> clases, ArrayList<UbicacionDeAsiento> ubicaciones,
-			BigDecimal precioMin, BigDecimal precioMax) {
+			ArrayList<DisponibilidadDeAsiento> disponibilidades, BigDecimal precioMin, BigDecimal precioMax) {
 
 		this.setClases(clases);
 		this.setUbicaciones(ubicaciones);
+		this.setDisponibilidades(disponibilidades);
 		setPrecioMin(precioMin);
 		setPrecioMax(precioMax);
 	}
@@ -48,6 +51,14 @@ public class Opcionales {
 
 	public List<UbicacionDeAsiento> getUbicaciones() {
 		return ubicaciones;
+	}
+
+	public void setDisponibilidades(List<DisponibilidadDeAsiento> disponibilidades) {
+		this.disponibilidades = disponibilidades;
+	}
+
+	public List<DisponibilidadDeAsiento> getDisponibilidades() {
+		return disponibilidades;
 	}
 
 		
