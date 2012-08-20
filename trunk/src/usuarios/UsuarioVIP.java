@@ -10,8 +10,7 @@ public class UsuarioVIP extends TipoUsuario {
 
 
 	@Override
-	public ArrayList<Asiento> getAsientosQueLeCorresponden(ArrayList<Asiento> asientos,
-			BigDecimal impuesto) {
+	public ArrayList<Asiento> getAsientosQueLeCorresponden(ArrayList<Asiento> asientos) {
 		return asientos;
 	}
 

@@ -2,7 +2,6 @@ package aerolineas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import usuarios.Usuario;
 import vuelos.Asiento;
@@ -10,16 +9,25 @@ import vuelos.Vuelo;
 
 public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements Aerolinea {
 
+	private static final AerolineaLanchita INSTANCE = new AerolineaLanchita();
 	private BigDecimal impuesto = new BigDecimal(0.15);
 	private ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+
+	
+	public static AerolineaLanchita getInstance() {
+		return INSTANCE;
+	}
+	
 	
 	public AerolineaLanchita() {
 		
 		String[][] asientosAerolinea = getAsientos();
 		ArrayList<String[]> asientosLanchita = new ArrayList<String[]>();
 		
-		asientosLanchita = transformarAsientos(asientosAerolinea);
-				
+		for (String[] asientoLanc : asientosAerolinea){
+			asientosLanchita.add(transformarAsiento(asientoLanc));	
+		}
+		
 		for (String[] asientoLanchita : asientosLanchita) {
 			Asiento asiento = new Asiento(asientoLanchita);
 			String numeroDeVuelo = asiento.getNumeroDeVuelo();
@@ -40,11 +48,14 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 		
 	}
 	
-	
-	private ArrayList<String[]> transformarAsientos(String[][] asientosAerolinea) {
-		ArrayList<String[]> asientos = new ArrayList<String[]>();
-		Collections.addAll(asientos, asientosAerolinea);
-		return asientos;
+	private String[] transformarAsiento(String[] asientoLanc) {
+		String[] asientoF = new String[14];
+		for(int i = 0; i<12; i++){
+			asientoF[i] = asientoLanc[i];	
+		}
+		asientoF[12] = asientoLanc[0].substring(15, 16);
+		asientoF[13] = asientoLanc[0].substring(0, 14);
+		return asientoF;
 	}
 
 

@@ -42,7 +42,8 @@ public class TestBuscador {
 	private TipoUsuario vip;
 	private TipoUsuario conRecargo;
 	private TipoUsuario estandar;
-	private Busqueda busqueda;
+	private Busqueda busquedaA;
+	private Busqueda busquedaB;
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
 	private Opcionales opciones;
@@ -54,7 +55,8 @@ public class TestBuscador {
 	private FiltroPrecio fP;
 	private FiltroSuperOferta fSO;
 	private FiltroDisponibilidad fD;
-	private Fecha fechaV;
+	private Fecha fechaA;
+	private Fecha fechaB;
 	
 
 	@Before
@@ -69,12 +71,14 @@ public class TestBuscador {
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
 		precioMin = new BigDecimal(100.00);
-		precioMax = new BigDecimal(460.00);
+		precioMax = new BigDecimal(8000.00);
 		clases = new ArrayList<ClaseDeAsiento>();
 		ubicaciones = new ArrayList<UbicacionDeAsiento>();
 		disponibilidades = new ArrayList<DisponibilidadDeAsiento>();
-		fechaV = new Fecha("20/12/2012");
-		busqueda = new Busqueda("EZE", fechaV, "USA", opciones);
+		fechaA = new Fecha("20/12/2012");
+		fechaB = new Fecha("15/08/2012");
+		busquedaA = new Busqueda("EZE", fechaA, "USA", opciones);
+		busquedaB = new Busqueda("_BS", fechaB, "SLA", opciones);
 		fC = new FiltroClase();
 		fU = new FiltroUbicacion();
 		fP = new FiltroPrecio();
@@ -89,11 +93,11 @@ public class TestBuscador {
 		buscador.getFiltros().add(fU);
 		buscador.getFiltros().add(fD);
 		ubicaciones.add(UbicacionDeAsiento.VENTANA);
-		disponibilidades.add(DisponibilidadDeAsiento.DISPONIBLE);
+//		disponibilidades.add(DisponibilidadDeAsiento.DISPONIBLE);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
-		System.out.println("Vip Ubic. Ventana " + busqueda.getResultado());
+		ArrayList<Asiento> asientosSegunUbicacionElegida = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosSegunUbicacionElegida, usuario));
+		System.out.println("Vip Ubic. Ventana " + busquedaA.getResultado());
 		Assert.assertEquals(1, asientosSegunUbicacionElegida.size());
 	}
 
@@ -104,9 +108,9 @@ public class TestBuscador {
 		clases.add(ClaseDeAsiento.PRIMERA);
 		buscador.getFiltros().add(fC);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax); 
-		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
-		System.out.println("Vip clase Ejecutiva " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorClase = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorClase, usuario));
+		System.out.println("Vip clase Ejecutiva " + busquedaA.getResultado());
 		Assert.assertEquals(1, asientosPorClase.size());
 	}
 	
@@ -119,9 +123,9 @@ public class TestBuscador {
 		ubicaciones.add(UbicacionDeAsiento.VENTANA);
 		clases.add(ClaseDeAsiento.PRIMERA);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecioYVentana = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYVentana, usuario));
-		System.out.println("Vip Primera y Ventana " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecioYVentana = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYVentana, usuario));
+		System.out.println("Vip Primera y Ventana " + busquedaA.getResultado());
 		Assert.assertEquals(1, asientosPorPrecioYVentana.size());
 	}
 	
@@ -133,10 +137,10 @@ public class TestBuscador {
 		clases.add(ClaseDeAsiento.PRIMERA);
 		clases.add(ClaseDeAsiento.EJECUTIVA);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecioYVentana = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYVentana, usuario));
-		System.out.println("Vip Primera y Ejecutiva " + busqueda.getResultado());
-		Assert.assertEquals(3, asientosPorPrecioYVentana.size());
+		ArrayList<Asiento> asientosPorPrecioYEjecutiva = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYEjecutiva, usuario));
+		System.out.println("Vip Primera y Ejecutiva " + busquedaA.getResultado());
+		Assert.assertEquals(3, asientosPorPrecioYEjecutiva.size());
 	}
 	
 	@Test
@@ -147,9 +151,9 @@ public class TestBuscador {
 		clases.add(ClaseDeAsiento.PRIMERA);
 		clases.add(ClaseDeAsiento.EJECUTIVA);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecioYVentana = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYVentana, usuario));
-		System.out.println("Estandar Primer y Ejecutiva " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecioYVentana = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecioYVentana, usuario));
+		System.out.println("Estandar Primer y Ejecutiva " + busquedaA.getResultado());
 		Assert.assertEquals(0, asientosPorPrecioYVentana.size());
 	}
 	
@@ -159,9 +163,9 @@ public class TestBuscador {
 		buscador.setCriterio(precioAsc);
 		buscador.getFiltros().add(fP);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
-		System.out.println("ConRecargo precio entre 100 y 460: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		System.out.println("ConRecargo precio entre 100 y 460: " + busquedaA.getResultado());
 		Assert.assertEquals(0, asientosPorPrecio.size());
 	}
 
@@ -172,21 +176,21 @@ public class TestBuscador {
 		buscador.setCriterio(precioAsc);
 		buscador.getFiltros().add(fP);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
-		System.out.println("Estandar precio entre 100 y 461: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		System.out.println("Estandar precio entre 100 y 461: " + busquedaA.getResultado());
 		Assert.assertEquals(0, asientosPorPrecio.size());
 	}
 	
 	@Test
-	public void usuarioVipBuscaAsientosPorPrecioDescendente() {
+	public void usuarioVipBuscaAsientosPorPrecioDescendenteEnOceanic() {
 		usuario.setTipoUsuario(vip);
 		buscador.setCriterio(precioDes);
 		buscador.getFiltros().add(fP);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
-		System.out.println("Vip precio entre 100 y 461: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaB, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		System.out.println("Vip precio entre 100 y 461: " + busquedaA.getResultado());
 		Assert.assertTrue(asientosPorPrecio.get(1).getPrecio().compareTo(asientosPorPrecio.get(2).getPrecio()) >= 0);
 	}
 	
@@ -196,9 +200,9 @@ public class TestBuscador {
 		buscador.setCriterio(precioAsc);
 		buscador.getFiltros().add(fP);
 		opciones.setOpcionales(clases, ubicaciones, disponibilidades, precioMin, precioMax);
-		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
-		System.out.println("Vip precio entre 100 y 461: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosPorPrecio, usuario));
+		System.out.println("Vip precio entre 100 y 461: " + busquedaA.getResultado());
 		Assert.assertTrue(asientosPorPrecio.get(1).getPrecio().compareTo(asientosPorPrecio.get(2).getPrecio()) <= 0);
 	}
 	
@@ -207,9 +211,9 @@ public class TestBuscador {
 		usuario.setTipoUsuario(estandar);
 		buscador.setCriterio(precioAsc);
 		buscador.getFiltros().add(fSO);
-		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
-		System.out.println("Estandar busca SuperOferta: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
+		System.out.println("Estandar busca SuperOferta: " + busquedaA.getResultado());
 		Assert.assertEquals("[]", asientosSuperOferta.toString());
 	}
 	
@@ -218,9 +222,9 @@ public class TestBuscador {
 		usuario.setTipoUsuario(vip);
 		buscador.setCriterio(tiempoVuelo);
 		buscador.getFiltros().add(fSO);
-		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busqueda, usuario);
-		busqueda.setResultado(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
-		System.out.println("Vip busca SuperOferta: " + busqueda.getResultado());
+		ArrayList<Asiento> asientosSuperOferta = buscador.buscarAsientos(busquedaA, usuario);
+		busquedaA.setResultado(buscador.mostrarAsientosBusqueda(asientosSuperOferta, usuario));
+		System.out.println("Vip busca SuperOferta: " + busquedaA.getResultado());
 		Assert.assertEquals(3, asientosSuperOferta.size());
 	}
 

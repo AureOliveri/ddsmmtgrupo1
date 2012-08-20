@@ -14,10 +14,10 @@ public class UsuarioConRecargo extends TipoUsuario {
 
 	@Override
 	protected ArrayList<Asiento> getAsientosQueLeCorresponden(
-			ArrayList<Asiento> asientos, BigDecimal impuesto) {
+			ArrayList<Asiento> asientos) {
 		ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();
 		for (Asiento asiento : asientos) {
-
+			BigDecimal impuesto = asiento.getVuelo().getAerolinea().getImpuesto();
 			if (!asiento.esSuperOferta(impuesto, this))
 				asientosNoVip.add(asiento);
 		}

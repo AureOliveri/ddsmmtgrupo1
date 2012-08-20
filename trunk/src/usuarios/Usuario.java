@@ -56,10 +56,10 @@ public class Usuario {
 	}
 
 	public ArrayList<Asiento> getAsientosQueLeCorreponden(
-			ArrayList<Asiento> asientos, BigDecimal impuesto) {
+			ArrayList<Asiento> asientos) {
 
 		return this.tipoUsuario
-				.getAsientosQueLeCorresponden(asientos, impuesto);
+				.getAsientosQueLeCorresponden(asientos);
 
 	}
 

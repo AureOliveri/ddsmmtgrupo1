@@ -37,8 +37,6 @@ public class Asiento {
 	public Asiento(String[] asiento) {
 		this();
 		this.setCodigoAsiento(asiento[0]);
-		setNumeroDeAsiento(codigoAsiento);
-		setNumeroDeVuelo(codigoAsiento);
 		precio = new BigDecimal(asiento[1]);
 		claseDeAsiento = ClaseDeAsiento.obtenerClase(asiento[2]);
 		ubicacion = UbicacionDeAsiento.obtenerUbicacion(asiento[3]);
@@ -50,6 +48,8 @@ public class Asiento {
 		destino = asiento[9];
 		setFechaSalida(new Fecha(asiento[10]));
 		setFechaLlegada(new Fecha(asiento[11]));
+		setNumeroDeAsiento(asiento[12]);
+		setNumeroDeVuelo(asiento[13]);
 	}
 
 	public Asiento() {
@@ -168,14 +168,6 @@ public class Asiento {
 		return reservas.peek();
 	}
 	
-	public String getNumeroDeVuelo() {
-		return numeroDeVuelo;
-	}
-	
-	public String getNumeroDeAsiento() {
-		return this.numeroDeAsiento;
-	}
-	
 	
 	/* SETTERS*/
 	
@@ -242,14 +234,6 @@ public class Asiento {
 		this.reservado = reservado;
 	}
 	
-	public void setNumeroDeVuelo(String codigoDeAsiento) {
-		this.numeroDeVuelo = codigoDeAsiento.substring(0, 13);
-	}
-	
-	public void setNumeroDeAsiento(String codigoDeAsiento) {
-		this.numeroDeAsiento = codigoDeAsiento.substring(14, 15);
-	}
-
 	public void setFechaSalida(Fecha fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
@@ -288,6 +272,22 @@ public class Asiento {
 
 	public void setHoraLlegada(Hora horaLlegada) {
 		this.horaLlegada = horaLlegada;
+	}
+
+	public String getNumeroDeAsiento() {
+		return numeroDeAsiento;
+	}
+
+	public void setNumeroDeAsiento(String numeroDeAsiento) {
+		this.numeroDeAsiento = numeroDeAsiento;
+	}
+
+	public String getNumeroDeVuelo() {
+		return numeroDeVuelo;
+	}
+
+	public void setNumeroDeVuelo(String numeroDeVuelo) {
+		this.numeroDeVuelo = numeroDeVuelo;
 	}
 	
 }

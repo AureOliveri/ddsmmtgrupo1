@@ -1,18 +1,16 @@
 package busquedas;
 
-import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.ArrayList;
 
 import usuarios.Usuario;
 import vuelos.Asiento;
 
-import aerolineas.AerolineaLanchita;
+import aerolineas.Aerolineas;
 
 public class Buscador{
 
-	private AerolineaLanchita aerolineaLanchita = new AerolineaLanchita();
-	private BigDecimal impuesto = aerolineaLanchita.getImpuesto();
+	private Aerolineas aerolineas = new Aerolineas();
 	protected CriterioBusqueda criterio;
 	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
 
@@ -20,7 +18,7 @@ public class Buscador{
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
 		ArrayList<Asiento> asientosB = new ArrayList<Asiento>();
-		asientos = aerolineaLanchita.getAsientosAerolinea();
+		asientos = aerolineas.getAsientosAerolineas();
 		for(Asiento asiento : asientos){
 			if(cumpleBusqueda(busqueda, asiento))
 				asientosB.add(asiento);
@@ -29,7 +27,7 @@ public class Buscador{
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
 
 		if (getFiltros().isEmpty()) {
-			return usuario.getAsientosQueLeCorreponden(asientosB, this.impuesto);
+			return usuario.getAsientosQueLeCorreponden(asientosB);
 		} else {
 			for(Asiento asiento : asientosB) {
 				boolean cumple = true;
@@ -42,7 +40,7 @@ public class Buscador{
 					asientosDeBusqueda.add(asiento);
 				}
 			}
-			return usuario.getAsientosQueLeCorreponden(asientosDeBusqueda, this.impuesto);
+			return usuario.getAsientosQueLeCorreponden(asientosDeBusqueda);
 		}
 	}
 
@@ -61,11 +59,7 @@ public class Buscador{
 	}
 
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-		return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario, impuesto);
-	}
-
-	public BigDecimal getImpuesto() {
-		return this.impuesto;
+		return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario);
 	}
 
 	public void setCriterio(CriterioBusqueda criterio) {
@@ -83,4 +77,5 @@ public class Buscador{
 	public ArrayList<Filtro> getFiltros() {
 		return filtros;
 	}
+
 }
