@@ -119,7 +119,7 @@ public class Asiento {
 	}
 	
 	public void reservar(String dni){
-		Reserva nuevaReserva = new Reserva(this.codigoAsiento, dni);
+		Reserva nuevaReserva = new Reserva(this, dni);
 		this.reservas.add(nuevaReserva);
 		this.reservado = true;
 	}

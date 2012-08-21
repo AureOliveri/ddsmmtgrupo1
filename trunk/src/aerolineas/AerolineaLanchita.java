@@ -3,6 +3,10 @@ package aerolineas;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import busquedas.Busqueda;
+
+import fechas.Fecha;
+
 import usuarios.Usuario;
 import vuelos.Asiento;
 import vuelos.Vuelo;
@@ -42,7 +46,9 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 						asiento.getDestino(), asiento.getFechaSalida(), asiento.getFechaLlegada(), numeroDeVuelo, this);
 				vuelo.addAsiento(asiento);
 				getVuelos().add(vuelo);				
-			}			
+			} else {
+				vuelo.addAsiento(asiento);
+			}
 			asiento.setVuelo(vuelo);
 		}
 		
@@ -62,12 +68,6 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	@Override
 	public void comprar(Asiento unAsiento) {
 
-	}
-
-	@Override
-	public String[][] busquedaDeAsientosDisponibles(String unOrigen,
-			String unDestino, String unaFecha) {
-			return this.asientosDisponibles(unOrigen, unDestino, unaFecha, null, null, null);
 	}
 
 	public BigDecimal getImpuesto() {
@@ -94,6 +94,37 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 			asientosAerolinea.addAll(vuelo.getAsientos());
 		}
 		return asientosAerolinea;
+	}
+
+	public Asiento retornarAsiento(String[] asientoD, String origen, String destino, Fecha fecha) {
+		ArrayList<Asiento> asientosAerolinea = new ArrayList<Asiento>();
+		asientosAerolinea = getAsientosAerolinea();
+		for(Asiento asientoC : asientosAerolinea) {
+			boolean cumpleOrigen = asientoC.getOrigen().equals(origen);
+			boolean cumpleDestino = asientoC.getDestino().equals(destino);
+			boolean cumpleFechaS = asientoC.getFechaSalida().esMenorIgualQue(fecha);
+			boolean cumpleFechaD = asientoC.getFechaLlegada().esMayorIgualQue(fecha);
+			boolean cumpleNumVuelo = asientoC.getCodigoAsiento().equals(asientoD[0]);
+			if(cumpleOrigen && cumpleDestino && cumpleFechaS && cumpleFechaD && cumpleNumVuelo) {
+				return asientoC;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Asiento> asientosDisponibles(Busqueda busqueda) {
+		String[][] asientosDisponibles;
+		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+		Asiento asiento = new Asiento();
+		asientosDisponibles = asientosDisponibles(busqueda.getOrigen(), busqueda.getDestino(), busqueda.getFechaV().getFechaS(), null, null, null);
+		for (String[] asientoD : asientosDisponibles) {
+			asiento = retornarAsiento(asientoD, busqueda.getOrigen(), busqueda.getDestino(), busqueda.getFechaV());
+			if (asiento != null) {
+				asientos.add(asiento);
+			}
+		}
+		return asientos;
 	}
 
 }

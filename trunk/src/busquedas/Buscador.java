@@ -1,5 +1,6 @@
 package busquedas;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.ArrayList;
 
@@ -17,19 +18,14 @@ public class Buscador{
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		ArrayList<Asiento> asientosB = new ArrayList<Asiento>();
-		asientos = aerolineas.getAsientosAerolineas();
-		for(Asiento asiento : asientos){
-			if(cumpleBusqueda(busqueda, asiento))
-				asientosB.add(asiento);
-		}
+		asientos = aerolineas.filtrarAsientos(busqueda);
 
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
 
 		if (getFiltros().isEmpty()) {
-			return usuario.getAsientosQueLeCorreponden(asientosB);
+			return usuario.getAsientosQueLeCorreponden(asientos);
 		} else {
-			for(Asiento asiento : asientosB) {
+			for(Asiento asiento : asientos) {
 				boolean cumple = true;
 				Filtro filtro = null;
 				for (Iterator<Filtro> itFiltros = filtros.iterator(); itFiltros.hasNext() && cumple; ) {
@@ -44,22 +40,23 @@ public class Buscador{
 		}
 	}
 
-	private boolean cumpleBusqueda(Busqueda busqueda, Asiento asiento) {
-		boolean cumpleOrigen = asiento.getOrigen().equals(busqueda.getOrigen());
-		boolean cumpleDestino = asiento.getDestino().equals(busqueda.getDestino());
-		boolean cumpleFechaS = asiento.getFechaSalida().esMenorIgualQue((busqueda.getFechaV()));
-		boolean cumpleFechaD = asiento.getFechaLlegada().esMayorIgualQue((busqueda.getFechaV()));
-		if(cumpleOrigen && cumpleDestino && cumpleFechaS && cumpleFechaD)
-			return true;
-		return false;
-	}
-
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;
 	}
 
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-		return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario);
+		if (this.getCriterio() == null) {
+			ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
+			for (int i = 0; i < asientos.size(); i++) {
+				BigDecimal impuesto = asientos.get(i).getVuelo().getAerolinea().getImpuesto();
+				ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), impuesto, usuario.getTipoUsuario());
+				asientosBusqueda.add(valores);
+			}
+			return asientosBusqueda;
+		} else {
+			return this.getCriterio().mostrarAsientosBusqueda(asientos, usuario);
+		}
+		
 	}
 
 	public void setCriterio(CriterioBusqueda criterio) {

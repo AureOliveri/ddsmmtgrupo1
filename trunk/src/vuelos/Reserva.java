@@ -1,20 +1,39 @@
 package vuelos;
 
+import fechas.Fecha;
+
 public class Reserva {
 
-	private String codigo;
 	private String dni;
+	private Fecha fechaVencimiento;
+	private Asiento asiento;
 
-	public Reserva(String codigo, String dni) {
-		this.codigo = codigo;
+	public Reserva(Asiento asiento, String dni) {
 		this.dni = dni;
-	}
-
-	public String getCodigo() {
-		return this.codigo;
+		setAsiento(asiento);
 	}
 
 	public String getDni() {
 		return this.dni;
+	}
+
+	public void setFechaVencimiento(Fecha fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+	public Fecha getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
+	}
+
+	public Asiento getAsiento() {
+		return asiento;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import busquedas.Busqueda;
+
 import com.oceanic.AsientoDTO;
 
 import enumeraciones.DisponibilidadDeAsiento;
@@ -29,8 +31,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements Ae
 		for (AsientoDTO asientoDto : asientosAerolinea){
 			asientosOceanic.add(transformarAsiento(asientoDto));	
 		}
-		
-		
+				
 		for (String[] asientoO : asientosOceanic) {
 			Asiento asiento = new Asiento(asientoO);
 			String numeroDeVuelo = asiento.getNumeroDeVuelo();
@@ -82,13 +83,6 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements Ae
 
 	}
 
-	@Override
-	public String[][] busquedaDeAsientosDisponibles(String unOrigen,
-			String unDestino, String unaFecha) {
-//			return this.asientosDisponiblesParaOrigenYDestino(unOrigen, unDestino, unaFecha);
-		return null;
-	}
-
 	public BigDecimal getImpuesto() {
 		return impuesto;
 	}
@@ -113,6 +107,35 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements Ae
 			asientosAerolinea.addAll(vuelo.getAsientos());
 		}
 		return asientosAerolinea;
+	}
+	
+	public Asiento retornarAsiento(AsientoDTO asientoDto) {
+		ArrayList<Asiento> asientosAerolinea = new ArrayList<Asiento>();
+		asientosAerolinea = getAsientosAerolinea();
+		for(Asiento asientoC : asientosAerolinea) {
+			if (asientoC.getNumeroDeVuelo().equals(asientoDto.getCodigoDeVuelo())
+					&& (asientoC.getNumeroDeAsiento().equals(asientoDto.getNumeroDeAsiento().toString())) ){
+				return asientoC;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Asiento> asientosDisponibles(Busqueda busqueda) {
+		List<AsientoDTO> asientosDisponibles;
+		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+		Asiento asiento = new Asiento();
+		if (busqueda.getDestino() == null) {
+			asientosDisponibles = asientosDisponiblesParaOrigen(busqueda.getOrigen(), busqueda.getFechaV().getFechaS());
+		} else {
+			asientosDisponibles = asientosDisponiblesParaOrigenYDestino(busqueda.getOrigen(), busqueda.getDestino(), busqueda.getFechaV().getFechaS());
+		}
+		for (AsientoDTO asientoDto : asientosDisponibles) {
+			asiento = retornarAsiento(asientoDto);
+			asientos.add(asiento);
+		}
+		return asientos;
 	}
 
 }
