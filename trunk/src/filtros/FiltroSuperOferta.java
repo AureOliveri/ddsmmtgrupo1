@@ -1,6 +1,8 @@
-package busquedas;
+package filtros;
 
 import java.math.BigDecimal;
+
+import busquedas.Busqueda;
 
 import usuarios.Usuario;
 import vuelos.Asiento;

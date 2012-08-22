@@ -1,4 +1,4 @@
-package busquedas;
+package criterios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Comparator;
 import usuarios.Usuario;
 import vuelos.Asiento;
 
-public class CriterioPopularidad extends CriterioBusqueda {
+public class CriterioPrecioAscendente extends CriterioBusqueda {
 	
 	@Override
 	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
@@ -16,9 +16,7 @@ public class CriterioPopularidad extends CriterioBusqueda {
 		int i;
 		Comparator<Asiento> comparatorAsiento = new Comparator<Asiento>() {
 			public int compare (Asiento a, Asiento b) {
-				BigDecimal popuA = new BigDecimal(a.getVuelo().getPopularidad());
-				BigDecimal popuB = new BigDecimal(b.getVuelo().getPopularidad());
-				return popuB.compareTo(popuA);
+				return a.getPrecio().compareTo(b.getPrecio());
 			}
 		};
 		Collections.sort(asientos, comparatorAsiento);

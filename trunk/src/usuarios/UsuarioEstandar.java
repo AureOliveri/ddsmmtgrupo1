@@ -50,7 +50,6 @@ public class UsuarioEstandar extends TipoUsuario {
 	
 	public Boolean esTuReserva(Reserva reserva, String dni){
 		Fecha fechaAux  = new Fecha();
-		fechaAux = fechaAux.crearFechaActual();
 		if (fechaAux.esAnteriorQue(reserva.getFechaVencimiento())) {
 			return reserva.getDni().equals(dni);
 		} else {

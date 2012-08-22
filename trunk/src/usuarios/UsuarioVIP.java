@@ -19,9 +19,4 @@ public class UsuarioVIP extends TipoUsuario {
 		return new BigDecimal(0);
 	}
 
-	public void comprarAsiento(Asiento unAsiento) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

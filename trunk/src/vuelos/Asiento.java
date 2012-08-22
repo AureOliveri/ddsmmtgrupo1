@@ -135,6 +135,7 @@ public class Asiento {
 		while (this.reservas != null){
 			this.reservas.poll();
 		}
+		// this.reservas.removeAll(reservas);
 	}
 	
 	public Boolean noEstaReservado(){

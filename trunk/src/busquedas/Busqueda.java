@@ -65,8 +65,7 @@ public class Busqueda {
 	public void setResultado(ArrayList<ArrayList<String>> resultado) {
 		this.resultado = resultado;
 	}
-
-
+	
 	public ArrayList<ArrayList<String>> getResultado() {
 		return resultado;
 	}

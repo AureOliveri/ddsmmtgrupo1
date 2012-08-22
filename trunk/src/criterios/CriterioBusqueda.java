@@ -1,4 +1,4 @@
-package busquedas;
+package criterios;
 
 import java.util.ArrayList;
 

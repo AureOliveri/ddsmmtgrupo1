@@ -1,5 +1,6 @@
-package busquedas;
+package filtros;
 
+import busquedas.Busqueda;
 import usuarios.Usuario;
 import vuelos.Asiento;
 

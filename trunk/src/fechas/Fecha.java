@@ -1,5 +1,6 @@
 package fechas;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ public class Fecha {
 	private int mes;
 	private int anio;
 	private int fechaFinal;
+	private String fechaActual;
 	private String fechaS;
 	private String formato;
 	private Map<Integer, Integer> diasPorMes = new HashMap<Integer, Integer>();
@@ -109,6 +111,11 @@ public class Fecha {
 	}
 
 	public Fecha() {
+		Calendar fechaActual = Calendar.getInstance();
+		String fechaS = Integer.toString(fechaActual.get(Calendar.DATE)) + "/"
+				+ Integer.toString(fechaActual.get(Calendar.MONTH) + 1) + "/"
+				+ Integer.toString(fechaActual.get(Calendar.YEAR));
+		Fecha fecha = new Fecha(fechaS);
 	}
 
 	public boolean esFormatoISO8601(String fechaS) {
@@ -133,14 +140,6 @@ public class Fecha {
 			dias += diasPorMes.get(i);
 		}
 		return dias;
-	}
-
-	public Fecha crearFechaActual() {
-		Date fechaActual = new Date();
-		String fechaS = Integer.toString(fechaActual.getDay()) + "/"
-				+ Integer.toString(fechaActual.getMonth()) + "/"
-				+ Integer.toString(fechaActual.getYear());
-		return new Fecha(fechaS);
 	}
 
 	public int diferenciaDeDiasCon(Fecha otraFecha) {
@@ -175,6 +174,14 @@ public class Fecha {
 
 	public String getFechaS() {
 		return fechaS;
+	}
+
+	public void setFechaActual(String fechaActual) {
+		this.fechaActual = fechaActual;
+	}
+
+	public String getFechaActual() {
+		return fechaActual;
 	}
 
 }
