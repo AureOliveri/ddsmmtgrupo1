@@ -26,15 +26,9 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	public AerolineaLanchita() {
 		
 		String[][] asientosAerolinea = getAsientos();
-		ArrayList<String[]> asientosLanchita = new ArrayList<String[]>();
 		
-		for (String[] asientoLanc : asientosAerolinea){
-			asientosLanchita.add(transformarAsiento(asientoLanc));	
-		}
-		
-		for (String[] asientoLanchita : asientosLanchita) {
-			Asiento asiento = new Asiento(asientoLanchita);
-			String numeroDeVuelo = asiento.getNumeroDeVuelo();
+		for (String[] asientoLanchita : asientosAerolinea) {
+			String numeroDeVuelo = obtenerNumeroDeVuelo(asientoLanchita[0]);
 			Vuelo vuelo = null;
 			for(Vuelo vueloA : vuelos) {
 				if(vueloA.getNumeroDeVuelo().equals(numeroDeVuelo)){
@@ -42,26 +36,33 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 				}
 			}
 			if(vuelo == null) {
-				vuelo = new Vuelo(asiento.getHoraLlegada(), asiento.getHoraSalida(), asiento.getOrigen(), 
-						asiento.getDestino(), asiento.getFechaSalida(), asiento.getFechaLlegada(), numeroDeVuelo, this);
-				vuelo.addAsiento(asiento);
+				
+				vuelo = new Vuelo(asientoLanchita[7], asientoLanchita[6], 
+						asientoLanchita[8],
+						asientoLanchita[9], asientoLanchita[10],
+						asientoLanchita[11], numeroDeVuelo, this);
 				getVuelos().add(vuelo);				
-			} else {
-				vuelo.addAsiento(asiento);
 			}
-			asiento.setVuelo(vuelo);
+			
+			Asiento asientoReal = new Asiento(asientoLanchita[0], asientoLanchita[1],
+					asientoLanchita[2],
+					asientoLanchita[3], asientoLanchita[4], asientoLanchita[5],
+					obtenerNumeroAsiento(asientoLanchita[0]), 
+					obtenerNumeroDeVuelo(asientoLanchita[0]), vuelo);
+			asientoReal.setVuelo(vuelo);
+			vuelo.addAsiento(asientoReal);
 		}
 		
 	}
 	
-	private String[] transformarAsiento(String[] asientoLanc) {
-		String[] asientoF = new String[14];
-		for(int i = 0; i<12; i++){
-			asientoF[i] = asientoLanc[i];	
-		}
-		asientoF[12] = asientoLanc[0].substring(15, 16);
-		asientoF[13] = asientoLanc[0].substring(0, 14);
-		return asientoF;
+	private String obtenerNumeroDeVuelo(String codigoAsiento) {
+		String nVuelo = codigoAsiento.substring(0, 14);
+		return nVuelo;
+	}
+	
+	private String obtenerNumeroAsiento(String codigoAsiento) {
+		String nAsiento = codigoAsiento.substring(15, 16);
+		return nAsiento;
 	}
 
 

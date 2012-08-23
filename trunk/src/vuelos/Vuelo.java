@@ -25,19 +25,19 @@ public class Vuelo {
 	
 	public Vuelo() {}
 	
-	public Vuelo(Hora horaLlegada, Hora horaSalida, String origen,
-			String destino, Fecha fechaSalida, Fecha fechaLlegada,
+	public Vuelo(String horaLlegada, String horaSalida, String origen,
+			String destino, String fechaSalida, String fechaLlegada,
 			String numeroDeVuelo, Aerolinea aerolinea) {
 		super();
-		this.setHoraLlegada(horaLlegada);
-		this.setHoraSalida(horaSalida);
+		this.setHoraLlegada(new Hora(horaLlegada));
+		this.setHoraSalida(new Hora(horaSalida));
 		this.origen = origen;
 		this.destino = destino;
-		this.setFechaLlegada(fechaLlegada);
-		this.setFechaSalida(fechaSalida);
+		this.setFechaLlegada(new Fecha(fechaLlegada));
+		this.setFechaSalida(new Fecha(fechaSalida));
 		this.numeroDeVuelo = numeroDeVuelo;
 		this.aerolinea = aerolinea;
-		this.setTiempoDeVuelo(new TiempoDeVuelo(fechaSalida, fechaLlegada, horaSalida, horaLlegada));
+		this.setTiempoDeVuelo(new TiempoDeVuelo(this.fechaSalida, this.fechaLlegada, this.horaSalida, this.horaLlegada));
 		
 	}
 

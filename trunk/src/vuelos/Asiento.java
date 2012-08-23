@@ -34,22 +34,23 @@ public class Asiento {
 	private Fecha fechaSalida;
 	private Fecha fechaLlegada;
 	
-	public Asiento(String[] asiento) {
+	public Asiento(String codigoAsiento, String precio, String clase, String ubicacion, String disponibilidad,
+			String dni, String numeroDeAsiento, String numeroDeVuelo, Vuelo vuelo) {
 		this();
-		this.setCodigoAsiento(asiento[0]);
-		precio = new BigDecimal(asiento[1]);
-		claseDeAsiento = ClaseDeAsiento.obtenerClase(asiento[2]);
-		ubicacion = UbicacionDeAsiento.obtenerUbicacion(asiento[3]);
-		setDisponibilidad(DisponibilidadDeAsiento.obtenerDisponibilidad(asiento[4]));
-		dni = asiento[5];
-		setHoraSalida(new Hora(asiento[6]));
-		setHoraLlegada(new Hora(asiento[7]));
-		origen = asiento[8];
-		destino = asiento[9];
-		setFechaSalida(new Fecha(asiento[10]));
-		setFechaLlegada(new Fecha(asiento[11]));
-		setNumeroDeAsiento(asiento[12]);
-		setNumeroDeVuelo(asiento[13]);
+		setCodigoAsiento(codigoAsiento);
+		setPrecio(new BigDecimal(precio));
+		setClaseDeAsiento(ClaseDeAsiento.obtenerClase(clase));
+		setUbicacion(UbicacionDeAsiento.obtenerUbicacion(ubicacion));
+		setDisponibilidad(DisponibilidadDeAsiento.obtenerDisponibilidad(disponibilidad));
+		setDni(dni);
+		setHoraSalida(vuelo.getHoraSalida());
+		setHoraLlegada(vuelo.getHoraLlegada());
+		setOrigen(vuelo.getOrigen());
+		setDestino(vuelo.getDestino());
+		setFechaSalida(vuelo.getFechaSalida());
+		setFechaLlegada(vuelo.getFechaLlegada());
+		setNumeroDeAsiento(numeroDeAsiento);
+		setNumeroDeVuelo(numeroDeVuelo);
 	}
 
 	public Asiento() {
