@@ -3,7 +3,8 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import excepciones.asientoReservadoException;
+import excepciones.AsientoReservadoException;
+
 
 import vuelos.Asiento;
 
@@ -30,7 +31,7 @@ public class Usuario {
 		try {
 			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
 			this.reservas.add(unAsiento);
-		} catch (asientoReservadoException e) {
+		} catch (AsientoReservadoException e) {
 
 		}
 	}

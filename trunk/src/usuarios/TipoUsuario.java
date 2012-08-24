@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import enumeraciones.DisponibilidadDeAsiento;
-import excepciones.asientoReservadoException;
+import excepciones.AsientoReservadoException;
 
 import vuelos.Asiento;
 
@@ -19,9 +19,12 @@ public abstract class TipoUsuario {
 		if (unAsiento.noEstaReservado()) {
 			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 		} else {
-			throw new asientoReservadoException(("el asiento "
+			throw new AsientoReservadoException(("el asiento "
 					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
 		}
 
+	}
+	
+	public void reservarAsiento(Asiento asientoReservado, Usuario usuario){		
 	}
 }

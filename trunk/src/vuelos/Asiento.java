@@ -119,11 +119,7 @@ public class Asiento {
 
 	}
 	
-	public void reservar(String dni){
-		Reserva nuevaReserva = new Reserva(this, dni);
-		this.reservas.add(nuevaReserva);
-		this.reservado = true;
-	}
+
 	
 	public void expirarReserva(){
 		this.reservas.poll();
@@ -290,6 +286,12 @@ public class Asiento {
 
 	public void setNumeroDeVuelo(String numeroDeVuelo) {
 		this.numeroDeVuelo = numeroDeVuelo;
+	}
+
+	public void reservar(String dni){
+		Reserva nuevaReserva = new Reserva(this, dni);
+		this.reservas.add(nuevaReserva);
+		this.reservado = true;
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import enumeraciones.DisponibilidadDeAsiento;
-import excepciones.asientoReservadoException;
+import excepciones.AsientoReservadoException;
 import fechas.Fecha;
 
 import vuelos.Asiento;
@@ -36,15 +36,15 @@ public class UsuarioEstandar extends TipoUsuario {
 		if(puedeComprar(unAsiento, dni)){
 			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 		} else {
-			throw new asientoReservadoException(("el asiento "
+			throw new AsientoReservadoException(("el asiento "
 					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
 		}
 		
 	}
-	
+	@Override
 	public void reservarAsiento(Asiento asientoReservado, Usuario usuario){
 		usuario.getReservas().add(asientoReservado);
-		asientoReservado.agregarleNuevaReserva(usuario.getDni());
+		asientoReservado.reservar(usuario.getDni());
 	}
 	public Boolean puedeComprar(Asiento unAsiento, String dni){
 		return unAsiento.noEstaReservado() || esTuReserva(unAsiento.getPrimeraReserva(), dni);
