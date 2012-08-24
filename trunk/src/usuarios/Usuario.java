@@ -3,7 +3,6 @@ package usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import enumeraciones.DisponibilidadDeAsiento;
 import excepciones.asientoReservadoException;
 
 import vuelos.Asiento;
@@ -17,13 +16,14 @@ public class Usuario {
 	protected BigDecimal recargo = new BigDecimal(20);
 	private BigDecimal montoCompras = new BigDecimal(0);
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
+	private ArrayList<Asiento> reservas = new ArrayList<Asiento>();
 
 	public void comprarAsiento(Asiento unAsiento) {
-		if (noTieneReserva(unAsiento)) {
-			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
-		} else {
-			throw new asientoReservadoException(("el asiento "
-					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
+		try {
+			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
+			this.reservas.add(unAsiento);
+		} catch (asientoReservadoException e) {
+
 		}
 	}
 
@@ -58,8 +58,7 @@ public class Usuario {
 	public ArrayList<Asiento> getAsientosQueLeCorreponden(
 			ArrayList<Asiento> asientos) {
 
-		return this.tipoUsuario
-				.getAsientosQueLeCorresponden(asientos);
+		return this.tipoUsuario.getAsientosQueLeCorresponden(asientos);
 
 	}
 
