@@ -18,6 +18,14 @@ public class Usuario {
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
 	private ArrayList<Asiento> reservas = new ArrayList<Asiento>();
 
+	public ArrayList<Asiento> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(ArrayList<Asiento> reservas) {
+		this.reservas = reservas;
+	}
+
 	public void comprarAsiento(Asiento unAsiento) {
 		try {
 			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
