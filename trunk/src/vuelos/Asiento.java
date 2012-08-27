@@ -332,5 +332,8 @@ public class Asiento {
 	public BigDecimal getPrecioConRecargo() {
 		return precioConRecargo;
 	}
-
+	@Override
+	public String toString() {
+		return this.codigoAsiento;
+	}
 }
