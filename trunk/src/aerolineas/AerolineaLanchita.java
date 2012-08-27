@@ -49,7 +49,6 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 					asientoLanchita[3], asientoLanchita[4], asientoLanchita[5],
 					obtenerNumeroAsiento(asientoLanchita[0]), 
 					obtenerNumeroDeVuelo(asientoLanchita[0]), vuelo);
-			asientoReal.setVuelo(vuelo);
 			vuelo.addAsiento(asientoReal);
 		}
 		
@@ -77,7 +76,7 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	
 	public BigDecimal getPrecioFinal(Asiento unAsiento, Usuario unUsuario){
 		BigDecimal precioFinal = new BigDecimal(0);
-		precioFinal = precioFinal.add(unAsiento.getPrecio().multiply(getImpuesto()).add(unUsuario.getRecargo()));
+		precioFinal = precioFinal.add(unAsiento.getPrecioInicial().multiply(getImpuesto()).add(unUsuario.getRecargo()));
 		return precioFinal;
 	}
 

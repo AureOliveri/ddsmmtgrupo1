@@ -11,9 +11,11 @@ import vuelos.Asiento;
 public abstract class TipoUsuario {
 
 	protected abstract ArrayList<Asiento> getAsientosQueLeCorresponden(
-			ArrayList<Asiento> asientos);
+			ArrayList<Asiento> asientos, TipoUsuario usuario);
 
 	public abstract BigDecimal getRecargo();
+	
+	public abstract String getCodigo();
 
 	public void comprarAsiento(Asiento unAsiento, String dni) {
 		if (unAsiento.noEstaReservado()) {

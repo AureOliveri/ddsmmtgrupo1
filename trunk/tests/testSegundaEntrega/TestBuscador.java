@@ -192,7 +192,7 @@ public class TestBuscador {
 		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaB, usuario);
 		busquedaA.setResultado(buscador.armarListaConLaBusqueda(asientosPorPrecio, usuario));
 		System.out.println("Vip precio entre 100 y 461: " + busquedaA.getResultado());
-		Assert.assertTrue(asientosPorPrecio.get(1).getPrecio().compareTo(asientosPorPrecio.get(2).getPrecio()) >= 0);
+		Assert.assertTrue(asientosPorPrecio.get(1).getPrecioInicial().compareTo(asientosPorPrecio.get(2).getPrecioInicial()) >= 0);
 	}
 	
 	@Test
@@ -204,7 +204,7 @@ public class TestBuscador {
 		ArrayList<Asiento> asientosPorPrecio = buscador.buscarAsientos(busquedaA, usuario);
 		busquedaA.setResultado(buscador.armarListaConLaBusqueda(asientosPorPrecio, usuario));
 		System.out.println("Vip precio entre 100 y 461: " + busquedaA.getResultado());
-		Assert.assertTrue(asientosPorPrecio.get(1).getPrecio().compareTo(asientosPorPrecio.get(2).getPrecio()) <= 0);
+		Assert.assertTrue(asientosPorPrecio.get(1).getPrecioInicial().compareTo(asientosPorPrecio.get(2).getPrecioInicial()) <= 0);
 	}
 	
 	@Test

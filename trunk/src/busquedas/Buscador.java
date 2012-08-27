@@ -1,12 +1,12 @@
 package busquedas;
 
-import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.ArrayList;
 
 import criterios.CriterioBusqueda;
 import filtros.Filtro;
 
+import usuarios.TipoUsuario;
 import usuarios.Usuario;
 import vuelos.Asiento;
 
@@ -40,28 +40,19 @@ public class Buscador {
 			}
 			asientos = asientosDeBusqueda;
 		}
-		return usuario.getAsientosQueLeCorreponden(asientos);
+		return usuario.getAsientosQueLeCorreponden(asientos, usuario.getTipoUsuario());
 	}
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {
 		return asientos == null;
 	}
 
-	public ArrayList<ArrayList<String>> armarListaConLaBusqueda(
+	public ArrayList<Asiento> armarListaConLaBusqueda(
 			ArrayList<Asiento> asientos, Usuario usuario) {
 		if (this.getCriterio() == null) {
-			ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
-			for (int i = 0; i < asientos.size(); i++) {
-				BigDecimal impuesto = asientos.get(i).getVuelo().getAerolinea()
-						.getImpuesto();
-				ArrayList<String> valores = asientos.get(i).mostrarAsiento(
-						asientos.get(i), impuesto, usuario.getTipoUsuario());
-				asientosBusqueda.add(valores);
-			}
-			return asientosBusqueda;
+			return asientos;
 		} else {
-			return this.getCriterio()
-					.mostrarAsientosBusqueda(asientos, usuario);
+			return this.getCriterio().armarListaBusqueda(asientos, usuario);
 		}
 
 	}
@@ -80,6 +71,16 @@ public class Buscador {
 
 	public ArrayList<Filtro> getFiltros() {
 		return filtros;
+	}
+
+	public void mostrarAsientos(ArrayList<Asiento> resultado, TipoUsuario usuario) {
+		if (resultado.isEmpty()) {
+			System.out.println("         []");
+		} else {
+			for (Asiento asiento : resultado) {
+				asiento.mostrar(usuario);
+			}
+		}
 	}
 
 }

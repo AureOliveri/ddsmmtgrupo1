@@ -10,7 +10,7 @@ public class UsuarioVIP extends TipoUsuario {
 
 
 	@Override
-	public ArrayList<Asiento> getAsientosQueLeCorresponden(ArrayList<Asiento> asientos) {
+	public ArrayList<Asiento> getAsientosQueLeCorresponden(ArrayList<Asiento> asientos,TipoUsuario usuario) {
 		return asientos;
 	}
 
@@ -19,4 +19,8 @@ public class UsuarioVIP extends TipoUsuario {
 		return new BigDecimal(0);
 	}
 
+	public String getCodigo() {
+		return "vip";
+	}
+	
 }

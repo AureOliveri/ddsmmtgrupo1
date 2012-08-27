@@ -2,6 +2,8 @@ package busquedas;
 
 import java.util.ArrayList;
 
+import vuelos.Asiento;
+
 import fechas.Fecha;
 
 public class Busqueda {
@@ -12,7 +14,7 @@ public class Busqueda {
 	private String destino;
 	private Fecha fechaV;
 	private Opcionales opcionales = new Opcionales();
-	private ArrayList<ArrayList<String>> resultado = new ArrayList<ArrayList<String>>();
+	private ArrayList<Asiento> resultado = new ArrayList<Asiento>();
 	
 	
 	/* METODOS*/ 
@@ -62,11 +64,11 @@ public class Busqueda {
 	}
 
 
-	public void setResultado(ArrayList<ArrayList<String>> resultado) {
+	public void setResultado(ArrayList<Asiento> resultado) {
 		this.resultado = resultado;
 	}
 	
-	public ArrayList<ArrayList<String>> getResultado() {
+	public ArrayList<Asiento> getResultado() {
 		return resultado;
 	}
 

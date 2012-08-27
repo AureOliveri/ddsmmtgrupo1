@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Queue;
 
-
 import usuarios.TipoUsuario;
 import usuarios.Usuario;
+import usuarios.UsuarioConRecargo;
 import enumeraciones.ClaseDeAsiento;
 import enumeraciones.DisponibilidadDeAsiento;
 import enumeraciones.UbicacionDeAsiento;
@@ -14,14 +14,15 @@ import fechas.Fecha;
 import fechas.Hora;
 
 public class Asiento {
-	
+
 	private ClaseDeAsiento claseDeAsiento;
 	private UbicacionDeAsiento ubicacion;
 	private Vuelo vuelo;
 	private String numeroDeAsiento;
 	private String numeroDeVuelo;
 	private String codigoAsiento;
-	private BigDecimal precio;
+	private BigDecimal precioInicial;
+	private BigDecimal precioFinal;
 	private DisponibilidadDeAsiento disponibilidad;
 	private Usuario usuario;
 	private Queue<Reserva> reservas;
@@ -33,15 +34,19 @@ public class Asiento {
 	private String destino;
 	private Fecha fechaSalida;
 	private Fecha fechaLlegada;
-	
-	public Asiento(String codigoAsiento, String precio, String clase, String ubicacion, String disponibilidad,
-			String dni, String numeroDeAsiento, String numeroDeVuelo, Vuelo vuelo) {
+	private BigDecimal precioConRecargo;
+
+	public Asiento(String codigoAsiento, String precio, String clase,
+			String ubicacion, String disponibilidad, String dni,
+			String numeroDeAsiento, String numeroDeVuelo, Vuelo vuelo) {
 		this();
 		setCodigoAsiento(codigoAsiento);
-		setPrecio(new BigDecimal(precio));
+		setPrecioInicial(new BigDecimal(precio));
+		setPrecioFinal(precioFinal(vuelo.getAerolinea().getImpuesto()));
 		setClaseDeAsiento(ClaseDeAsiento.obtenerClase(clase));
 		setUbicacion(UbicacionDeAsiento.obtenerUbicacion(ubicacion));
-		setDisponibilidad(DisponibilidadDeAsiento.obtenerDisponibilidad(disponibilidad));
+		setDisponibilidad(DisponibilidadDeAsiento
+				.obtenerDisponibilidad(disponibilidad));
 		setDni(dni);
 		setHoraSalida(vuelo.getHoraSalida());
 		setHoraLlegada(vuelo.getHoraLlegada());
@@ -51,66 +56,85 @@ public class Asiento {
 		setFechaLlegada(vuelo.getFechaLlegada());
 		setNumeroDeAsiento(numeroDeAsiento);
 		setNumeroDeVuelo(numeroDeVuelo);
+		setVuelo(vuelo);
 	}
 
 	public Asiento() {
 		super();
 	}
-	
-	public void imprimir(){
-		System.out.println(this.ubicacion);
+
+	public void mostrar(TipoUsuario tUsuario) {
+		TipoUsuario conRecargo = new UsuarioConRecargo();
+		if(tUsuario.getCodigo().equals(conRecargo.getCodigo())) {
+				System.out.println("         [" + codigoAsiento + ", "
+				+ precioConRecargo
+				+ ", " + claseDeAsiento.getCodigo() + ", "
+				+ ubicacion.getCodigo() + ", " + disponibilidad.getCodigo()
+				+ "]");
+		} else {
+				System.out.println("         [" + codigoAsiento + ", "
+				+ precioFinal
+				+ ", " + claseDeAsiento.getCodigo() + ", "
+				+ ubicacion.getCodigo() + ", " + disponibilidad.getCodigo()
+				+ "]");
+		}
 	}
-	
+
 	public void ocupate() {
 		this.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
 	}
 
-	public boolean esPrimeraClase(){
+	public boolean esPrimeraClase() {
 		return (this.claseDeAsiento.equals(ClaseDeAsiento.PRIMERA));
 	}
-	
-	public boolean esClaseEjecutiva(){
+
+	public boolean esClaseEjecutiva() {
 		return (this.claseDeAsiento.equals(ClaseDeAsiento.EJECUTIVA));
 	}
-	
-	public boolean esClaseTurista(){
+
+	public boolean esClaseTurista() {
 		return (this.claseDeAsiento.equals(ClaseDeAsiento.TURISTA));
 	}
-	
-	public boolean esSuperOferta(BigDecimal impuesto, TipoUsuario usuario){
-		return (this.esSuperOfertaPrimera(impuesto, usuario) || this.esSuperOfertaEjecutiva(impuesto, usuario)); 
-	}
-	
-	public BigDecimal precioTotal(BigDecimal impuesto, TipoUsuario usuario) {
-		BigDecimal pTotal = precio.add(precio.multiply(impuesto)).setScale(2, BigDecimal.ROUND_UP);
-		pTotal = pTotal.add(usuario.getRecargo());
-		return pTotal;	
-	}
-	
-	public boolean esOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
-		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaPrimeraClase) < 0;
+
+	public boolean esSuperOferta() {
+		return this.esSuperOfertaPrimera() || this.esSuperOfertaEjecutiva();
 	}
 
-	public boolean esOfertaEjecutiva(BigDecimal impuesto, TipoUsuario usuario) {
+	public BigDecimal precioFinal(BigDecimal impuesto) {
+		BigDecimal pTotal = precioInicial.add(precioInicial.multiply(impuesto)).setScale(2,
+				BigDecimal.ROUND_UP);
+		return pTotal;
+	}
+	
+	public void agregarRecargo(TipoUsuario usuario) {
+		this.setPrecioConRecargo(precioFinal.add(usuario.getRecargo()));		
+	}
+	
+	public boolean esOfertaPrimera() {
+		BigDecimal ofertaPrimeraClase = new BigDecimal(8000);
+		return precioFinal.compareTo(ofertaPrimeraClase) < 0;
+	}
+
+	public boolean esOfertaEjecutiva() {
 		BigDecimal ofertaClaseEjecutiva = new BigDecimal(4000);
-		return this.precioTotal(impuesto, usuario).compareTo(ofertaClaseEjecutiva) < 0;
+		return precioFinal.compareTo(ofertaClaseEjecutiva) < 0;
 	}
-	
-	public boolean esSuperOfertaPrimera(BigDecimal impuesto, TipoUsuario usuario) {
-		return this.esPrimeraClase() && this.esOfertaPrimera(impuesto, usuario);
+
+	public boolean esSuperOfertaPrimera() {
+		return this.esPrimeraClase() && this.esOfertaPrimera();
 	}
-	
-	public boolean esSuperOfertaEjecutiva(BigDecimal impuesto, TipoUsuario usuario) {
-		return this.esClaseEjecutiva() && this.esOfertaEjecutiva(impuesto, usuario);
+
+	public boolean esSuperOfertaEjecutiva() {
+		return this.esClaseEjecutiva() && this.esOfertaEjecutiva();
 	}
-	
-	public ArrayList<String> mostrarAsiento(Asiento unAsiento, BigDecimal impuesto, TipoUsuario usuario) {
-		
+
+	public ArrayList<String> mostrarAsiento(Asiento unAsiento,
+			BigDecimal impuesto, TipoUsuario usuario) {
+
 		ArrayList<String> asientoString = new ArrayList<String>();
-		
+
 		asientoString.add(unAsiento.getCodigoAsiento());
-		asientoString.add(unAsiento.precioTotal(impuesto, usuario).toString());
+		asientoString.add(unAsiento.getPrecioFinal().toString());
 		asientoString.add(unAsiento.getClaseDeAsiento().getCodigo());
 		asientoString.add(unAsiento.getUbicacion().getCodigo());
 		asientoString.add(unAsiento.getDisponibilidad().getCodigo());
@@ -118,28 +142,26 @@ public class Asiento {
 		return asientoString;
 
 	}
-	
 
-	
-	public void expirarReserva(){
+	public void expirarReserva() {
 		this.reservas.poll();
-		if(this.reservas.isEmpty()){
+		if (this.reservas.isEmpty()) {
 			this.reservado = false;
 		}
 	}
-	
-	public void eliminarReservas(){
-		while (this.reservas != null){
+
+	public void eliminarReservas() {
+		while (this.reservas != null) {
 			this.reservas.poll();
 		}
 		// this.reservas.removeAll(reservas);
 	}
-	
-	public Boolean noEstaReservado(){
+
+	public Boolean noEstaReservado() {
 		return (!this.reservado);
 	}
-	
-	/* GETTERS*/
+
+	/* GETTERS */
 
 	public Vuelo getVuelo() {
 		return vuelo;
@@ -148,34 +170,35 @@ public class Asiento {
 	public String getCodigoAsiento() {
 		return codigoAsiento;
 	}
-	public BigDecimal getPrecio(){
-		return precio;
+
+	public BigDecimal getPrecioInicial() {
+		return precioInicial;
 	}
-	public ClaseDeAsiento getClaseDeAsiento(){
+
+	public ClaseDeAsiento getClaseDeAsiento() {
 		return claseDeAsiento;
 	}
-	public UbicacionDeAsiento getUbicacion(){
+
+	public UbicacionDeAsiento getUbicacion() {
 		return ubicacion;
 	}
-	
-	public Boolean getReservado(){
+
+	public Boolean getReservado() {
 		return reservado;
 	}
-	
-	public Reserva getPrimeraReserva(){
+
+	public Reserva getPrimeraReserva() {
 		return reservas.peek();
 	}
-	
-	
-	/* SETTERS*/
-	
-	
-	public void setPrecio(BigDecimal unPrecio){
-		this.precio =unPrecio;
+
+	public void setPrecioInicial(BigDecimal unPrecio) {
+		this.precioInicial = unPrecio;
 	}
+
 	public void setVuelo(Vuelo vuelo) {
 		this.vuelo = vuelo;
 	}
+
 	public void setCodigoAsiento(String codigoAsiento) {
 		this.codigoAsiento = codigoAsiento;
 	}
@@ -231,7 +254,7 @@ public class Asiento {
 	public void setReservado(Boolean reservado) {
 		this.reservado = reservado;
 	}
-	
+
 	public void setFechaSalida(Fecha fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
@@ -288,10 +311,26 @@ public class Asiento {
 		this.numeroDeVuelo = numeroDeVuelo;
 	}
 
-	public void reservar(String dni){
+	public void reservar(String dni) {
 		Reserva nuevaReserva = new Reserva(this, dni);
 		this.reservas.add(nuevaReserva);
 		this.reservado = true;
 	}
-	
+
+	public void setPrecioFinal(BigDecimal precioFinal) {
+		this.precioFinal = precioFinal;
+	}
+
+	public BigDecimal getPrecioFinal() {
+		return precioFinal;
+	}
+
+	public void setPrecioConRecargo(BigDecimal precioConRecargo) {
+		this.precioConRecargo = precioConRecargo;
+	}
+
+	public BigDecimal getPrecioConRecargo() {
+		return precioConRecargo;
+	}
+
 }

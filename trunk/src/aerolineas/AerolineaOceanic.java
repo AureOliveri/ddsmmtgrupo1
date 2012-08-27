@@ -28,13 +28,8 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	public AerolineaOceanic() {
 
 		List<AsientoDTO> asientosAerolinea = getAsientosDisponibles();
-		// ArrayList<String[]> asientosOceanic = new ArrayList<String[]>();
-		// for (AsientoDTO asientoDto : asientosAerolinea){
-		// asientosOceanic.add(transformarAsiento(asientoDto));
-		// }
 
 		for (AsientoDTO asiento : asientosAerolinea) {
-			// Asiento asiento = new Asiento(asientoO);
 			String numeroDeVuelo = asiento.getCodigoDeVuelo();
 			Vuelo vuelo = null;
 			for (Vuelo vueloA : vuelos) {
@@ -47,13 +42,8 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 						asiento.getHoraDeSalida(), asiento.getOrigen(),
 						asiento.getDestino(), asiento.getFechaDeSalida(),
 						asiento.getFechaDeLlegada(), numeroDeVuelo, this);
-//				vuelo.addAsiento(asientoReal);
 				getVuelos().add(vuelo);
 			} 
-//			else {
-//				vuelo.addAsiento(asiento);
-//			}
-//			asiento.setVuelo(vuelo);
 			
 			String codigoAsiento = obtenerCodigoAsiento(asiento
 					.getNumeroDeAsiento().toString(),
@@ -67,7 +57,6 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 					ubicacion, disponibilidad, " ",
 					asiento.getNumeroDeAsiento().toString(),
 					asiento.getCodigoDeVuelo(), vuelo);
-			asientoReal.setVuelo(vuelo);
 			vuelo.addAsiento(asientoReal);
 		}
 
@@ -110,7 +99,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 
 	public BigDecimal getPrecioFinal(Asiento unAsiento, Usuario unUsuario) {
 		BigDecimal precioFinal = new BigDecimal(0);
-		precioFinal = precioFinal.add(unAsiento.getPrecio()
+		precioFinal = precioFinal.add(unAsiento.getPrecioInicial()
 				.multiply(getImpuesto()).add(unUsuario.getRecargo()));
 		return precioFinal;
 	}

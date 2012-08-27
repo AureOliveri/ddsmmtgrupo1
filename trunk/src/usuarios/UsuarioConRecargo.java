@@ -14,15 +14,19 @@ public class UsuarioConRecargo extends TipoUsuario {
 
 	@Override
 	protected ArrayList<Asiento> getAsientosQueLeCorresponden(
-			ArrayList<Asiento> asientos) {
+			ArrayList<Asiento> asientos, TipoUsuario tUsuario) {
 		ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();
 		for (Asiento asiento : asientos) {
-			BigDecimal impuesto = asiento.getVuelo().getAerolinea().getImpuesto();
-			if (!asiento.esSuperOferta(impuesto, this))
+			asiento.agregarRecargo(tUsuario);
+			if (!asiento.esSuperOferta()){
 				asientosNoVip.add(asiento);
+			}
 		}
 		return asientosNoVip;
-
+	}
+	
+	public String getCodigo() {
+		return "conRecargo";
 	}
 
 	public void comprarAsiento(Asiento unAsiento) {

@@ -65,9 +65,9 @@ public class Usuario {
 	}
 
 	public ArrayList<Asiento> getAsientosQueLeCorreponden(
-			ArrayList<Asiento> asientos) {
+			ArrayList<Asiento> asientos, TipoUsuario usuario) {
 
-		return this.tipoUsuario.getAsientosQueLeCorresponden(asientos);
+		return this.tipoUsuario.getAsientosQueLeCorresponden(asientos, usuario);
 
 	}
 

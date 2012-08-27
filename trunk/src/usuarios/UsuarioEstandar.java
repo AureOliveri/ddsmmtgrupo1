@@ -16,20 +16,22 @@ public class UsuarioEstandar extends TipoUsuario {
 
 	@Override
 	protected ArrayList<Asiento> getAsientosQueLeCorresponden(
-			ArrayList<Asiento> asientos) {
+			ArrayList<Asiento> asientos, TipoUsuario usuario) {
 		ArrayList<Asiento> asientosNoVip = new ArrayList<Asiento>();
 		for (Asiento asiento : asientos) {
-			BigDecimal impuesto = asiento.getVuelo().getAerolinea().getImpuesto();
-			if (!asiento.esSuperOferta(impuesto, this))
+			if (!asiento.esSuperOferta())
 				asientosNoVip.add(asiento);
 		}
 		return asientosNoVip;
 
 	}
 
-	@Override
 	public BigDecimal getRecargo() {
 		return new BigDecimal(0);
+	}
+	
+	public String getCodigo() {
+		return "estandar";
 	}
 
 	public void comprarAsiento(Asiento unAsiento, String dni) {

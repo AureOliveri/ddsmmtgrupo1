@@ -7,7 +7,7 @@ import vuelos.Asiento;
 
 public abstract class CriterioBusqueda {
 	
-	abstract public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario);
+	abstract public ArrayList<Asiento> armarListaBusqueda(ArrayList<Asiento> asientos, Usuario usuario);
 	
 	
 }

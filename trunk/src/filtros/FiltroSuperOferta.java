@@ -1,6 +1,5 @@
 package filtros;
 
-import java.math.BigDecimal;
 
 import busquedas.Busqueda;
 
@@ -11,7 +10,6 @@ public class FiltroSuperOferta implements Filtro {
 
 	public boolean aplicarFiltro(Busqueda busqueda, Usuario usuario, Asiento asiento) { 
 	
-		BigDecimal impuesto = asiento.getVuelo().getAerolinea().getImpuesto();
-		return asiento.esSuperOferta(impuesto, usuario.getTipoUsuario());
+		return asiento.esSuperOferta();
 	}
 }

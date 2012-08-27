@@ -11,22 +11,15 @@ import vuelos.Asiento;
 public class CriterioPrecioAscendente extends CriterioBusqueda {
 	
 	@Override
-	public ArrayList<ArrayList<String>> mostrarAsientosBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
-		ArrayList<ArrayList<String>> asientosBusqueda = new ArrayList<ArrayList<String>>();
-		int i;
+	public ArrayList<Asiento> armarListaBusqueda(ArrayList<Asiento> asientos, Usuario usuario) {
 		Comparator<Asiento> comparatorAsiento = new Comparator<Asiento>() {
 			public int compare (Asiento a, Asiento b) {
-				return a.getPrecio().compareTo(b.getPrecio());
+				return a.getPrecioInicial().compareTo(b.getPrecioInicial());
 			}
 		};
 		Collections.sort(asientos, comparatorAsiento);
-		for (i = 0; i < asientos.size(); i++) {
-			BigDecimal impuesto = asientos.get(i).getVuelo().getAerolinea().getImpuesto();
-			ArrayList<String> valores = asientos.get(i).mostrarAsiento(asientos.get(i), impuesto, usuario.getTipoUsuario());
-			asientosBusqueda.add(valores);
-		}
 		
-		return asientosBusqueda;
+		return asientos;
 	}
 	
 }
