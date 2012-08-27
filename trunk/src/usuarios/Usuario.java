@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import excepciones.AsientoReservadoException;
 
 
+
 import vuelos.Asiento;
 
 import busquedas.Busqueda;
@@ -32,8 +33,9 @@ public class Usuario {
 			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
 			this.reservas.add(unAsiento);
 		} catch (AsientoReservadoException e) {
-
+		
 		}
+
 	}
 
 	public Boolean noTieneReserva(Asiento unAsiento) {
