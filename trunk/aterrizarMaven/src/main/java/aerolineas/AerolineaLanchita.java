@@ -1,15 +1,15 @@
-package aerolineas;
+package main.java.aerolineas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import busquedas.Busqueda;
+import main.java.busquedas.Busqueda;
 
-import fechas.Fecha;
+import main.java.fechas.Fecha;
 
-import usuarios.Usuario;
-import vuelos.Asiento;
-import vuelos.Vuelo;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
+import main.java.vuelos.Vuelo;
 
 public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements Aerolinea {
 

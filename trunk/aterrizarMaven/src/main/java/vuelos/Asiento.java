@@ -1,17 +1,17 @@
-package vuelos;
+package main.java.vuelos;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Queue;
 
-import usuarios.TipoUsuario;
-import usuarios.Usuario;
-import usuarios.UsuarioConRecargo;
-import enumeraciones.ClaseDeAsiento;
-import enumeraciones.DisponibilidadDeAsiento;
-import enumeraciones.UbicacionDeAsiento;
-import fechas.Fecha;
-import fechas.Hora;
+import main.java.usuarios.TipoUsuario;
+import main.java.usuarios.Usuario;
+import main.java.usuarios.UsuarioConRecargo;
+import main.java.enumeraciones.ClaseDeAsiento;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.enumeraciones.UbicacionDeAsiento;
+import main.java.fechas.Fecha;
+import main.java.fechas.Hora;
 
 public class Asiento {
 

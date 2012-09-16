@@ -1,4 +1,4 @@
-package mocks;
+package main.java.mocks;
 
 import java.util.ArrayList;
 import java.util.Arrays;

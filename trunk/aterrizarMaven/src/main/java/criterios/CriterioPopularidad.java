@@ -1,12 +1,12 @@
-package criterios;
+package main.java.criterios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import usuarios.Usuario;
-import vuelos.Asiento;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
 
 public class CriterioPopularidad extends CriterioBusqueda {
 	

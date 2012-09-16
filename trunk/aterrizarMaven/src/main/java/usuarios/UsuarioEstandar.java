@@ -1,14 +1,14 @@
-package usuarios;
+package main.java.usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import enumeraciones.DisponibilidadDeAsiento;
-import excepciones.AsientoReservadoException;
-import fechas.Fecha;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.excepciones.AsientoReservadoException;
+import main.java.fechas.Fecha;
 
-import vuelos.Asiento;
-import vuelos.Reserva;
+import main.java.vuelos.Asiento;
+import main.java.vuelos.Reserva;
 
 
 

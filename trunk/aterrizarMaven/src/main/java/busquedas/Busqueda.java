@@ -1,10 +1,10 @@
-package busquedas;
+package main.java.busquedas;
 
 import java.util.ArrayList;
 
-import vuelos.Asiento;
+import main.java.vuelos.Asiento;
 
-import fechas.Fecha;
+import main.java.fechas.Fecha;
 
 public class Busqueda {
 

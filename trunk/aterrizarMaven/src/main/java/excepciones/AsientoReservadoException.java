@@ -1,4 +1,4 @@
-package excepciones;
+package main.java.excepciones;
 
 public class AsientoReservadoException extends RuntimeException {
 	

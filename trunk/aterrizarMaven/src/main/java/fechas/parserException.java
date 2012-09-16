@@ -1,4 +1,4 @@
-package fechas;
+package main.java.fechas;
 
 public class parserException extends RuntimeException {
 

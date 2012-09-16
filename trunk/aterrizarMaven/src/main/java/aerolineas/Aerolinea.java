@@ -1,11 +1,11 @@
-package aerolineas;
+package main.java.aerolineas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import busquedas.Busqueda;
+import main.java.busquedas.Busqueda;
 
-import vuelos.Asiento;
+import main.java.vuelos.Asiento;
 
 public interface Aerolinea {
 

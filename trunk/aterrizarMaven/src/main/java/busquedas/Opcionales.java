@@ -1,12 +1,13 @@
-package busquedas;
+package main.java.busquedas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import enumeraciones.ClaseDeAsiento;
-import enumeraciones.DisponibilidadDeAsiento;
-import enumeraciones.UbicacionDeAsiento;
+import main.java.enumeraciones.ClaseDeAsiento;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.enumeraciones.UbicacionDeAsiento;
+
 public class Opcionales {
 	private List<ClaseDeAsiento> clases;
 	private List<UbicacionDeAsiento> ubicaciones;
