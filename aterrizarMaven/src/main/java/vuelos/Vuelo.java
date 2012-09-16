@@ -1,12 +1,12 @@
-package vuelos;
+package main.java.vuelos;
 
 import java.util.ArrayList;
 
-import enumeraciones.DisponibilidadDeAsiento;
-import fechas.Fecha;
-import fechas.Hora;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.fechas.Fecha;
+import main.java.fechas.Hora;
 
-import aerolineas.Aerolinea;
+import main.java.aerolineas.Aerolinea;
 
 
 public class Vuelo {

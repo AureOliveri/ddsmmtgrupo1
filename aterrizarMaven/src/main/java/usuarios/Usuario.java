@@ -1,15 +1,11 @@
-package usuarios;
+package main.java.usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import excepciones.AsientoReservadoException;
-
-
-
-import vuelos.Asiento;
-
-import busquedas.Busqueda;
+import main.java.excepciones.AsientoReservadoException;
+import main.java.vuelos.Asiento;
+import main.java.busquedas.Busqueda;
 
 public class Usuario {
 

@@ -1,11 +1,11 @@
-package aerolineas;
+package main.java.aerolineas;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import busquedas.Busqueda;
+import main.java.busquedas.Busqueda;
 
-import vuelos.Asiento;
+import main.java.vuelos.Asiento;
 
 public class Aerolineas {
 

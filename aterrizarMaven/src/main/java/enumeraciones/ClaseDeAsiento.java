@@ -1,4 +1,4 @@
-package enumeraciones;
+package main.java.enumeraciones;
 
 public enum ClaseDeAsiento {
 	PRIMERA {

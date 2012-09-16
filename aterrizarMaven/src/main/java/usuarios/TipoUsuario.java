@@ -1,12 +1,12 @@
-package usuarios;
+package main.java.usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import enumeraciones.DisponibilidadDeAsiento;
-import excepciones.AsientoReservadoException;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.excepciones.AsientoReservadoException;
 
-import vuelos.Asiento;
+import main.java.vuelos.Asiento;
 
 public abstract class TipoUsuario {
 

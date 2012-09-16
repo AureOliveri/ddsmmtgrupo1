@@ -1,9 +1,9 @@
-package vuelos;
+package main.java.vuelos;
 
 import java.util.Calendar;
 
-import fechas.Fecha;
-import fechas.Hora;
+import main.java.fechas.Fecha;
+import main.java.fechas.Hora;
 
 public class TiempoDeVuelo {
 	

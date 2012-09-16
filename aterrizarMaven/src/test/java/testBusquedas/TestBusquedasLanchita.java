@@ -1,4 +1,4 @@
-package testBusquedas;
+package test.java.testBusquedas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,30 +8,30 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import criterios.CriterioBusqueda;
-import criterios.CriterioPrecioAscendente;
-import criterios.CriterioPrecioDescendente;
-import criterios.CriterioTiempoDeVuelo;
+import main.java.criterios.CriterioBusqueda;
+import main.java.criterios.CriterioPrecioAscendente;
+import main.java.criterios.CriterioPrecioDescendente;
+import main.java.criterios.CriterioTiempoDeVuelo;
 
 
-import usuarios.TipoUsuario;
-import usuarios.Usuario;
-import usuarios.UsuarioConRecargo;
-import usuarios.UsuarioEstandar;
-import usuarios.UsuarioVIP;
-import vuelos.Asiento;
-import busquedas.Buscador;
-import busquedas.Busqueda;
-import busquedas.Opcionales;
-import enumeraciones.ClaseDeAsiento;
-import enumeraciones.DisponibilidadDeAsiento;
-import enumeraciones.UbicacionDeAsiento;
-import fechas.Fecha;
-import filtros.FiltroClase;
-import filtros.FiltroDisponibilidad;
-import filtros.FiltroPrecio;
-import filtros.FiltroSuperOferta;
-import filtros.FiltroUbicacion;
+import main.java.usuarios.TipoUsuario;
+import main.java.usuarios.Usuario;
+import main.java.usuarios.UsuarioConRecargo;
+import main.java.usuarios.UsuarioEstandar;
+import main.java.usuarios.UsuarioVIP;
+import main.java.vuelos.Asiento;
+import main.java.busquedas.Buscador;
+import main.java.busquedas.Busqueda;
+import main.java.busquedas.Opcionales;
+import main.java.enumeraciones.ClaseDeAsiento;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
+import main.java.enumeraciones.UbicacionDeAsiento;
+import main.java.fechas.Fecha;
+import main.java.filtros.FiltroClase;
+import main.java.filtros.FiltroDisponibilidad;
+import main.java.filtros.FiltroPrecio;
+import main.java.filtros.FiltroSuperOferta;
+import main.java.filtros.FiltroUbicacion;
 
 public class TestBusquedasLanchita {
 

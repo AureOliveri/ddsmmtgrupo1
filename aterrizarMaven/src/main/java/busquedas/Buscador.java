@@ -1,16 +1,16 @@
-package busquedas;
+package main.java.busquedas;
 
 import java.util.Iterator;
 import java.util.ArrayList;
 
-import criterios.CriterioBusqueda;
-import filtros.Filtro;
+import main.java.criterios.CriterioBusqueda;
+import main.java.filtros.Filtro;
 
-import usuarios.TipoUsuario;
-import usuarios.Usuario;
-import vuelos.Asiento;
+import main.java.usuarios.TipoUsuario;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
 
-import aerolineas.Aerolineas;
+import main.java.aerolineas.Aerolineas;
 
 public class Buscador {
 

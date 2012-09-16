@@ -1,10 +1,10 @@
-package filtros;
+package main.java.filtros;
 
 
-import busquedas.Busqueda;
+import main.java.busquedas.Busqueda;
 
-import usuarios.Usuario;
-import vuelos.Asiento;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
 
 public class FiltroSuperOferta implements Filtro {
 

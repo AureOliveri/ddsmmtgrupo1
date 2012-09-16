@@ -1,18 +1,18 @@
-package aerolineas;
+package main.java.aerolineas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import busquedas.Busqueda;
+import main.java.busquedas.Busqueda;
 
 import com.oceanic.AsientoDTO;
 
-import enumeraciones.DisponibilidadDeAsiento;
+import main.java.enumeraciones.DisponibilidadDeAsiento;
 
-import usuarios.Usuario;
-import vuelos.Asiento;
-import vuelos.Vuelo;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
+import main.java.vuelos.Vuelo;
 
 public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 		Aerolinea {

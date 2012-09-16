@@ -1,10 +1,9 @@
-package usuarios;
+package main.java.usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import vuelos.Asiento;
-
+import main.java.vuelos.Asiento;
 
 public class UsuarioConRecargo extends TipoUsuario {
 

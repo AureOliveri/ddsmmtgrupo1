@@ -1,6 +1,6 @@
-package vuelos;
+package main.java.vuelos;
 
-import fechas.Fecha;
+import main.java.fechas.Fecha;
 
 public class Reserva {
 
