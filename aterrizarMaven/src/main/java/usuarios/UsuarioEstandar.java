@@ -7,8 +7,8 @@ import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.excepciones.AsientoReservadoException;
 import main.java.fechas.Fecha;
 
+import main.java.reservas.Reserva;
 import main.java.vuelos.Asiento;
-import main.java.vuelos.Reserva;
 
 
 
@@ -55,12 +55,12 @@ public class UsuarioEstandar extends TipoUsuario {
 	public Boolean esTuReserva(Reserva reserva, String dni){
 		Fecha fechaAux  = new Fecha();
 		if (fechaAux.esAnteriorQue(reserva.getFechaVencimiento())) {
-			return reserva.getDni().equals(dni);
+			return reserva.getUsuario().getDni().equals(dni);
 		} else {
 			while(reserva.getFechaVencimiento().esMenorIgualQue(fechaAux)){
 				reserva.getAsiento().getReservas().poll();
 			}
-			return reserva.getDni().equals(dni);
+			return reserva.getUsuario().getDni().equals(dni);
 			
 		}
 	}
