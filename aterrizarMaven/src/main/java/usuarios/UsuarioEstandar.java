@@ -46,7 +46,7 @@ public class UsuarioEstandar extends TipoUsuario {
 	@Override
 	public void reservarAsiento(Asiento asientoReservado, Usuario usuario){
 		usuario.getReservas().add(asientoReservado);
-		asientoReservado.reservar(usuario.getDni());
+		asientoReservado.reservar(usuario);
 	}
 	public Boolean puedeComprar(Asiento unAsiento, String dni){
 		return unAsiento.noEstaReservado() || esTuReserva(unAsiento.getPrimeraReserva(), dni);

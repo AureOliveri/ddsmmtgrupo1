@@ -312,8 +312,8 @@ public class Asiento {
 		this.numeroDeVuelo = numeroDeVuelo;
 	}
 
-	public void reservar(String dni) {
-		Reserva nuevaReserva = new Reserva(this, dni);
+	public void reservar(Usuario usuario) {
+		Reserva nuevaReserva = new Reserva(this, usuario);
 		this.reservas.add(nuevaReserva);
 		this.reservado = true;
 	}
