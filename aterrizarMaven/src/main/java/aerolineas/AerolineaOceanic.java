@@ -154,4 +154,9 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 		return asientos;
 	}
 
+	@Override
+	public void reservar(Asiento asiento, Usuario usuario) {
+		AerolineaOceanic.getInstance().reservar(usuario.getDni(), asiento.getNumeroDeVuelo(),  Integer.parseInt(asiento.getNumeroDeAsiento()))	;	
+	}
+
 }
