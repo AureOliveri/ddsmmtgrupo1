@@ -1,20 +1,22 @@
-package main.java.vuelos;
+package main.java.reservas;
 
 import main.java.fechas.Fecha;
+import main.java.usuarios.Usuario;
+import main.java.vuelos.Asiento;
 
 public class Reserva {
 
-	private String dni;
+	private Usuario usuario;
 	private Fecha fechaVencimiento;
 	private Asiento asiento;
 
-	public Reserva(Asiento asiento, String dni) {
-		this.dni = dni;
+	public Reserva(Asiento asiento, Usuario usuario) {
+		this.usuario = usuario;
 		setAsiento(asiento);
 	}
 
-	public String getDni() {
-		return this.dni;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
 	public void setFechaVencimiento(Fecha fechaVencimiento) {
@@ -33,7 +35,7 @@ public class Reserva {
 		return asiento;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
