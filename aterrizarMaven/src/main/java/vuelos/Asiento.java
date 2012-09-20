@@ -19,7 +19,7 @@ public class Asiento {
 	private ClaseDeAsiento claseDeAsiento;
 	private UbicacionDeAsiento ubicacion;
 	private Vuelo vuelo;
-	private Integer numeroDeAsiento;
+	private String numeroDeAsiento;
 	private String numeroDeVuelo;
 	private String codigoAsiento;
 	private BigDecimal precioInicial;
@@ -39,7 +39,7 @@ public class Asiento {
 
 	public Asiento(String codigoAsiento, String precio, String clase,
 			String ubicacion, String disponibilidad, String dni,
-			Integer numeroDeAsiento, String numeroDeVuelo, Vuelo vuelo) {
+			String numeroDeAsiento, String numeroDeVuelo, Vuelo vuelo) {
 		this();
 		setCodigoAsiento(codigoAsiento);
 		setPrecioInicial(new BigDecimal(precio));
@@ -296,11 +296,11 @@ public class Asiento {
 		this.horaLlegada = horaLlegada;
 	}
 
-	public Integer getNumeroDeAsiento() {
+	public String getNumeroDeAsiento() {
 		return numeroDeAsiento;
 	}
 
-	public void setNumeroDeAsiento(Integer numeroDeAsiento) {
+	public void setNumeroDeAsiento(String numeroDeAsiento) {
 		this.numeroDeAsiento = numeroDeAsiento;
 	}
 
