@@ -50,7 +50,7 @@ public class Usuario extends Entity {
 	}
 
 	public Boolean noTieneReserva(Asiento unAsiento) {
-		return (unAsiento.getReservado().equals(false));
+		return !this.getReservas().contains(unAsiento);
 	}
 
 	public TipoUsuario getTipoUsuario() {
@@ -103,5 +103,11 @@ public class Usuario extends Entity {
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void reservar(Asiento asiento){
+		this.getReservas().add(asiento);
+		asiento.reservar(this);
+		asiento.getVuelo().getAerolinea().reservar(asiento, this);
 	}
 }
