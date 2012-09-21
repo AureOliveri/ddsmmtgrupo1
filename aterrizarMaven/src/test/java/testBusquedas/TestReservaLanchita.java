@@ -41,18 +41,22 @@ public class TestReservaLanchita {
 		asiento1 = asientos.get(0);
 		asiento2 = asientos.get(1);
 		asiento3 = asientos.get(2);
+		usuario1.reservar(asiento1);
 	}
 
 	@Test
 	public void usuarioSinReservas(){
-		Assert.assertTrue(usuario1.noTieneReserva(asiento1));
+		Assert.assertTrue(usuario1.noTieneReserva(asiento2));
 	}
 	
 	@Test
-	public void reservarAsiento() {
-		usuario1.reservar(asiento1);
-		Assert.assertTrue(asiento1.getReservado());
+	public void usuarioConReserva(){
+		Assert.assertFalse(usuario1.noTieneReserva(asiento1));
 	}
 
 
+	@Test (expected = EstadoErroneoException.class)
+	public void reservarAsientoOcupado(){
+		usuario2.reservar(asiento1);
+	}
 }
