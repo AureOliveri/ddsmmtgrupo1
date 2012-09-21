@@ -313,9 +313,9 @@ public class Asiento {
 	}
 
 	public void reservar(Usuario usuario) {
-		Reserva nuevaReserva = new Reserva(this, usuario);
-		this.reservas.add(nuevaReserva);
-		this.reservado = true;
+		if(!this.getReservado()){
+			this.setReservado(true);
+		}
 	}
 
 	public void setPrecioFinal(BigDecimal precioFinal) {
