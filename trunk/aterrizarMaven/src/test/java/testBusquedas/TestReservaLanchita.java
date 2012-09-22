@@ -23,11 +23,9 @@ public class TestReservaLanchita {
 	private static Buscador buscador;
 	private static Fecha fecha;
 	private static Busqueda busqueda;
-	private static AerolineaLanchita aerolinea;
 	private static ArrayList<Asiento> asientos;
 	private static Asiento asiento1;
 	private static Asiento asiento2;
-	private static Asiento asiento3;
 	
 
 	@Before
@@ -40,23 +38,25 @@ public class TestReservaLanchita {
 		asientos = buscador.buscarAsientos(busqueda, usuario1);
 		asiento1 = asientos.get(0);
 		asiento2 = asientos.get(1);
-		asiento3 = asientos.get(2);
-		usuario1.reservar(asiento1);
 	}
 
-	@Test
-	public void usuarioSinReservas(){
-		Assert.assertTrue(usuario1.noTieneReserva(asiento2));
-	}
+
 	
 	@Test
 	public void usuarioConReserva(){
+		usuario1.reservar(asiento1);
 		Assert.assertFalse(usuario1.noTieneReserva(asiento1));
+	}	
+	
+	@Test
+	public void usuarioSinReserva(){
+		Assert.assertTrue(usuario1.noTieneReserva(asiento2));
+	}
+	
+	@Test(expected = EstadoErroneoException.class)
+	public void asientoReservadoDosVeces(){
+		usuario1.reservar(asiento2);
+		usuario2.reservar(asiento2);
 	}
 
-
-	@Test (expected = EstadoErroneoException.class)
-	public void reservarAsientoOcupado(){
-		usuario2.reservar(asiento1);
-	}
 }
