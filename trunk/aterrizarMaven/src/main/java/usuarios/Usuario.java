@@ -109,4 +109,8 @@ public class Usuario extends Entity {
 		return nombre;
 	}
 	
+	public String toString(){
+		return this.getNombre();
+	}
+	
 }

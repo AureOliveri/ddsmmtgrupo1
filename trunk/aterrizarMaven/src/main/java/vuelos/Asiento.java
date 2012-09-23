@@ -147,8 +147,8 @@ public class Asiento {
 	}
 
 	public void expirarReserva() {
-		this.getReservas().peek().getUsuario().getReservas().remove(this);
-		this.reservas.poll();
+		Reserva reserva =	this.reservas.poll();
+		reserva.getUsuario().getReservas().remove(reserva.getAsiento());
 		if (this.reservas.isEmpty()) {
 			this.reservado = false;
 		} 
