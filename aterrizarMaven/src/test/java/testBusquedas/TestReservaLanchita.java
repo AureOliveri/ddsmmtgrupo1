@@ -43,7 +43,10 @@ public class TestReservaLanchita {
 		asientos = buscador.buscarAsientos(busqueda, usuarioEstandar1);
 		asiento1 = asientos.get(0);
 		asiento2 = asientos.get(1);
+		asiento3 = asientos.get(2);
 	}
+	
+	
 	
 	@Test
 	public void usuarioConReserva() {
@@ -57,6 +60,11 @@ public class TestReservaLanchita {
 	}
 	
 	@Test
+	public void usuarioSinReserva(){
+		Assert.assertTrue(usuarioEstandar2.noTieneReserva(asiento2));
+	}
+	
+	@Test
 	public void dobleReservaDeAsiento(){
 		usuarioEstandar1.getTipoUsuario().reservarAsiento(asiento1, usuarioEstandar1);
 		usuarioEstandar2.getTipoUsuario().reservarAsiento(asiento1, usuarioEstandar2);
@@ -65,7 +73,8 @@ public class TestReservaLanchita {
 
 	@Test 
 	public void ReservaExpirada(){
-		usuarioEstandar1.getTipoUsuario().reservarAsiento(asiento1, usuarioEstandar1);
-		asiento1.expirarReserva();
+		usuarioEstandar1.getTipoUsuario().reservarAsiento(asiento3, usuarioEstandar1);
+		asiento3.expirarReserva();
+		Assert.assertTrue(usuarioEstandar1.noTieneReserva(asiento3));
 	}
 }
