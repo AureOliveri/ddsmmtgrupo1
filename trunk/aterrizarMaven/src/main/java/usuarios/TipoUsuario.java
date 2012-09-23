@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.excepciones.AsientoReservadoException;
+import main.java.excepciones.ReservaNoEstandarException;
 
 import main.java.vuelos.Asiento;
 
@@ -28,5 +29,6 @@ public abstract class TipoUsuario {
 	}
 	
 	public void reservarAsiento(Asiento asientoReservado, Usuario usuario){		
+		throw new ReservaNoEstandarException();
 	}
 }

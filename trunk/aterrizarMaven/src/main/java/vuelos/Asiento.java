@@ -2,6 +2,7 @@ package main.java.vuelos;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import main.java.reservas.Reserva;
@@ -58,6 +59,7 @@ public class Asiento {
 		setNumeroDeAsiento(numeroDeAsiento);
 		setNumeroDeVuelo(numeroDeVuelo);
 		setVuelo(vuelo);
+		reservas = new LinkedList<Reserva>();
 	}
 
 	public Asiento() {
@@ -145,10 +147,11 @@ public class Asiento {
 	}
 
 	public void expirarReserva() {
+		this.getReservas().peek().getUsuario().getReservas().remove(this);
 		this.reservas.poll();
 		if (this.reservas.isEmpty()) {
 			this.reservado = false;
-		}
+		} 
 	}
 
 	public void eliminarReservas() {
@@ -313,6 +316,8 @@ public class Asiento {
 	}
 
 	public void reservar(Usuario usuario) {
+		Reserva reserva = new Reserva(this, usuario);
+		this.getReservas().add(reserva);
 		if(!this.getReservado()){
 			this.setReservado(true);
 		}

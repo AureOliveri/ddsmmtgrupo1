@@ -105,9 +105,4 @@ public class Usuario extends Entity {
 		return nombre;
 	}
 	
-	public void reservar(Asiento asiento){
-		this.getReservas().add(asiento);
-		asiento.reservar(this);
-		asiento.getVuelo().getAerolinea().reservar(asiento, this);
-	}
 }

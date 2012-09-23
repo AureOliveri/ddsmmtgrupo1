@@ -138,12 +138,12 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 
 	@Override
 	public void reservar(Asiento asiento, Usuario usuario) {
-		try{
-			AerolineaLanchita.getInstance().reservar(asiento.getCodigoAsiento(),
-					usuario.getDni());
-			} catch (EstadoErroneoException e){
-			
-			}
+		try {
+			AerolineaLanchita.getInstance().reservar(
+					asiento.getCodigoAsiento(), usuario.getDni());
+		} catch (EstadoErroneoException e) {
+			throw e;
+		}
 
 	}
 }
