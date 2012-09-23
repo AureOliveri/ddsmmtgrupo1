@@ -13,6 +13,10 @@ import main.java.busquedas.Busqueda;
 @TransactionalAndObservable
 public class Usuario extends Entity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String dni;
 	protected TipoUsuario tipoUsuario;
