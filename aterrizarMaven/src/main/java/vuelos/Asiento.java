@@ -5,17 +5,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.uqbar.commons.model.Entity;
+import org.uqbar.commons.utils.TransactionalAndObservable;
+
 import main.java.reservas.Reserva;
 import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.usuarios.UsuarioConRecargo;
+import main.java.aerolineas.Aerolinea;
 import main.java.enumeraciones.ClaseDeAsiento;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.enumeraciones.UbicacionDeAsiento;
 import main.java.fechas.Fecha;
 import main.java.fechas.Hora;
 
-public class Asiento {
+@TransactionalAndObservable
+public class Asiento extends Entity {
 
 	private ClaseDeAsiento claseDeAsiento;
 	private UbicacionDeAsiento ubicacion;
@@ -341,5 +346,9 @@ public class Asiento {
 	@Override
 	public String toString() {
 		return this.codigoAsiento;
+	}
+	
+	public Aerolinea getAerolinea() {
+		return this.vuelo.getAerolinea();
 	}
 }

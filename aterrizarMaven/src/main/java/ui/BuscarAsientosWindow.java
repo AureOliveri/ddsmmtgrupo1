@@ -1,13 +1,11 @@
 package main.java.ui;
 
-import main.java.busquedas.Busqueda;
-
-import org.uqbar.arena.windows.WindowOwner;
+import main.java.modelos.BuscadorModel;
 
 public class BuscarAsientosWindow extends CrearBusquedaWindow {
 
-	public BuscarAsientosWindow(WindowOwner owner) {
-		super(owner, new Busqueda());
+	public BuscarAsientosWindow(AterrizarWindow owner) {
+		super(owner, new BuscadorModel(AterrizarWindow.getUsuario()));
 	}
 
 	@Override
