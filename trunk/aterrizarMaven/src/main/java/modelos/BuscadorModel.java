@@ -24,19 +24,12 @@ public class BuscadorModel {
 	}
 
 	public void search() {
-		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		asientos = buscador.getAerolineas().getAsientosAerolineas();
-//		asientos = buscador.buscarAsientos(this.busqueda, this.usuario);
+//		ArrayList<Asiento> asientos = buscador.getAerolineas().getAsientosAerolineas();
+		ArrayList<Asiento> asientos = buscador.buscarAsientos(this.busqueda, this.usuario);
 		this.busqueda.setResultado(asientos);
 		buscador.mostrarAsientos(busqueda.getResultado(), usuario.getTipoUsuario());
-		
 	}
 	
-	   public ArrayList<Asiento> getAsientos(){
-		   return buscador.getAerolineas().getAsientosAerolineas();
-//           return this.busqueda.getResultado();
-	}
-
 	public void setOrigen(String origenASetear) {
 		this.busqueda.setOrigen(origenASetear);
 	}

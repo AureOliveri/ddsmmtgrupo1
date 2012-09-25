@@ -1,17 +1,15 @@
 package main.java.busquedas;
 
-import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import main.java.aerolineas.Aerolineas;
 import main.java.criterios.CriterioBusqueda;
 import main.java.filtros.Filtro;
-
 import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
-
-import main.java.aerolineas.AerolineaLanchita;
-import main.java.aerolineas.Aerolineas;
 
 public class Buscador {
 
@@ -79,7 +77,7 @@ public class Buscador {
 		return filtros;
 	}
 
-	public void mostrarAsientos(ArrayList<Asiento> resultado, TipoUsuario usuario) {
+	public void mostrarAsientos(List<Asiento> resultado, TipoUsuario usuario) {
 		if (resultado.isEmpty()) {
 			System.out.println("         []");
 		} else {
