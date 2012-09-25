@@ -1,12 +1,12 @@
 package main.java.busquedas;
 
 import java.util.ArrayList;
-
-import org.uqbar.commons.utils.Observable;
-
-import main.java.vuelos.Asiento;
+import java.util.List;
 
 import main.java.fechas.Fecha;
+import main.java.vuelos.Asiento;
+
+import org.uqbar.commons.utils.Observable;
 
 
 @Observable
@@ -16,7 +16,7 @@ public class Busqueda {
 	private String destino;
 	private Fecha fechaV;
 	private Opcionales opcionales = new Opcionales();
-	private ArrayList<Asiento> resultado = new ArrayList<Asiento>();
+	private List<Asiento> resultado = new ArrayList<Asiento>();
 	
 	public Busqueda(){
 	}
@@ -68,11 +68,11 @@ public class Busqueda {
 	}
 
 
-	public void setResultado(ArrayList<Asiento> resultado) {
+	public void setResultado(List<Asiento> resultado) {
 		this.resultado = resultado;
 	}
 	
-	public ArrayList<Asiento> getResultado() {
+	public List<Asiento> getResultado() {
 		return resultado;
 	}
 

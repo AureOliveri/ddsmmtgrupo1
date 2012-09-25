@@ -5,7 +5,6 @@ import main.java.modelos.BuscadorModel;
 import main.java.vuelos.Asiento;
 
 import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -14,9 +13,10 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-public class CrearBusquedaWindow extends TransactionalDialog<BuscadorModel> {
+public class CrearBusquedaWindow extends Dialog<BuscadorModel> {
 
 	public CrearBusquedaWindow(WindowOwner owner, BuscadorModel model) {
 		super(owner, model);
@@ -38,7 +38,7 @@ public class CrearBusquedaWindow extends TransactionalDialog<BuscadorModel> {
 		Panel searchFormPanel = new Panel(mainPanel);
 		searchFormPanel.setLayout(new ColumnLayout(2));
 
-		new Label(searchFormPanel).setText("Orirgen: ");
+		new Label(searchFormPanel).setText("Origen: ");
 		new TextBox(searchFormPanel).bindValueToProperty("origen");
 
 		new Label(searchFormPanel).setText("Destino: ");
@@ -59,8 +59,8 @@ public class CrearBusquedaWindow extends TransactionalDialog<BuscadorModel> {
 	
 	protected void createResultsGrid(Panel mainPanel) {
 		Table<Asiento> table = new Table<Asiento>(mainPanel, Asiento.class);
-		table.bindItemsToProperty("asientos");
-		table.bindItemsToProperty("asientoSeleccionado");
+		table.bindItemsToProperty("busqueda.resultado");
+		table.bindValueToProperty("asientoSeleccionado");
 		this.describeResultsGrid(table);
 	}
 	
@@ -69,21 +69,16 @@ public class CrearBusquedaWindow extends TransactionalDialog<BuscadorModel> {
 		Column<Asiento> aerolineaColum = new Column<Asiento>(table);
 		aerolineaColum.setTitle("Aerolinea");
 		aerolineaColum.setFixedSize(150);
-		aerolineaColum.bindContentsToProperty("aerolinea");
-
-		Column<Asiento> codAsColum = new Column<Asiento>(table);
-		codAsColum.setTitle("Codigo");
-		codAsColum.setFixedSize(100);
-		codAsColum.bindContentsToProperty("codigoAsiento");
+		aerolineaColum.bindContentsToProperty("nombreAerolinea");
 		
 		Column<Asiento> vueloColum = new Column<Asiento>(table);
 		vueloColum.setTitle("Vuelo");
-		vueloColum.setFixedSize(100);
-		vueloColum.bindContentsToProperty("vuelo");
+		vueloColum.setFixedSize(130);
+		vueloColum.bindContentsToProperty("numeroDeVuelo");
 		
 		Column<Asiento> asientoColum = new Column<Asiento>(table);
 		asientoColum.setTitle("Asiento");
-		asientoColum.setFixedSize(100);
+		asientoColum.setFixedSize(80);
 		asientoColum.bindContentsToProperty("numeroDeAsiento");
 
 		Column<Asiento> precioColumn = new Column<Asiento>(table);
