@@ -10,18 +10,24 @@ import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
+import main.java.aerolineas.AerolineaLanchita;
 import main.java.aerolineas.Aerolineas;
 
 public class Buscador {
 
+	private static final Buscador INSTANCE = new Buscador();
 	private Aerolineas aerolineas = new Aerolineas();
 	protected CriterioBusqueda criterio;
 	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
+	
+	public static Buscador getInstance() {
+		return INSTANCE;
+	}
 
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		asientos = aerolineas.filtrarAsientos(busqueda);
+		asientos = getAerolineas().filtrarAsientos(busqueda);
 
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
 
@@ -81,6 +87,14 @@ public class Buscador {
 				asiento.mostrar(usuario);
 			}
 		}
+	}
+
+	public void setAerolineas(Aerolineas aerolineas) {
+		this.aerolineas = aerolineas;
+	}
+
+	public Aerolineas getAerolineas() {
+		return aerolineas;
 	}
 
 }

@@ -1,5 +1,6 @@
 package main.java.ui;
 
+import main.java.aerolineas.Aerolineas;
 import main.java.usuarios.Usuario;
 import main.java.usuarios.UsuarioVIP;
 
@@ -14,10 +15,12 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-public class AterrizarWindow extends SimpleWindow<Usuario>{
+public class AterrizarWindow extends SimpleWindow<Usuario>{ //TODO Cambiar Usuario de simWind x oper
 
+	private static Usuario usuario = new Usuario("Aure", "35555555", new UsuarioVIP());
+	
 	public AterrizarWindow(WindowOwner parent) {
-		super(parent, new Usuario("Aure", "35555555", new UsuarioVIP()));
+		super(parent, getUsuario());
 	}
 
 	@Override
@@ -74,6 +77,13 @@ public class AterrizarWindow extends SimpleWindow<Usuario>{
 		
 	}
 
+	public void setUsuario(Usuario usuario) {
+		AterrizarWindow.usuario = usuario;
+	}
+
+	public static Usuario getUsuario() {
+		return usuario;
+	}
 
 }
 
