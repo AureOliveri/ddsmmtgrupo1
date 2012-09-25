@@ -12,6 +12,7 @@ import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.bindings.ObservableProperty;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
+import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
@@ -106,7 +107,7 @@ public class CrearBusquedaWindow extends TransactionalDialog<Busqueda> {
 
 	protected void createGridActions(Panel mainPanel) {
 		Panel actionsPanel = new Panel(mainPanel);
-		actionsPanel.setHorizontalLayout();
+		actionsPanel.setLayout(new HorizontalLayout());
 
 		Button edit = new Button(actionsPanel);
 		edit.setCaption("Aceptar");
