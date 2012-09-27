@@ -24,27 +24,11 @@ public class BuscadorModel {
 	}
 
 	public void search() {
-//		ArrayList<Asiento> asientos = buscador.getAerolineas().getAsientosAerolineas();
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(this.busqueda, this.usuario);
 		this.busqueda.setResultado(asientos);
 		buscador.mostrarAsientos(busqueda.getResultado(), usuario.getTipoUsuario());
 	}
 	
-	public void setOrigen(String origenASetear) {
-		this.busqueda.setOrigen(origenASetear);
-	}
-	
-	public String getOrigen(){
-		return this.busqueda.getOrigen();
-	}
-	
-	public void setDestino(String destinoASetear) {
-		this.busqueda.setDestino(destinoASetear);
-	}
-	
-	public String getDestino(){
-		return this.busqueda.getDestino();
-	}
 	public void setFecha(Fecha fechaV) {
 		this.busqueda.setFechaV(fechaV);
 	}
