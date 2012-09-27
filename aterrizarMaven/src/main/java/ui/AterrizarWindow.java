@@ -49,7 +49,7 @@ public class AterrizarWindow extends SimpleWindow<Usuario>{ //TODO Cambiar Usuar
 	}
 	
 	public void buscarAsientos() {
-		this.openDialog(new BuscarAsientosWindow(this));
+		this.openDialog(new BuscadorWindow(this));
 	}
 	
 //	public void verReservas() {

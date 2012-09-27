@@ -155,11 +155,15 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	private List<AsientoDTO> getAsientosDisponibles(String origen,
 			String destino, String fecha) {
 		try {
-			if (destino == null) {
-				return asientosDisponiblesParaOrigen(origen, fecha);
+			if (origen == null) {
+				return getAsientosDisponibles();
 			} else {
-				return asientosDisponiblesParaOrigenYDestino(origen, destino,
-						fecha);
+				if (destino == null) {
+					return asientosDisponiblesParaOrigen(origen, fecha);
+				} else {
+					return asientosDisponiblesParaOrigenYDestino(origen, destino,
+							fecha);
+				}
 			}
 		} catch (NullPointerException ex) {
 			// Oceanic no conoce el destino
