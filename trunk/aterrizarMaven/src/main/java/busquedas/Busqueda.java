@@ -33,14 +33,14 @@ public class Busqueda {
 	public void validar(){
 		if (origen != null && !origen.isEmpty()) {
 			if(this.origen.length()!= 3){
-				throw new UserException("Debe ingresar un origen valido");
+				throw new UserException("Origen invalido (Debe ser de 3 letras)");
 			}
 		} else {
 			origen = null;
 		}
 		if (destino != null && !destino.isEmpty()){
 			if(this.destino.length()!=3){
-				throw new UserException("Debe ingresar un destino valido");
+				throw new UserException("Destino invalido (Debe ser de 3 letras)");
 			}
 		} else {
 			destino = null;
