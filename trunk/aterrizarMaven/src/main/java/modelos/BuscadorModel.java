@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
-import main.java.fechas.Fecha;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
@@ -16,6 +15,7 @@ public class BuscadorModel {
 	private Buscador buscador = Buscador.getInstance();
 	private Usuario usuario ;
 	private Busqueda busqueda = new Busqueda();
+	private String fecha;
 	private Asiento asientoSeleccionado;
 	private Boolean habilitado = false;
 	
@@ -29,14 +29,11 @@ public class BuscadorModel {
 		buscador.mostrarAsientos(busqueda.getResultado(), usuario.getTipoUsuario());
 	}
 	
-	public void setFecha(Fecha fechaV) {
-		this.busqueda.setFechaV(fechaV);
+	public void clear() {
+		this.busqueda.setOrigen(null);
+		this.busqueda.setDestino(null);
 	}
-	
-	public Fecha getFecha(){
-		return this.busqueda.getFechaV();
-	}
-	
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -68,4 +65,15 @@ public class BuscadorModel {
 	public Boolean getHabilitado() {
 		return habilitado;
 	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+		this.busqueda.setFecha(fecha);
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+	
+ 
 }
