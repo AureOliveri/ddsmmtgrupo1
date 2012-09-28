@@ -7,6 +7,7 @@ import main.java.busquedas.Busqueda;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
+import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
 
@@ -24,14 +25,25 @@ public class BuscadorModel {
 	}
 
 	public void search() {
+		validar();
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(this.busqueda, this.usuario);
 		this.busqueda.setResultado(asientos);
 		buscador.mostrarAsientos(busqueda.getResultado(), usuario.getTipoUsuario());
 	}
 	
-	public void clear() {
-		this.busqueda.setOrigen(null);
-		this.busqueda.setDestino(null);
+	private void validar() {
+		if (!this.ingresoOrigen())
+			throw new UserException("Falta ingresar origen");
+		if (!this.ingresoDestino())
+			throw new UserException("Falta ingresar destino");
+	}
+
+	private boolean ingresoOrigen() {
+		return this.busqueda.getOrigen() != null;
+	}
+	
+	private boolean ingresoDestino() {
+		return this.busqueda.getDestino() != null;
 	}
 
 	public void setUsuario(Usuario usuario) {

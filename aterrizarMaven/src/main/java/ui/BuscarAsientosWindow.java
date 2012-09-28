@@ -23,7 +23,6 @@ public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 
 	public BuscarAsientosWindow(WindowOwner owner, BuscadorModel model) {
 		super(owner, model);
-		this.getModelObject().search();
 	}
 	
 	@Override
@@ -39,7 +38,7 @@ public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
-		searchFormPanel.setLayout(new ColumnLayout(2));
+		searchFormPanel.setLayout(new ColumnLayout(4));
 
 		new Label(searchFormPanel).setText("Origen: (EZE, PER, AEO, _BS, SLA, _NY) ");
 		new TextBox(searchFormPanel).bindValueToProperty("busqueda.origen");
@@ -57,12 +56,13 @@ public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 		new Button(actions) //
 			.setCaption("Buscar")
 			.onClick(new MessageSend(this.getModelObject(), "search"))
-			.setAsDefault();
+			.setAsDefault()
+			.disableOnError();
 	}
 	
 	protected void createResultsGrid(Panel mainPanel) {
 		Table<Asiento> table = new Table<Asiento>(mainPanel, Asiento.class);
-		table.setHeigth(300);
+		table.setHeigth(150);
 		table.setWidth(660);
 		table.bindItemsToProperty("busqueda.resultado");
 		table.bindValueToProperty("asientoSeleccionado");
