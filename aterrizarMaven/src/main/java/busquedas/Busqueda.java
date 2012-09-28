@@ -6,6 +6,7 @@ import java.util.List;
 import main.java.fechas.Fecha;
 import main.java.vuelos.Asiento;
 
+import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
 
@@ -29,15 +30,33 @@ public class Busqueda {
 		this.setOpcionales(opcionales);
 	}
 
+	public void validar(){
+		if (origen != null && !origen.isEmpty()) {
+			if(this.origen.length()!= 3){
+				throw new UserException("Debe ingresar un origen valido");
+			}
+		} else {
+			origen = null;
+		}
+		if (destino != null && !destino.isEmpty()){
+			if(this.destino.length()!=3){
+				throw new UserException("Debe ingresar un destino valido");
+			}
+		} else {
+			destino = null;
+		}
+	}
 
 	/* SETTERS*/
 
 	public void setOrigen(String origenASetear){
-		this.origen = origenASetear;
+		this.origen = origenASetear.toUpperCase();
+		validar();
 	}
 
 	public void setDestino(String destinoAsetear){
-		this.destino = destinoAsetear;
+		this.destino = destinoAsetear.toUpperCase();
+		validar();
 	} 
 
 	/*GETTERS*/
@@ -56,8 +75,16 @@ public class Busqueda {
 	public Opcionales getOpcionales() {
 		return opcionales;
 	}
-
-
+	
+	public void setFecha(String fecha) {
+		Fecha fechaV = new Fecha(fecha);
+		setFechaV(fechaV);
+	}
+	
+	public String getFecha() {
+		return getFechaV().getFechaS();
+	}
+	
 	public void setFechaV(Fecha fechaV) {
 		this.fechaV = fechaV;
 	}
