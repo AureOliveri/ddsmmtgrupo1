@@ -1,7 +1,6 @@
 package main.java.fechas;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,9 +54,13 @@ public class Fecha {
 		diasPorMes.put(11, 30);
 		diasPorMes.put(12, 31);
 
-		if (mes > 12 || dia > this.diasPorMes.get(mes)) {
-			throw new RuntimeException();
-		}
+		if (this.mes > 12)
+			throw new UserException("Mes incorrecto (No puede haber mas de 12 meses)");
+		
+		if (this.dia > 31)
+			throw new UserException("No puede haber mas de 31 dias");
+		if (this.dia > this.diasPorMes.get(this.mes))
+			throw new UserException("Mayor cantidad de dias para el mes ingresado");
 
 	}
 
@@ -116,6 +119,7 @@ public class Fecha {
 		String fechaS = Integer.toString(fechaActual.get(Calendar.DATE)) + "/"
 				+ Integer.toString(fechaActual.get(Calendar.MONTH) + 1) + "/"
 				+ Integer.toString(fechaActual.get(Calendar.YEAR));
+		@SuppressWarnings("unused")
 		Fecha fecha = new Fecha(fechaS);
 	}
 
