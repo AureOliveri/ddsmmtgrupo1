@@ -36,6 +36,15 @@ public class BuscadorModel {
 			throw new UserException("Falta ingresar origen");
 		if (!this.ingresoDestino())
 			throw new UserException("Falta ingresar destino");
+		if (!this.ingresoFecha())
+			throw new UserException("Falta ingresar fecha");
+		if (!this.cumpleFormatoFecha())
+			throw new UserException("El formato correcto es dd/mm/aaaa");
+	}
+	
+	private void validarFechaString(String fecha) {
+		if (fecha.length() < 10)
+			throw new UserException("La cadena ingresada es muy corta");
 	}
 
 	private boolean ingresoOrigen() {
@@ -44,6 +53,14 @@ public class BuscadorModel {
 	
 	private boolean ingresoDestino() {
 		return this.busqueda.getDestino() != null;
+	}
+	
+	private boolean ingresoFecha() {
+		return this.busqueda.getFechaV() != null;
+	}
+	
+	private boolean cumpleFormatoFecha() {
+		return this.busqueda.getFechaV().esFormatoLatinoamericano(this.busqueda.getFechaV().getFechaS());
 	}
 
 	public void setUsuario(Usuario usuario) {
@@ -79,7 +96,7 @@ public class BuscadorModel {
 	}
 
 	public void setFecha(String fecha) {
-		this.fecha = fecha;
+		validarFechaString(fecha);
 		this.busqueda.setFecha(fecha);
 	}
 
