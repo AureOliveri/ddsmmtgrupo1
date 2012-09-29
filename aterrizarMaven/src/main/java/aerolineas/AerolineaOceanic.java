@@ -152,6 +152,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 		return asientos;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private List<AsientoDTO> getAsientosDisponibles(String origen,
 			String destino, String fecha) {
 		try {

@@ -53,7 +53,9 @@ public class Fecha {
 		diasPorMes.put(10, 31);
 		diasPorMes.put(11, 30);
 		diasPorMes.put(12, 31);
-
+		
+		if (this.mes == 0 || this.dia == 0 || this.anio < 1970 || this.anio > 2100)
+			throw new UserException("Datos incorrectos para una fecha");
 		if (this.mes > 12)
 			throw new UserException("Mes incorrecto (No puede haber mas de 12 meses)");
 		

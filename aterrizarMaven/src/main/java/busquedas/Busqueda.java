@@ -30,12 +30,16 @@ public class Busqueda {
 		this.setOpcionales(opcionales);
 	}
 
-	public void validar(){
+	public void validarOrigen(){
 		if (origen != null) {
 			if(this.origen.length()!= 3){
 				throw new UserException("Origen invalido (Debe ser de 3 letras)");
 			}
 		}
+
+	}
+
+	public void validarDestino() {
 		if (destino != null){
 			if(this.destino.length()!=3){
 				throw new UserException("Destino invalido (Debe ser de 3 letras)");
@@ -45,12 +49,12 @@ public class Busqueda {
 	
 	public void setOrigen(String origenASetear){
 		this.origen = origenASetear.toUpperCase();
-		validar();
+		validarOrigen();
 	}
 
 	public void setDestino(String destinoAsetear){
 		this.destino = destinoAsetear.toUpperCase();
-		validar();
+		validarDestino();
 	} 
 
 	public String getOrigen(){
