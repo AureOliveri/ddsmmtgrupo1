@@ -3,8 +3,6 @@ package main.java.ui;
 
 import main.java.modelos.BuscadorModel;
 import main.java.vuelos.Asiento;
-import main.java.busquedas.Busqueda;
-import main.java.fechas.Fecha;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -17,7 +15,6 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.arena.bindings.Transformer;
 
 public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 
@@ -28,7 +25,7 @@ public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 	@Override
 	protected void createMainTemplate(Panel mainPanel) {
 		this.setTitle("Buscador de Asientos");
-		this.setTaskDescription("Ingrese los parámetros de búsqueda");
+		this.setTaskDescription("Ingresar parametros obligatorios de busqueda");
 
 		super.createMainTemplate(mainPanel);
 		this.createResultsGrid(mainPanel);
@@ -41,13 +38,13 @@ public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
 		searchFormPanel.setLayout(new ColumnLayout(4));
 
 		new Label(searchFormPanel).setText("Origen: (EZE, PER, AEO, _BS, SLA, _NY) ");
-		new TextBox(searchFormPanel).bindValueToProperty("busqueda.origen");
+		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("busqueda.origen");
 
 		new Label(searchFormPanel).setText("Destino: (USA, PER, USH, _BS, SLA, _NY) ");
-		new TextBox(searchFormPanel).bindValueToProperty("busqueda.destino");
+		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("busqueda.destino");
 
 		new Label(searchFormPanel).setText("Fecha: (DD/MM/AAAA)");
-		new TextBox(searchFormPanel).bindValueToProperty("fecha");
+		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("fecha");
 		
 	}
 	

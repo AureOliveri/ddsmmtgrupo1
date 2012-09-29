@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.uqbar.commons.model.UserException;
+
 public class Fecha {
 	private int dia;
 	private int mes;
@@ -33,8 +35,7 @@ public class Fecha {
 					fechaString.substring(0, 2), fechaString.substring(3, 5),
 					"Norteamericano");
 		} else {
-			throw new parserException(
-					"La cadena ingresada no concuerda con ningun formato valido");
+			throw new UserException("La cadena ingresada no concuerda con ningun formato valido");
 		}
 
 		diasPorMes.put(1, 31);
