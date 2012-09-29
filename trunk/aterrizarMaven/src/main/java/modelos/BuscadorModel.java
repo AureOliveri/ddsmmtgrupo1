@@ -43,8 +43,8 @@ public class BuscadorModel {
 	}
 	
 	private void validarFechaString(String fecha) {
-		if (fecha.length() < 10)
-			throw new UserException("La cadena ingresada es muy corta");
+		if (fecha.length() != 10)
+			throw new UserException("La fecha ingresada no tiene 10 digitos");
 	}
 
 	private boolean ingresoOrigen() {
@@ -97,7 +97,11 @@ public class BuscadorModel {
 
 	public void setFecha(String fecha) {
 		validarFechaString(fecha);
-		this.busqueda.setFecha(fecha);
+		try {
+			this.busqueda.setFecha(fecha);
+		} catch (NumberFormatException e){
+			throw new UserException("No se pueden ingresar letras");
+		}
 	}
 
 	public String getFecha() {
