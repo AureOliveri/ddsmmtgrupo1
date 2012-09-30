@@ -1,8 +1,6 @@
 package main.java.ui;
 
-import main.java.aerolineas.Aerolineas;
-import main.java.usuarios.Usuario;
-import main.java.usuarios.UsuarioVIP;
+import main.java.modelos.ModeloOperacion;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -12,15 +10,13 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.SimpleWindow;
+import org.uqbar.arena.windows.Window;
 import org.uqbar.arena.windows.WindowOwner;
 
-public class AterrizarWindow extends SimpleWindow<Usuario>{ //TODO Cambiar Usuario de simWind x oper
+public class AterrizarWindow extends Window<ModeloOperacion>{ //TODO Cambiar Usuario de simWind x oper
 
-	private static Usuario usuario = new Usuario("Aure", "35555555", new UsuarioVIP());
-	
 	public AterrizarWindow(WindowOwner parent) {
-		super(parent, getUsuario());
+		super(parent, new ModeloOperacion());
 	}
 
 	@Override
@@ -33,8 +29,7 @@ public class AterrizarWindow extends SimpleWindow<Usuario>{ //TODO Cambiar Usuar
 		Panel saludo = new Panel(mainPanel);
 		saludo.setLayout(new HorizontalLayout());
 
-		new Label(saludo).setText("Hola");
-		new Label(saludo).bindValueToProperty("nombre");
+		new Label(saludo).bindValueToProperty("saludo");
 
 		new Label(mainPanel).setText("¿Que desea hacer?");
 
@@ -49,41 +44,22 @@ public class AterrizarWindow extends SimpleWindow<Usuario>{ //TODO Cambiar Usuar
 	}
 	
 	public void buscarAsientos() {
-		this.openDialog(new BuscadorWindow(this));
+		this.openDialog(new BuscadorWindow(this, this.getModelObject().getUsuario()));
 	}
 	
-//	public void verReservas() {
-//		this.openDialog(new OperacionWindow(this, "Reservas"));
-//	}
-//	
-//	public void verCompras() {
-//		this.openDialog(new OperacionWindow(this, "Compras"));
-//	}
+	public void verReservas() {
+		this.openDialog(new OperacionWindow(this, "Reservas"));
+	}
+	
+	public void verCompras() {
+		this.openDialog(new OperacionWindow(this, "Compras"));
+	}
 
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();
 	}
 
-
-	@Override
-	protected void addActions(Panel actionsPanel) {
-		
-	}
-
-	@Override
-	protected void createFormPanel(Panel mainPanel) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setUsuario(Usuario usuario) {
-		AterrizarWindow.usuario = usuario;
-	}
-
-	public static Usuario getUsuario() {
-		return usuario;
-	}
 
 }
 

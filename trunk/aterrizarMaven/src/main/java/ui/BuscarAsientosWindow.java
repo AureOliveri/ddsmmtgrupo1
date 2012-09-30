@@ -1,7 +1,7 @@
 package main.java.ui;
 
 
-import main.java.modelos.BuscadorModel;
+import main.java.modelos.ModeloBuscador;
 import main.java.vuelos.Asiento;
 
 import org.uqbar.arena.actions.MessageSend;
@@ -17,9 +17,9 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-public class BuscarAsientosWindow extends Dialog<BuscadorModel> {
+public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 
-	public BuscarAsientosWindow(WindowOwner owner, BuscadorModel model) {
+	public BuscarAsientosWindow(WindowOwner owner, ModeloBuscador model) {
 		super(owner, model);
 	}
 	
