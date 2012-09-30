@@ -1,16 +1,16 @@
 package main.java.ui;
 
-import main.java.modelos.BuscadorModel;
+import main.java.modelos.ModeloBuscador;
+import main.java.usuarios.Usuario;
 
 public class BuscadorWindow extends BuscarAsientosWindow {
 
-	public BuscadorWindow(AterrizarWindow owner) {
-		super(owner, new BuscadorModel(AterrizarWindow.getUsuario()));
+	public BuscadorWindow(AterrizarWindow owner, Usuario usuario) {
+		super(owner, new ModeloBuscador(usuario));
 	}
 
 	@Override
 	protected void executeTask() {
-//		RepositorioCelulares.getInstance().create(this.getModelObject());
 		super.executeTask();
 	}
 }

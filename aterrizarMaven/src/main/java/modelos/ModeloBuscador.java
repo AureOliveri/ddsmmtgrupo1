@@ -12,7 +12,7 @@ import org.uqbar.commons.utils.Observable;
 
 
 @Observable
-public class BuscadorModel {
+public class ModeloBuscador {
 	private Buscador buscador = Buscador.getInstance();
 	private Usuario usuario ;
 	private Busqueda busqueda = new Busqueda();
@@ -20,7 +20,7 @@ public class BuscadorModel {
 	private Asiento asientoSeleccionado;
 	private Boolean habilitado = false;
 	
-	public BuscadorModel(Usuario usuario) {
+	public ModeloBuscador(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
