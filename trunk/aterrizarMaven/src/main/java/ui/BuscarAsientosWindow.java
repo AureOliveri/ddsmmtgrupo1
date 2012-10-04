@@ -1,16 +1,21 @@
 package main.java.ui;
 
 
+import main.java.enumeraciones.Ciudad;
 import main.java.modelos.ModeloBuscador;
+import main.java.repositorios.RepositorioDestinos;
+import main.java.repositorios.RepositorioOrigenes;
 import main.java.vuelos.Asiento;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.bindings.NotNullObservable;
+import org.uqbar.arena.bindings.ObservableProperty;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -36,14 +41,20 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
-		searchFormPanel.setLayout(new ColumnLayout(4));
+		searchFormPanel.setLayout(new ColumnLayout(2));
 
 		new Label(searchFormPanel).setText("Origen: (EZE, PER, AEO, _BS, SLA, _NY) ");
-		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("busqueda.origen");
+		Selector<Ciudad> selectorO = new Selector<Ciudad>(searchFormPanel).allowNull(false);
+		selectorO //
+			.bindItems(new ObservableProperty(RepositorioOrigenes.getInstance(), "ciudades"));
+		selectorO.bindValueToProperty("busqueda.origen");
 
 		new Label(searchFormPanel).setText("Destino: (USA, PER, USH, _BS, SLA, _NY) ");
-		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("busqueda.destino");
-
+		Selector<Ciudad> selectorD = new Selector<Ciudad>(searchFormPanel).allowNull(false);
+		selectorD//
+			.bindItems(new ObservableProperty(RepositorioDestinos.getInstance(), "ciudades"));
+		selectorD.bindValueToProperty("busqueda.destino");
+		
 		new Label(searchFormPanel).setText("Fecha: (DD/MM/AAAA)");
 		new TextBox(searchFormPanel).setWidth(75).bindValueToProperty("fecha");
 		

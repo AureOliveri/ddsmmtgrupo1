@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
+import main.java.enumeraciones.Ciudad;
 import main.java.excepciones.ReservaNoEstandarException;
 import main.java.fechas.Fecha;
 import main.java.usuarios.Usuario;
@@ -34,7 +35,7 @@ public class TestReservaOceanic {
 		usuarioEstandar2 = new Usuario("Usuario Estandar 2", "22222222", new UsuarioEstandar());
 		usuarioVip1 = new Usuario("usuario vip 1", "33333333", new UsuarioVIP());
 		fecha = new Fecha("15/08/2012");
-		busqueda = new Busqueda("_BS", fecha, "SLA", null);
+		busqueda = new Busqueda(Ciudad.BUENOS_AIRES, fecha, Ciudad.LOS_ANGELES, null);
 		buscador = new Buscador();
 		asientos = buscador.buscarAsientos(busqueda, usuarioVip1);
 		asiento1 = asientos.get(0);

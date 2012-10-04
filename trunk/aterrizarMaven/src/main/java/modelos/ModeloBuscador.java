@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
+import main.java.excepciones.AsientoReservadoException;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
@@ -42,8 +43,14 @@ public class ModeloBuscador {
 			this.setLabel("El asiento " + asientoSeleccionado.getCodigoAsiento() + " ha sido reservado exitosamente");
 			this.setBoton("Seguir Buscando");
 			buscador.mostrarAsientos(usuario.getReservas(), usuario.getTipoUsuario());
+		} catch (AsientoReservadoException e){
+			this.setLabel("Ha ocurrido un error en la reserva: " 
+					+ e.getMessage() + "\n Por favor intente nuevamente");
+			this.setBoton("Aceptar");
 		} catch (EstadoErroneoException e){
-			throw new UserException(e.getMessage());
+			this.setLabel("Ha ocurrido un error en la reserva: " 
+					+ e.getMessage() + "\n Por favor intente nuevamente");
+			this.setBoton("Aceptar");
 		}
 	}
 	
