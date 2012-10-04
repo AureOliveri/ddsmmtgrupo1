@@ -9,8 +9,4 @@ public class BuscadorWindow extends BuscarAsientosWindow {
 		super(owner, new ModeloBuscador(usuario));
 	}
 
-	@Override
-	protected void executeTask() {
-		super.executeTask();
-	}
 }

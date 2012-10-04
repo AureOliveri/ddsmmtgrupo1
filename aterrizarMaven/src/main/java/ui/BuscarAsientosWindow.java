@@ -107,11 +107,11 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 
 		Button editC = new Button(actionsPanel);
 		editC.setCaption("Comprar");
-		editC.onClick(new MessageSend(this, "comprar"));
+		editC.onClick(new MessageSend(this.getModelObject(), "comprar"));
 
 		Button editR = new Button(actionsPanel);
 		editR.setCaption("Reservar");
-		editR.onClick(new MessageSend(this, "reservar"));
+		editR.onClick(new MessageSend(this.getModelObject(), "reservar"));
 
 		Button remove = new Button(actionsPanel);
 		remove.setCaption("Cerrar");

@@ -1,6 +1,7 @@
 package main.java.ui;
 
 import main.java.modelos.ModeloOperacion;
+import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
 import org.uqbar.arena.actions.MessageSend;
@@ -16,8 +17,8 @@ import org.uqbar.arena.windows.WindowOwner;
 
 public class OperacionWindow extends Dialog<ModeloOperacion> {
 
-	public OperacionWindow(WindowOwner owner, String label) {
-		super(owner, new ModeloOperacion(label));
+	public OperacionWindow(WindowOwner owner, String label, Usuario usuario) {
+		super(owner, new ModeloOperacion(label, usuario));
 	}
 
 	
@@ -41,8 +42,8 @@ public class OperacionWindow extends Dialog<ModeloOperacion> {
 		Table<Asiento> table = new Table<Asiento>(mainPanel, Asiento.class);
 		table.setHeigth(100);
 		table.setWidth(610);
-		table.bindItemsToProperty("usuario.reservas");
-//		table.bindValueToProperty("asientoSeleccionado");
+		table.bindItemsToProperty("resultados");
+		table.bindValueToProperty("asientoSeleccionado");
 		this.describeResultsGrid(table);
 	}
 	
@@ -51,7 +52,7 @@ public class OperacionWindow extends Dialog<ModeloOperacion> {
 		Column<Asiento> salidaColum = new Column<Asiento>(table);
 		salidaColum.setTitle("Salida");
 		salidaColum.setFixedSize(150);
-		salidaColum.bindContentsToProperty("fechaSalida");
+		salidaColum.bindContentsToProperty("fecha");
 		
 		Column<Asiento> aerolineaColum = new Column<Asiento>(table);
 		aerolineaColum.setTitle("Aerolinea");

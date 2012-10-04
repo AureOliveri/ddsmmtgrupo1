@@ -90,7 +90,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	}
 
 	@Override
-	public void comprar(Asiento unAsiento) {
+	public void comprar(Asiento unAsiento, Usuario usuario) {
 
 	}
 

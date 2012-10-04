@@ -1,6 +1,6 @@
 package main.java.ui;
 
-import main.java.modelos.ModeloOperacion;
+import main.java.modelos.ModeloPrincipal;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -13,10 +13,10 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.arena.windows.WindowOwner;
 
-public class AterrizarWindow extends Window<ModeloOperacion>{ //TODO Cambiar Usuario de simWind x oper
-
+public class AterrizarWindow extends Window<ModeloPrincipal>{
+	
 	public AterrizarWindow(WindowOwner parent) {
-		super(parent, new ModeloOperacion());
+		super(parent, new ModeloPrincipal());
 	}
 
 	@Override
@@ -48,11 +48,11 @@ public class AterrizarWindow extends Window<ModeloOperacion>{ //TODO Cambiar Usu
 	}
 	
 	public void verReservas() {
-		this.openDialog(new OperacionWindow(this, "Reservas"));
+		this.openDialog(new OperacionWindow(this, "Reservas", this.getModelObject().getUsuario()));
 	}
 	
 	public void verCompras() {
-		this.openDialog(new OperacionWindow(this, "Compras"));
+		this.openDialog(new OperacionWindow(this, "Compras",  this.getModelObject().getUsuario()));
 	}
 
 	protected void openDialog(Dialog<?> dialog) {

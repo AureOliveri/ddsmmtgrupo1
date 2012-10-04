@@ -7,8 +7,11 @@ import main.java.busquedas.Busqueda;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
+
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
+
+import com.lanchita.excepciones.EstadoErroneoException;
 
 
 @Observable
@@ -29,6 +32,23 @@ public class ModeloBuscador {
 		ArrayList<Asiento> asientos = buscador.buscarAsientos(this.busqueda, this.usuario);
 		this.busqueda.setResultado(asientos);
 		buscador.mostrarAsientos(busqueda.getResultado(), usuario.getTipoUsuario());
+	}
+	
+	public void reservar() {
+		try {
+			this.asientoSeleccionado.getAerolinea().reservar(asientoSeleccionado, usuario);
+			buscador.mostrarAsientos(usuario.getReservas(), usuario.getTipoUsuario());
+		} catch (EstadoErroneoException e){
+			throw new UserException(e.getMessage());
+		}
+	}
+	
+	public void comprar() {
+		try {
+			this.asientoSeleccionado.getAerolinea().comprar(asientoSeleccionado, usuario);
+		} catch (EstadoErroneoException e){
+			throw new UserException(e.getMessage());
+		}
 	}
 	
 	private void validar() {

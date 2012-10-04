@@ -355,4 +355,8 @@ public class Asiento extends Entity {
 	public String getNombreAerolinea() {
 		return this.vuelo.getAerolinea().getNombre();
 	}
+	
+	public String getFecha() {
+		return getFechaSalida().getFechaS();
+	}
 }

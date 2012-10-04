@@ -67,7 +67,7 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	}
 
 	@Override
-	public void comprar(Asiento unAsiento) {
+	public void comprar(Asiento unAsiento, Usuario usuario) {
 
 	}
 
@@ -146,6 +146,7 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 		try {
 			AerolineaLanchita.getInstance().reservar(
 					asiento.getCodigoAsiento(), usuario.getDni());
+			usuario.getReservas().add(asiento);
 		} catch (EstadoErroneoException e) {
 			throw e;
 		}
