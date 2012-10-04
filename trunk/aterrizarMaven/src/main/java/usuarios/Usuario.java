@@ -2,8 +2,10 @@ package main.java.usuarios;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.uqbar.commons.model.Entity;
+import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.TransactionalAndObservable;
 
 import main.java.excepciones.AsientoReservadoException;
@@ -23,7 +25,8 @@ public class Usuario extends Entity {
 	protected BigDecimal recargo = new BigDecimal(20);
 	private BigDecimal montoCompras = new BigDecimal(0);
 	private ArrayList<Busqueda> historialBusquedas = new ArrayList<Busqueda>();
-	private ArrayList<Asiento> reservas = new ArrayList<Asiento>();
+	private List<Asiento> compras = new ArrayList<Asiento>();
+	private List<Asiento> reservas = new ArrayList<Asiento>();
 
 	public Usuario(){
 	}
@@ -35,7 +38,7 @@ public class Usuario extends Entity {
 		setTipoUsuario(tipo);
 	}
 	
-	public ArrayList<Asiento> getReservas() {
+	public List<Asiento> getReservas() {
 		return reservas;
 	}
 
@@ -46,9 +49,9 @@ public class Usuario extends Entity {
 	public void comprarAsiento(Asiento unAsiento) {
 		try {
 			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
-			this.reservas.add(unAsiento);
+			this.getCompras().add(unAsiento);
 		} catch (AsientoReservadoException e) {
-		
+			throw new UserException("Asiento reservado");
 		}
 
 	}
@@ -112,5 +115,13 @@ public class Usuario extends Entity {
 	public String toString(){
 		return this.getNombre();
 	}
-	
+
+	public void setCompras(List<Asiento> compras) {
+		this.compras = compras;
+	}
+
+	public List<Asiento> getCompras() {
+		return compras;
+	}
+
 }
