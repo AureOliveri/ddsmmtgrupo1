@@ -23,6 +23,7 @@ import main.java.vuelos.Asiento;
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
 import main.java.busquedas.Opcionales;
+import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.ClaseDeAsiento;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.enumeraciones.UbicacionDeAsiento;
@@ -78,8 +79,8 @@ public class TestBusquedasLanchita {
 		ubicaciones = new ArrayList<UbicacionDeAsiento>();
 		disponibilidades = new ArrayList<DisponibilidadDeAsiento>();
 		fechaA = new Fecha("20/12/2012");
-		busquedaA = new Busqueda("EZE", fechaA, "USA", opciones);
-		busquedaB = new Busqueda("PER", fechaA, "USA", opciones);
+		busquedaA = new Busqueda(Ciudad.EZEIZA, fechaA, Ciudad.ESTADOS_UNIDOS, opciones);
+		busquedaB = new Busqueda(Ciudad.PERU, fechaA, Ciudad.ESTADOS_UNIDOS, opciones);
 		fC = new FiltroClase();
 		fU = new FiltroUbicacion();
 		fP = new FiltroPrecio();

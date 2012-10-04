@@ -3,6 +3,7 @@ package main.java.busquedas;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.enumeraciones.Ciudad;
 import main.java.fechas.Fecha;
 import main.java.vuelos.Asiento;
 
@@ -13,8 +14,8 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class Busqueda {
 
-	private String origen;
-	private String destino;
+	private Ciudad origen;
+	private Ciudad destino;
 	private Fecha fechaV;
 	private Opcionales opcionales = new Opcionales();
 	private List<Asiento> resultado = new ArrayList<Asiento>();
@@ -22,7 +23,7 @@ public class Busqueda {
 	public Busqueda(){
 	}
 	
-	public Busqueda(String origen,Fecha fecha, String destino, Opcionales opcionales){
+	public Busqueda(Ciudad origen,Fecha fecha, Ciudad destino, Opcionales opcionales){
 		this();
 		this.setOrigen(origen);
 		this.setDestino(destino);
@@ -30,38 +31,19 @@ public class Busqueda {
 		this.setOpcionales(opcionales);
 	}
 
-	public void validarOrigen(){
-		if (origen != null) {
-			if(this.origen.length()!= 3){
-				throw new UserException("Origen invalido (Debe ser de 3 letras)");
-			}
-		}
-
+	public void setOrigen(Ciudad origenASetear){
+		this.origen = origenASetear;
 	}
 
-	public void validarDestino() {
-		if (destino != null){
-			if(this.destino.length()!=3){
-				throw new UserException("Destino invalido (Debe ser de 3 letras)");
-			}
-		}
-	}
-	
-	public void setOrigen(String origenASetear){
-		this.origen = origenASetear.toUpperCase();
-		validarOrigen();
-	}
-
-	public void setDestino(String destinoAsetear){
-		this.destino = destinoAsetear.toUpperCase();
-		validarDestino();
+	public void setDestino(Ciudad destinoAsetear){
+		this.destino = destinoAsetear;
 	} 
 
-	public String getOrigen(){
+	public Ciudad getOrigen(){
 		return this.origen;
 	}
 
-	public String getDestino(){
+	public Ciudad getDestino(){
 		return this.destino;
 	} 
 

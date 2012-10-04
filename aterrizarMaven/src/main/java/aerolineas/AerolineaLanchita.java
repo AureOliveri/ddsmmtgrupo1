@@ -128,8 +128,8 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 		Asiento asiento = new Asiento();
 		String fecha = busqueda.getFechaV() != null ? busqueda.getFechaV()
 				.getFechaS() : null;
-				String origen = busqueda.getOrigen();
-				String destino = busqueda.getDestino();
+				String origen = busqueda.getOrigen().getCodigo();
+				String destino = busqueda.getDestino().getCodigo();
 				asientosDisponibles = asientosDisponibles(origen,
 						destino, fecha, null, null, null);
 				for (String[] asientoD : asientosDisponibles) {

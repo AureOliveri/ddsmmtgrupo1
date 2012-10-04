@@ -23,6 +23,7 @@ import main.java.vuelos.Asiento;
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
 import main.java.busquedas.Opcionales;
+import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.ClaseDeAsiento;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.enumeraciones.UbicacionDeAsiento;
@@ -41,12 +42,10 @@ public class TestBusquedasOceanic {
 	private CriterioBusqueda precioAsc;
 	private CriterioBusqueda tiempoVuelo;
 	private Usuario usuarioA;
-	private Usuario usuarioB;
 	private TipoUsuario vip;
 	private TipoUsuario conRecargo;
 	private TipoUsuario estandar;
 	private Busqueda busquedaA;
-	private Busqueda busquedaB;
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
 	private Opcionales opciones;
@@ -69,7 +68,6 @@ public class TestBusquedasOceanic {
 		precioAsc = new CriterioPrecioAscendente();
 		tiempoVuelo = new CriterioTiempoDeVuelo();
 		usuarioA = new Usuario();
-		usuarioB = new Usuario();
 		vip = new UsuarioVIP();
 		conRecargo = new UsuarioConRecargo();
 		estandar = new UsuarioEstandar();
@@ -79,8 +77,7 @@ public class TestBusquedasOceanic {
 		ubicaciones = new ArrayList<UbicacionDeAsiento>();
 		disponibilidades = new ArrayList<DisponibilidadDeAsiento>();
 		fechaA = new Fecha("15/08/2012");
-		busquedaA = new Busqueda("_BS", fechaA, "SLA", opciones);
-		busquedaB = new Busqueda("PER", fechaA, "USA", opciones);
+		busquedaA = new Busqueda(Ciudad.BUENOS_AIRES, fechaA, Ciudad.LOS_ANGELES, opciones);
 		fC = new FiltroClase();
 		fU = new FiltroUbicacion();
 		fP = new FiltroPrecio();

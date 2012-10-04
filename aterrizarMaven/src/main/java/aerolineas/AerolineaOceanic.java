@@ -143,7 +143,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 				.getFechaS() : null;
 
 		List<AsientoDTO> asientosDisponibles = this.getAsientosDisponibles(
-				busqueda.getOrigen(), busqueda.getDestino(), fecha);
+				busqueda.getOrigen().getCodigo(), busqueda.getDestino().getCodigo(), fecha);
 
 		for (AsientoDTO asientoDto : asientosDisponibles) {
 			asiento = retornarAsiento(asientoDto);

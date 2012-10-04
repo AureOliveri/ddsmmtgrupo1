@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
+import main.java.enumeraciones.Ciudad;
 import main.java.excepciones.ReservaNoEstandarException;
 import main.java.fechas.Fecha;
 import main.java.usuarios.Usuario;
@@ -36,7 +37,7 @@ public class TestReservaLanchita {
 		usuarioVip1 = new Usuario("usuario 3", "33333333", new UsuarioVIP());
 		buscador = new Buscador();
 		fecha = new Fecha("20/12/2012");
-		busqueda = new Busqueda("PER", fecha, "USA", null);
+		busqueda = new Busqueda(Ciudad.PERU, fecha, Ciudad.ESTADOS_UNIDOS, null);
 		asientos = buscador.buscarAsientos(busqueda, usuarioEstandar1);
 		asiento1 = asientos.get(0);
 		asiento2 = asientos.get(1);
