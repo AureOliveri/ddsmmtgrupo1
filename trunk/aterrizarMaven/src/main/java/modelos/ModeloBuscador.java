@@ -22,6 +22,8 @@ public class ModeloBuscador {
 	private String fecha;
 	private Asiento asientoSeleccionado;
 	private Boolean habilitado = false;
+	private String label;
+	private String boton;
 	
 	public ModeloBuscador(Usuario usuario) {
 		this.usuario = usuario;
@@ -37,6 +39,8 @@ public class ModeloBuscador {
 	public void reservar() {
 		try {
 			this.asientoSeleccionado.getAerolinea().reservar(asientoSeleccionado, usuario);
+			this.setLabel("El asiento " + asientoSeleccionado.getCodigoAsiento() + " ha sido reservado exitosamente");
+			this.setBoton("Seguir Buscando");
 			buscador.mostrarAsientos(usuario.getReservas(), usuario.getTipoUsuario());
 		} catch (EstadoErroneoException e){
 			throw new UserException(e.getMessage());
@@ -126,6 +130,22 @@ public class ModeloBuscador {
 
 	public String getFecha() {
 		return fecha;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setBoton(String boton) {
+		this.boton = boton;
+	}
+
+	public String getBoton() {
+		return boton;
 	}
 	
  
