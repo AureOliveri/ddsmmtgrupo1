@@ -107,11 +107,11 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 
 		Button editC = new Button(actionsPanel);
 		editC.setCaption("Comprar");
-		editC.onClick(new MessageSend(this.getModelObject(), "comprar"));
+		editC.onClick(new MessageSend(this, "comprar"));
 
 		Button editR = new Button(actionsPanel);
 		editR.setCaption("Reservar");
-		editR.onClick(new MessageSend(this.getModelObject(), "reservar"));
+		editR.onClick(new MessageSend(this, "reservar"));
 
 		Button remove = new Button(actionsPanel);
 		remove.setCaption("Cerrar");
@@ -120,6 +120,16 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 		NotNullObservable elementSelected = new NotNullObservable("asientoSeleccionado");
 		editC.bindEnabled(elementSelected);
 		editR.bindEnabled(elementSelected);
+	}
+	
+	public void reservar() {
+		this.getModelObject().reservar();
+		this.openDialog(new MensajeWindow(this, this.getModelObject()));
+	}
+	
+	protected void openDialog(Dialog<?> dialog) {
+		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
+		dialog.open();
 	}
 
 }
