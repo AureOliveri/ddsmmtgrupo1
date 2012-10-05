@@ -138,6 +138,12 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 		this.openDialog(new MensajeWindow(this, this.getModelObject()));
 	}
 	
+	public void comprar() {
+		this.getModelObject().comprar();
+		this.openDialog(new MensajeWindow(this, this.getModelObject()));
+		this.getModelObject().search();
+	}
+	
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();

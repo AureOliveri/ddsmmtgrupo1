@@ -57,8 +57,13 @@ public class ModeloBuscador {
 	public void comprar() {
 		try {
 			this.asientoSeleccionado.getAerolinea().comprar(asientoSeleccionado, usuario);
+			this.setLabel("El asiento " + asientoSeleccionado.getCodigoAsiento() + " ha sido comprado exitosamente");
+			this.setBoton("Seguir Buscando");
+			buscador.mostrarAsientos(usuario.getReservas(), usuario.getTipoUsuario());
 		} catch (EstadoErroneoException e){
-			throw new UserException(e.getMessage());
+			this.setLabel("Ha ocurrido un error en la compra: " 
+					+ e.getMessage() + "\n Por favor intente nuevamente");
+			this.setBoton("Aceptar");
 		}
 	}
 	
