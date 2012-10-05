@@ -360,14 +360,19 @@ public class Asiento extends Entity {
 		return getFechaSalida().getFechaS();
 	}
 
-	public Boolean estasDisponiblePAra(Usuario usuario2) {
-		String disponibilidad = this.getDisponibilidad().getCodigo();
-		if((disponibilidad.equals("D")) || reservaPertenecienteA(usuario2, disponibilidad)) return true;
-		return false;
+	private boolean reservaPertenecienteA(Usuario usuario) {
+		return estaReservado() &&  this.getPrimeraReserva().getUsuario().equals(usuario);
 	}
 
-	private boolean reservaPertenecienteA(Usuario usuario2,
-			String disponibilidad) {
-		return (disponibilidad.equals("R") &&  this.getPrimeraReserva().getUsuario().equals(usuario2));
+	public Boolean estaReservado() {
+		return this.getDisponibilidad().equals(DisponibilidadDeAsiento.RESERVADO);
+	}
+	
+	public Boolean estaDisponible() {
+		return this.getDisponibilidad().equals(DisponibilidadDeAsiento.DISPONIBLE);
+	}
+	
+	public boolean estaDisponibleParaComprarPor(Usuario usuario) {
+		return estaDisponible() || reservaPertenecienteA(usuario);
 	}
 }

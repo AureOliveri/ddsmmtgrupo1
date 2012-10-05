@@ -68,7 +68,8 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 
 	@Override
 	public void comprar(Asiento unAsiento, Usuario usuario) {
-
+		comprar(unAsiento.getCodigoAsiento());
+		usuario.getCompras().add(unAsiento);
 	}
 
 	public BigDecimal getImpuesto() {
@@ -144,8 +145,7 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 	@Override
 	public void reservar(Asiento asiento, Usuario usuario) {
 		try {
-			AerolineaLanchita.getInstance().reservar(
-					asiento.getCodigoAsiento(), usuario.getDni());
+			reservar(asiento.getCodigoAsiento(), usuario.getDni());
 			usuario.getReservas().add(asiento);
 		} catch (EstadoErroneoException e) {
 			throw e;
