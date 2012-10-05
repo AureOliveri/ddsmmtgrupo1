@@ -47,15 +47,24 @@ public class Usuario extends Entity {
 		this.reservas = reservas;
 	}
 
-	public void comprarAsiento(Asiento unAsiento) {
-		try {
-			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
-			this.getCompras().add(unAsiento);
-		} catch (AsientoReservadoException e) {
-			throw new UserException("Asiento reservado");
+	public void comprar(Asiento asiento){
+		if(asiento.estaDisponibleParaComprarPor(this)) {
+			asiento.setDisponibilidad(DisponibilidadDeAsiento.DISPONIBLE);
+			asiento.getAerolinea().comprar(asiento, this);
+		} else {
+			throw new UserException("No podes comprar, jodete!");
 		}
-
 	}
+	
+//	public void comprarAsiento(Asiento unAsiento) {
+//		try {
+//			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
+//			this.getCompras().add(unAsiento);
+//		} catch (AsientoReservadoException e) {
+//			throw new UserException("Asiento reservado");
+//		}
+//
+//	}
 
 	public Boolean noTieneReserva(Asiento unAsiento) {
 		return !(this.getReservas().contains(unAsiento));
@@ -85,11 +94,6 @@ public class Usuario extends Entity {
 		historialBusquedas.add(busqueda);
 	}
 	
-	public void comprar(Asiento asiento){
-		if(asiento.estasDisponiblePAra(this))	this.compras.add(asiento);			
-	
-	}
-
 	public ArrayList<Asiento> getAsientosQueLeCorreponden(
 			ArrayList<Asiento> asientos, TipoUsuario usuario) {
 

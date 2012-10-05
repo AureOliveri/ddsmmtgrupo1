@@ -39,6 +39,7 @@ public class ModeloBuscador {
 	
 	public void reservar() {
 		try {
+//			this.usuario.reservar(asientoSeleccionado);
 			this.asientoSeleccionado.getAerolinea().reservar(asientoSeleccionado, usuario);
 			this.setLabel("El asiento " + asientoSeleccionado.getCodigoAsiento() + " ha sido reservado exitosamente");
 			this.setBoton("Seguir Buscando");
@@ -56,6 +57,7 @@ public class ModeloBuscador {
 	
 	public void comprar() {
 		try {
+//			this.usuario.comprar(asientoSeleccionado);
 			this.asientoSeleccionado.getAerolinea().comprar(asientoSeleccionado, usuario);
 			this.setLabel("El asiento " + asientoSeleccionado.getCodigoAsiento() + " ha sido comprado exitosamente");
 			this.setBoton("Seguir Buscando");

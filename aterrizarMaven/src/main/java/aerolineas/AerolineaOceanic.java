@@ -91,7 +91,10 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 
 	@Override
 	public void comprar(Asiento unAsiento, Usuario usuario) {
-
+		Integer numeroAsiento = Integer.parseInt(unAsiento.getNumeroDeAsiento());
+		String codigoVuelo = unAsiento.getVuelo().getNumeroDeVuelo();
+		comprarSiHayDisponibilidad(usuario.getDni(), codigoVuelo, numeroAsiento);
+		usuario.getCompras().add(unAsiento);
 	}
 
 	public BigDecimal getImpuesto() {
