@@ -8,6 +8,7 @@ import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.TransactionalAndObservable;
 
+import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.excepciones.AsientoReservadoException;
 import main.java.vuelos.Asiento;
 import main.java.busquedas.Busqueda;
@@ -82,6 +83,11 @@ public class Usuario extends Entity {
 
 	public void guardarBusqueda(Busqueda busqueda) {
 		historialBusquedas.add(busqueda);
+	}
+	
+	public void comprar(Asiento asiento){
+		if(asiento.estasDisponiblePAra(this))	this.compras.add(asiento);			
+	
 	}
 
 	public ArrayList<Asiento> getAsientosQueLeCorreponden(
