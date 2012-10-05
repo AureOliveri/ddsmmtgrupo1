@@ -177,6 +177,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 		AerolineaOceanic.getInstance().reservar(usuario.getDni(),
 				asiento.getNumeroDeVuelo(),
 				Integer.parseInt(asiento.getNumeroDeAsiento()));
+		usuario.getReservas().add(asiento);
 	}
 
 	private void setNombre(String nombre) {
