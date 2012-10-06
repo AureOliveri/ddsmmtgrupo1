@@ -30,7 +30,7 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 	
 	@Override
 	protected void createMainTemplate(Panel mainPanel) {
-		this.setTitle("Buscador de Asientos");
+		this.setTitle("Aterrizar.com");
 		this.setTaskDescription("Ingresar parametros obligatorios de busqueda");
 
 		super.createMainTemplate(mainPanel);
