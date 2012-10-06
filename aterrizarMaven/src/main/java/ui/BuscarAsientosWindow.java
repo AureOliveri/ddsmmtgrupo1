@@ -3,6 +3,9 @@ package main.java.ui;
 
 import main.java.enumeraciones.Ciudad;
 import main.java.modelos.ModeloBuscador;
+import main.java.modelos.ModeloOperacion;
+import main.java.modelos.ModeloPrincipal;
+import main.java.modelos.ModeloSobreReserva;
 import main.java.repositorios.RepositorioDestinos;
 import main.java.repositorios.RepositorioOrigenes;
 import main.java.vuelos.Asiento;
@@ -134,8 +137,12 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 	}
 	
 	public void reservar() {
-		this.getModelObject().reservar();
-		this.openDialog(new MensajeWindow(this, this.getModelObject()));
+		Boolean reservaExitosa = this.getModelObject().reservar();
+		if(reservaExitosa){
+			this.openDialog(new MensajeWindow(this, this.getModelObject()));			
+		} else {
+			this.openDialog(new SobreReservaWindow(this, new ModeloSobreReserva(this.getModelObject().getAsientoSeleccionado())));
+		}
 	}
 	
 	public void comprar() {
