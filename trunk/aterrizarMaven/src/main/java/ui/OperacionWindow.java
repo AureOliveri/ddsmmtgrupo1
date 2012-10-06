@@ -24,7 +24,7 @@ public class OperacionWindow extends Dialog<ModeloOperacion> {
 	
 	@Override
 	public void createContents(Panel mainPanel) {
-		this.setTitle("Reservas de usuario");
+		this.setTitle("Aterrizar.com");
 		
 		mainPanel.setLayout(new VerticalLayout());
 
