@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.uqbar.commons.model.Entity;
-import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.TransactionalAndObservable;
 
-import main.java.enumeraciones.DisponibilidadDeAsiento;
-import main.java.excepciones.AsientoReservadoException;
 import main.java.vuelos.Asiento;
 import main.java.busquedas.Busqueda;
 
@@ -48,24 +45,14 @@ public class Usuario extends Entity {
 	}
 
 	public void comprar(Asiento asiento){
-		if(asiento.estaDisponibleParaComprarPor(this)) {
-			asiento.setDisponibilidad(DisponibilidadDeAsiento.DISPONIBLE);
+		if(asiento.estaDisponibleParaComprarPor(this))
 			asiento.getAerolinea().comprar(asiento, this);
-		} else {
-			throw new UserException("No podes comprar, jodete!");
-		}
 	}
 	
-//	public void comprarAsiento(Asiento unAsiento) {
-//		try {
-//			this.tipoUsuario.comprarAsiento(unAsiento, this.getDni());
-//			this.getCompras().add(unAsiento);
-//		} catch (AsientoReservadoException e) {
-//			throw new UserException("Asiento reservado");
-//		}
-//
-//	}
-
+	public void reservar(Asiento asiento){
+		asiento.getAerolinea().reservar(asiento, this);
+	}
+	
 	public Boolean noTieneReserva(Asiento unAsiento) {
 		return !(this.getReservas().contains(unAsiento));
 	}
