@@ -16,11 +16,26 @@ public class Fecha {
 	private String formato;
 	private Map<Integer, Integer> diasPorMes = new HashMap<Integer, Integer>();
 
+	public Fecha() {
+		Calendar fechaActual = Calendar.getInstance();
+		String fechaS = Integer.toString(fechaActual.get(Calendar.DATE)) + "/"
+				+ Integer.toString(fechaActual.get(Calendar.MONTH) + 1) + "/"
+				+ Integer.toString(fechaActual.get(Calendar.YEAR));
+		@SuppressWarnings("unused")
+		Fecha fecha = new Fecha(fechaS);
+	}
+
 	public Fecha(String fechaString) {
 
 		setFechaS(fechaString);
 		fechaString = fechaString.replaceAll(" ", "");
 
+		crearFechaConFormato(fechaString);
+		asignarDiaPorMes();
+		validarFecha();
+	}
+
+	private void crearFechaConFormato(String fechaString) {
 		if (esFormatoISO8601(fechaString)) {
 			this.crearFecha(fechaString.substring(0, 4),
 					fechaString.substring(5, 7), fechaString.substring(8, 10),
@@ -34,9 +49,12 @@ public class Fecha {
 					fechaString.substring(0, 2), fechaString.substring(3, 5),
 					"Norteamericano");
 		} else {
-			throw new UserException("La cadena ingresada no concuerda con ningun formato valido");
+			throw new UserException(
+					"La cadena ingresada no concuerda con ningun formato valido");
 		}
+	}
 
+	private void asignarDiaPorMes() {
 		diasPorMes.put(1, 31);
 		if (esBiciesto()) {
 			diasPorMes.put(2, 29);
@@ -53,17 +71,21 @@ public class Fecha {
 		diasPorMes.put(10, 31);
 		diasPorMes.put(11, 30);
 		diasPorMes.put(12, 31);
-		
-		if (this.mes == 0 || this.dia == 0 || this.anio < 1970 || this.anio > 2100)
+	}
+
+	private void validarFecha() {
+		if (this.mes == 0 || this.dia == 0 || this.anio < 1970
+				|| this.anio > 2100)
 			throw new UserException("Datos incorrectos para una fecha");
 		if (this.mes > 12)
-			throw new UserException("Mes incorrecto (No puede haber mas de 12 meses)");
-		
+			throw new UserException(
+					"Mes incorrecto (No puede haber mas de 12 meses)");
+
 		if (this.dia > 31)
 			throw new UserException("No puede haber mas de 31 dias");
 		if (this.dia > this.diasPorMes.get(this.mes))
-			throw new UserException("Mayor cantidad de dias para el mes ingresado");
-
+			throw new UserException(
+					"Mayor cantidad de dias para el mes ingresado");
 	}
 
 	private void crearFecha(String anio, String mes, String dia, String formato) {
@@ -91,40 +113,7 @@ public class Fecha {
 		this.setFormato(formato);
 		return;
 	}
-
-	public void setFormato(String formato) {
-		this.formato = formato;
-	}
-
-	public String getFormato() {
-		return formato;
-	}
-
-	public int getAnio() {
-		return anio;
-	}
-
-	public int getMes() {
-		return mes;
-	}
-
-	public int getDia() {
-		return dia;
-	}
-
-	public int getFecha() {
-		return fechaFinal;
-	}
-
-	public Fecha() {
-		Calendar fechaActual = Calendar.getInstance();
-		String fechaS = Integer.toString(fechaActual.get(Calendar.DATE)) + "/"
-				+ Integer.toString(fechaActual.get(Calendar.MONTH) + 1) + "/"
-				+ Integer.toString(fechaActual.get(Calendar.YEAR));
-		@SuppressWarnings("unused")
-		Fecha fecha = new Fecha(fechaS);
-	}
-
+	
 	public boolean esFormatoISO8601(String fechaS) {
 		return (fechaS.substring(4, 5).equals("-"))
 				&& (fechaS.substring(7, 8).equals("-"));
@@ -173,6 +162,30 @@ public class Fecha {
 
 	public boolean esBiciesto() {
 		return (this.anio % 4 == 0);
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public int getAnio() {
+		return anio;
+	}
+
+	public int getMes() {
+		return mes;
+	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public int getFecha() {
+		return fechaFinal;
 	}
 
 	public void setFechaS(String fechaS) {

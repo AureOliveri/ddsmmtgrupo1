@@ -3,8 +3,6 @@ package main.java.ui;
 
 import main.java.enumeraciones.Ciudad;
 import main.java.modelos.ModeloBuscador;
-import main.java.modelos.ModeloOperacion;
-import main.java.modelos.ModeloPrincipal;
 import main.java.modelos.ModeloSobreReserva;
 import main.java.repositorios.RepositorioDestinos;
 import main.java.repositorios.RepositorioOrigenes;
