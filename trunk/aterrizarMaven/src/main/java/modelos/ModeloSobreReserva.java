@@ -1,8 +1,11 @@
 package main.java.modelos;
 
+import org.uqbar.commons.utils.Observable;
+
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
+@Observable
 public class ModeloSobreReserva {
 	private Asiento asientoSeleccionado;
 	private String mensajeReservado;

@@ -2,6 +2,7 @@ package main.java.vuelos;
 
 import java.util.ArrayList;
 
+import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.fechas.Fecha;
 import main.java.fechas.Hora;
@@ -13,8 +14,8 @@ public class Vuelo {
 
 	private Hora horaLlegada;
 	private Hora horaSalida;
-	private String origen;
-	private String destino;
+	private Ciudad origen;
+	private Ciudad destino;
 	private Fecha fechaLlegada;
 	private Fecha fechaSalida;
 	private String numeroDeVuelo;
@@ -29,15 +30,16 @@ public class Vuelo {
 			String destino, String fechaSalida, String fechaLlegada,
 			String numeroDeVuelo, Aerolinea aerolinea) {
 		super();
-		this.setHoraLlegada(new Hora(horaLlegada));
-		this.setHoraSalida(new Hora(horaSalida));
-		this.origen = origen;
-		this.destino = destino;
-		this.setFechaLlegada(new Fecha(fechaLlegada));
-		this.setFechaSalida(new Fecha(fechaSalida));
-		this.numeroDeVuelo = numeroDeVuelo;
-		this.aerolinea = aerolinea;
-		this.setTiempoDeVuelo(new TiempoDeVuelo(this.fechaSalida, this.fechaLlegada, this.horaSalida, this.horaLlegada));
+		setHoraLlegada(new Hora(horaLlegada));
+		setHoraSalida(new Hora(horaSalida));
+		setOrigen(Ciudad.obtenerCiudad(origen));
+		setDestino(Ciudad.obtenerCiudad(destino));
+		setFechaLlegada(new Fecha(fechaLlegada));
+		setFechaSalida(new Fecha(fechaSalida));
+		setNumeroDeVuelo(numeroDeVuelo);
+		setAerolinea(aerolinea);
+		setTiempoDeVuelo(new TiempoDeVuelo(this.fechaSalida, this.fechaLlegada,
+										   this.horaSalida, this.horaLlegada));
 		
 	}
 
@@ -51,11 +53,11 @@ public class Vuelo {
 	 
 	 /* SETTERS*/
 	 
-	 public void setOrigen(String origenASetear){
+	 public void setOrigen(Ciudad origenASetear){
 	  this.origen = origenASetear;
 	 }
 	 
-	 public void setDestino(String destinoAsetear){
+	 public void setDestino(Ciudad destinoAsetear){
 	  this.destino = destinoAsetear;
 	 } 
 	 
@@ -65,11 +67,11 @@ public class Vuelo {
 	 
 
 	 /*GETTERS*/
-	 public String getOrigen(){
+	 public Ciudad getOrigen(){
 	  return this.origen;
 	 }
 	 
-	 public String getDestino(){
+	 public Ciudad getDestino(){
 	  return this.destino;
 	 } 
 	 

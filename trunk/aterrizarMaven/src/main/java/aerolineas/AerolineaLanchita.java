@@ -7,13 +7,15 @@ import com.lanchita.excepciones.EstadoErroneoException;
 
 import main.java.busquedas.Busqueda;
 
+import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.fechas.Fecha;
 
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 import main.java.vuelos.Vuelo;
 
-public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements Aerolinea {
+public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
+		Aerolinea {
 
 	private static final AerolineaLanchita INSTANCE = new AerolineaLanchita();
 	private BigDecimal impuesto = new BigDecimal(0.15);
@@ -99,19 +101,17 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 		return asientosAerolinea;
 	}
 
-	public Asiento retornarAsiento(String[] asientoD, String origen,
-			String destino, Fecha fecha) {
-		ArrayList<Asiento> asientosAerolinea = new ArrayList<Asiento>();
-		asientosAerolinea = getAsientosAerolinea();
+	public Asiento retornarAsiento(String[] asientoD) {
+		ArrayList<Asiento> asientosAerolinea = getAsientosAerolinea();
 		for (Asiento asientoC : asientosAerolinea) {
-			boolean cumpleOrigen = origen == null 
-			|| asientoC.getOrigen().equals(origen);
-			boolean cumpleDestino = destino == null 
-			|| asientoC.getDestino().equals(destino);
-			boolean cumpleFechaS = fecha == null
-			|| asientoC.getFechaSalida().esMenorIgualQue(fecha);
-			boolean cumpleFechaD = fecha == null 
-			|| asientoC.getFechaLlegada().esMayorIgualQue(fecha);
+			boolean cumpleOrigen = asientoC.getOrigen().getCodigo()
+					.equals(asientoD[8]);
+			boolean cumpleDestino = asientoC.getDestino().getCodigo()
+					.equals(asientoD[9]);
+			boolean cumpleFechaS = asientoC.getFechaSalida().esMenorIgualQue(
+					new Fecha(asientoD[10]));
+			boolean cumpleFechaD = asientoC.getFechaLlegada().esMayorIgualQue(
+					new Fecha(asientoD[11]));
 			boolean cumpleNumVuelo = asientoC.getCodigoAsiento().equals(
 					asientoD[0]);
 			if (cumpleOrigen && cumpleDestino && cumpleFechaS && cumpleFechaD
@@ -124,22 +124,29 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 
 	@Override
 	public ArrayList<Asiento> asientosDisponibles(Busqueda busqueda) {
-		String[][] asientosDisponibles;
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		Asiento asiento = new Asiento();
-		String fecha = busqueda.getFechaV() != null ? busqueda.getFechaV()
-				.getFechaS() : null;
-				String origen = busqueda.getOrigen().getCodigo();
-				String destino = busqueda.getDestino().getCodigo();
-				asientosDisponibles = asientosDisponibles(origen,
-						destino, fecha, null, null, null);
-				for (String[] asientoD : asientosDisponibles) {
-					asiento = retornarAsiento(asientoD, origen, destino, busqueda.getFechaV());
-					if (asiento != null) {
-						asientos.add(asiento);
-					}
-				}
-				return asientos;
+		String fechaSalida = busqueda.getFechaV().getFechaS();
+		String origen = busqueda.getOrigen().getCodigo();
+		String destino = busqueda.getDestino().getCodigo();
+		String[][] asientosDisponibles = asientosDisponibles(origen, destino,
+				fechaSalida, null, null, null);
+		for (String[] asientoD : asientosDisponibles) {
+			Asiento asiento = retornarAsiento(asientoD);
+			if (asiento != null) {
+				asientos.add(asiento);
+			}
+		}
+		String[][] asientosReservados = asientos(origen, destino, fechaSalida,
+				null, null, null);
+		for (String[] asientoD : asientosReservados) {
+			Asiento asiento = retornarAsiento(asientoD);
+			if (asiento != null
+					& asientoD[4].equals(DisponibilidadDeAsiento.RESERVADO
+							.getCodigo())) {
+				asientos.add(asiento);
+			}
+		}
+		return asientos;
 	}
 
 	@Override
