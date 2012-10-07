@@ -13,6 +13,7 @@ import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.usuarios.UsuarioConRecargo;
 import main.java.aerolineas.Aerolinea;
+import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.ClaseDeAsiento;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.enumeraciones.UbicacionDeAsiento;
@@ -37,8 +38,8 @@ public class Asiento extends Entity {
 	private String dni;
 	private Hora horaSalida;
 	private Hora horaLlegada;
-	private String origen;
-	private String destino;
+	private Ciudad origen;
+	private Ciudad destino;
 	private Fecha fechaSalida;
 	private Fecha fechaLlegada;
 	private BigDecimal precioConRecargo;
@@ -236,19 +237,19 @@ public class Asiento extends Entity {
 		this.reservas = reservas;
 	}
 
-	public String getOrigen() {
+	public Ciudad getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(String origen) {
+	public void setOrigen(Ciudad origen) {
 		this.origen = origen;
 	}
 
-	public String getDestino() {
+	public Ciudad getDestino() {
 		return destino;
 	}
 
-	public void setDestino(String destino) {
+	public void setDestino(Ciudad destino) {
 		this.destino = destino;
 	}
 
