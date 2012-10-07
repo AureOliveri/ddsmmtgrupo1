@@ -375,4 +375,9 @@ public class Asiento extends Entity {
 	public boolean estaDisponibleParaComprarPor(Usuario usuario) {
 		return estaDisponible() || reservaPertenecienteA(usuario);
 	}
+
+	public void sobreReservar(Usuario usuario){
+		Reserva reserva = new Reserva(this, usuario);
+		this.reservas.add(reserva);
+	}
 }

@@ -27,7 +27,7 @@ public class SobreReservaWindow extends Dialog<ModeloSobreReserva> {
 		new Label(mainPanel).setText("¿Que desea hacer?");
 		Panel botonera = new Panel(mainPanel);
 		botonera.setLayout(new ColumnLayout(2));
-		new Button(botonera).setCaption("SobreReservar").onClick(null);
+		new Button(botonera).setCaption("SobreReservar").onClick(new MessageSend(this, "sobreReservar"));
 		new Button(botonera).setCaption("seguir buscando").onClick(new MessageSend(this, "close"));
 	}
 

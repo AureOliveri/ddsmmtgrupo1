@@ -1,14 +1,17 @@
 package main.java.modelos;
 
+import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 
 public class ModeloSobreReserva {
 	private Asiento asientoSeleccionado;
 	private String mensajeReservado;
-
-	public ModeloSobreReserva(Asiento asientoSeleccionado){
+	private Usuario usuario;
+	
+	public ModeloSobreReserva(Asiento asientoSeleccionado, Usuario usuario){
 		this.asientoSeleccionado = asientoSeleccionado;
 		this.mensajeReservado = "El asiento " + this.asientoSeleccionado.getCodigoAsiento() + " ya se encuentra reservado";
+		this.usuario = usuario;
 	}
 	
 	public void setAsientoSeleccionado(Asiento asientoSeleccionado) {
@@ -25,6 +28,10 @@ public class ModeloSobreReserva {
 
 	public String getMensajeReservado() {
 		return mensajeReservado;
+	}
+	
+	public void sobreReservar(){
+		this.asientoSeleccionado.sobreReservar(this.usuario);
 	}
 	
 }

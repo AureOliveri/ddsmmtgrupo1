@@ -141,7 +141,7 @@ public class BuscarAsientosWindow extends Dialog<ModeloBuscador> {
 		if(reservaExitosa){
 			this.openDialog(new MensajeWindow(this, this.getModelObject()));			
 		} else {
-			this.openDialog(new SobreReservaWindow(this, new ModeloSobreReserva(this.getModelObject().getAsientoSeleccionado())));
+			this.openDialog(new SobreReservaWindow(this, new ModeloSobreReserva(this.getModelObject().getAsientoSeleccionado(), this.getModelObject().getUsuario())));
 		}
 	}
 	
