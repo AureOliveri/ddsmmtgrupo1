@@ -14,13 +14,15 @@ public class Opcionales {
 	private List<DisponibilidadDeAsiento> disponibilidades;
 	private BigDecimal precioMin;
 	private BigDecimal precioMax;
-	
-	public void setOpcionales(ArrayList<ClaseDeAsiento> clases, ArrayList<UbicacionDeAsiento> ubicaciones,
-			ArrayList<DisponibilidadDeAsiento> disponibilidades, BigDecimal precioMin, BigDecimal precioMax) {
 
-		this.setClases(clases);
-		this.setUbicaciones(ubicaciones);
-		this.setDisponibilidades(disponibilidades);
+	public void setOpcionales(ArrayList<ClaseDeAsiento> clases,
+			ArrayList<UbicacionDeAsiento> ubicaciones,
+			ArrayList<DisponibilidadDeAsiento> disponibilidades,
+			BigDecimal precioMin, BigDecimal precioMax) {
+
+		setClases(clases);
+		setUbicaciones(ubicaciones);
+		setDisponibilidades(disponibilidades);
 		setPrecioMin(precioMin);
 		setPrecioMax(precioMax);
 	}
@@ -28,12 +30,15 @@ public class Opcionales {
 	public void setPrecioMin(BigDecimal precioMin) {
 		this.precioMin = precioMin;
 	}
+
 	public BigDecimal getPrecioMin() {
 		return precioMin;
 	}
+
 	public void setPrecioMax(BigDecimal precioMax) {
 		this.precioMax = precioMax;
 	}
+
 	public BigDecimal getPrecioMax() {
 		return precioMax;
 	}
@@ -54,7 +59,8 @@ public class Opcionales {
 		return ubicaciones;
 	}
 
-	public void setDisponibilidades(List<DisponibilidadDeAsiento> disponibilidades) {
+	public void setDisponibilidades(
+			List<DisponibilidadDeAsiento> disponibilidades) {
 		this.disponibilidades = disponibilidades;
 	}
 
@@ -62,5 +68,4 @@ public class Opcionales {
 		return disponibilidades;
 	}
 
-		
 }

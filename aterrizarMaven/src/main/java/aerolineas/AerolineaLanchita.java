@@ -3,8 +3,6 @@ package main.java.aerolineas;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import com.lanchita.excepciones.EstadoErroneoException;
-
 import main.java.busquedas.Busqueda;
 
 import main.java.enumeraciones.DisponibilidadDeAsiento;
@@ -151,14 +149,10 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 
 	@Override
 	public void reservar(Asiento asiento, Usuario usuario) {
-		try {
 			reservar(asiento.getCodigoAsiento(), usuario.getDni());
 			usuario.getReservas().add(asiento);
-		} catch (EstadoErroneoException e) {
-			throw e;
 		}
 
-	}
 
 	private void setNombre(String nombre) {
 		this.nombre = nombre;

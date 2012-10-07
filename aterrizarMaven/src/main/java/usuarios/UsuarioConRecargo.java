@@ -28,9 +28,5 @@ public class UsuarioConRecargo extends TipoUsuario {
 		return "conRecargo";
 	}
 
-	public void comprarAsiento(Asiento unAsiento) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

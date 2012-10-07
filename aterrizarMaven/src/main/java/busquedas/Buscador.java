@@ -17,18 +17,22 @@ public class Buscador {
 	private Aerolineas aerolineas = new Aerolineas();
 	protected CriterioBusqueda criterio;
 	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
-	
+
 	public static Buscador getInstance() {
 		return INSTANCE;
 	}
 
 	public ArrayList<Asiento> buscarAsientos(Busqueda busqueda, Usuario usuario) {
 		usuario.guardarBusqueda(busqueda);
-		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
-		asientos = getAerolineas().filtrarAsientos(busqueda);
+		ArrayList<Asiento> asientos = getAerolineas().filtrarAsientos(busqueda);
+		asientos = aplicarFiltros(busqueda, usuario, asientos);
+		return usuario.getAsientosQueLeCorreponden(asientos,
+				usuario.getTipoUsuario());
+	}
 
+	private ArrayList<Asiento> aplicarFiltros(Busqueda busqueda,
+			Usuario usuario, ArrayList<Asiento> asientos) {
 		ArrayList<Asiento> asientosDeBusqueda = new ArrayList<Asiento>();
-
 		if (!getFiltros().isEmpty()) {
 			for (Asiento asiento : asientos) {
 				boolean cumple = true;
@@ -44,7 +48,7 @@ public class Buscador {
 			}
 			asientos = asientosDeBusqueda;
 		}
-		return usuario.getAsientosQueLeCorreponden(asientos, usuario.getTipoUsuario());
+		return asientos;
 	}
 
 	public boolean noHayAsientosDisponibles(ArrayList<Asiento> asientos) {

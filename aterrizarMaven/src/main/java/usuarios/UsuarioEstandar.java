@@ -3,8 +3,6 @@ package main.java.usuarios;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import main.java.enumeraciones.DisponibilidadDeAsiento;
-import main.java.excepciones.AsientoReservadoException;
 import main.java.fechas.Fecha;
 
 import main.java.reservas.Reserva;
@@ -34,15 +32,7 @@ public class UsuarioEstandar extends TipoUsuario {
 		return "estandar";
 	}
 
-	public void comprarAsiento(Asiento unAsiento, String dni) {
-		if(puedeComprar(unAsiento, dni)){
-			unAsiento.setDisponibilidad(DisponibilidadDeAsiento.RESERVADO);
-		} else {
-			throw new AsientoReservadoException(("el asiento "
-					+ unAsiento.getCodigoAsiento() + " se encuentra reservado"));
-		}
-		
-	}
+
 	@Override
 	public void reservarAsiento(Asiento asientoReservado, Usuario usuario){
 		usuario.getReservas().add(asientoReservado);
