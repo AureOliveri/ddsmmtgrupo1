@@ -3,6 +3,8 @@ package main.java.aerolineas;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.eclipse.core.databinding.observable.set.SetDiff;
+
 import main.java.busquedas.Busqueda;
 
 import main.java.enumeraciones.DisponibilidadDeAsiento;
@@ -68,6 +70,7 @@ public class AerolineaLanchita extends com.lanchita.AerolineaLanchita implements
 
 	@Override
 	public void comprar(Asiento unAsiento, Usuario usuario) {
+		unAsiento.setDisponibilidad(DisponibilidadDeAsiento.DISPONIBLE); //Para solucionar el problema de lanchita.
 		comprar(unAsiento.getCodigoAsiento());
 		usuario.getCompras().add(unAsiento);
 	}
