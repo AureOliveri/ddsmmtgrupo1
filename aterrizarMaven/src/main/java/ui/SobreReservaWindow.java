@@ -1,5 +1,6 @@
 package main.java.ui;
 
+
 import main.java.modelos.ModeloSobreReserva;
 
 import org.uqbar.arena.actions.MessageSend;
@@ -25,8 +26,14 @@ public class SobreReservaWindow extends Dialog<ModeloSobreReserva> {
 		new Label(mainPanel).setText("¿Que desea hacer?");
 		Panel botonera = new Panel(mainPanel);
 		botonera.setLayout(new ColumnLayout(2));
-		new Button(botonera).setCaption("SobreReservar").onClick(new MessageSend(this, "sobreReservar"));
-		new Button(botonera).setCaption("Seguir Buscando").onClick(new MessageSend(this, "close"));
+		new Button(botonera).setCaption("SobreReservar").onClick(
+				new MessageSend(this, "sobreReservar"));
+		new Button(botonera).setCaption("Seguir Buscando").onClick(
+				new MessageSend(this, "close"));
+	}
+
+	public void sobreReservar() {
+		this.getModelObject().sobreReservar();
 	}
 
 	@Override

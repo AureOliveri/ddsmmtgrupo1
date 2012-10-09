@@ -10,13 +10,20 @@ public class ModeloSobreReserva {
 	private Asiento asientoSeleccionado;
 	private String mensajeReservado;
 	private Usuario usuario;
-	
-	public ModeloSobreReserva(Asiento asientoSeleccionado, Usuario usuario){
+	private String label;
+
+	public ModeloSobreReserva(Asiento asientoSeleccionado, Usuario usuario) {
 		this.asientoSeleccionado = asientoSeleccionado;
-		this.mensajeReservado = "El asiento " + this.asientoSeleccionado.getCodigoAsiento() + " ya se encuentra reservado";
-		this.usuario = usuario;
+		this.mensajeReservado = "El asiento "
+				+ this.asientoSeleccionado.getCodigoAsiento()
+				+ " ya se encuentra reservado";
+		this.setUsuario(usuario);
 	}
-	
+
+	public void sobreReservar() {
+		this.asientoSeleccionado.sobreReservar(usuario);
+	}
+
 	public void setAsientoSeleccionado(Asiento asientoSeleccionado) {
 		this.asientoSeleccionado = asientoSeleccionado;
 	}
@@ -32,9 +39,21 @@ public class ModeloSobreReserva {
 	public String getMensajeReservado() {
 		return mensajeReservado;
 	}
-	
-	public void sobreReservar(){
-		this.asientoSeleccionado.sobreReservar(this.usuario);
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
 }
