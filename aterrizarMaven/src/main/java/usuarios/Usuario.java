@@ -49,8 +49,8 @@ public class Usuario extends Entity {
 			asiento.getAerolinea().comprar(asiento, this);
 	}
 	
-	public void reservar(Asiento asiento){
-		asiento.getAerolinea().reservar(asiento, this);
+	public boolean reservar(Asiento asiento){
+		return asiento.getAerolinea().reservar(asiento, this);
 	}
 	
 	public Boolean noTieneReserva(Asiento unAsiento) {

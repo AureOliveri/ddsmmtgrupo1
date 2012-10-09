@@ -29,7 +29,7 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	public AerolineaOceanic() {
 
 		setNombre("Oceanic");
-		List<AsientoDTO> asientosAerolinea = getAsientosDisponibles();
+		List<AsientoDTO> asientosAerolinea = getAsientos();
 
 		for (AsientoDTO asiento : asientosAerolinea) {
 			String numeroDeVuelo = asiento.getCodigoDeVuelo();
@@ -91,10 +91,12 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 
 	@Override
 	public void comprar(Asiento unAsiento, Usuario usuario) {
-		Integer numeroAsiento = Integer.parseInt(unAsiento.getNumeroDeAsiento());
+		Integer numeroAsiento = Integer
+				.parseInt(unAsiento.getNumeroDeAsiento());
 		String codigoVuelo = unAsiento.getVuelo().getNumeroDeVuelo();
 		comprarSiHayDisponibilidad(usuario.getDni(), codigoVuelo, numeroAsiento);
 		usuario.getCompras().add(unAsiento);
+		usuario.getReservas().remove(unAsiento);
 	}
 
 	public BigDecimal getImpuesto() {
@@ -124,14 +126,22 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 		return asientosAerolinea;
 	}
 
-	public Asiento retornarAsiento(AsientoDTO asientoDto) {
+	public Asiento retornarAsiento(AsientoDTO asientoDto, String origen, String destino, String fecha) {
 		ArrayList<Asiento> asientosAerolinea = new ArrayList<Asiento>();
 		asientosAerolinea = getAsientosAerolinea();
 		for (Asiento asientoC : asientosAerolinea) {
-			if (asientoC.getNumeroDeVuelo().equals(
-					asientoDto.getCodigoDeVuelo())
-					&& (asientoC.getNumeroDeAsiento().equals(asientoDto
-							.getNumeroDeAsiento().toString()))) {
+			boolean cumpleNumVuelo = asientoC.getNumeroDeVuelo().equals(
+					asientoDto.getCodigoDeVuelo());
+			boolean cumpleNumAsiento = asientoC.getNumeroDeAsiento().equals(
+					asientoDto.getNumeroDeAsiento().toString());
+			boolean cumpleOrigen = asientoC.getOrigen().getCodigo()
+					.equals(asientoDto.getOrigen()) && origen.equals(asientoDto.getOrigen());
+			boolean cumpleDestino = asientoC.getDestino().getCodigo()
+					.equals(asientoDto.getDestino()) && destino.equals(asientoDto.getDestino());
+			boolean cumpleFecha = asientoC.getFecha().equals(
+					asientoDto.getFechaDeSalida()) && fecha.equals(asientoDto.getFechaDeSalida());
+			if (cumpleNumVuelo && cumpleNumAsiento && cumpleOrigen
+					&& cumpleDestino && cumpleFecha) {
 				return asientoC;
 			}
 		}
@@ -142,16 +152,25 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	public ArrayList<Asiento> asientosDisponibles(Busqueda busqueda) {
 		ArrayList<Asiento> asientos = new ArrayList<Asiento>();
 		Asiento asiento = new Asiento();
-		String fecha = busqueda.getFechaV() != null ? busqueda.getFechaV()
-				.getFechaS() : null;
+		String fecha = busqueda.getFechaV().getFechaS();
+		String origen = busqueda.getOrigen().getCodigo();
+		String destino = busqueda.getDestino().getCodigo();
 
 		List<AsientoDTO> asientosDisponibles = this.getAsientosDisponibles(
-				busqueda.getOrigen().getCodigo(), busqueda.getDestino().getCodigo(), fecha);
+				origen, destino, fecha);
 
 		for (AsientoDTO asientoDto : asientosDisponibles) {
-			asiento = retornarAsiento(asientoDto);
+			asiento = retornarAsiento(asientoDto, origen, destino, fecha);
 			asientos.add(asiento);
 		}
+
+//		List<AsientoDTO> asientosReservados = this.getAsientos();
+//		for (AsientoDTO asientoDtoR : asientosReservados) {
+//			asiento = retornarAsiento(asientoDtoR, origen, destino, fecha);
+//			if (asiento != null && asientoDtoR.getReservado())
+//				
+//				asientos.add(asiento);
+//		}
 		return asientos;
 	}
 
@@ -165,8 +184,8 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 				if (destino == null) {
 					return asientosDisponiblesParaOrigen(origen, fecha);
 				} else {
-					return asientosDisponiblesParaOrigenYDestino(origen, destino,
-							fecha);
+					return asientosDisponiblesParaOrigenYDestino(origen,
+							destino, fecha);
 				}
 			}
 		} catch (NullPointerException ex) {
@@ -176,17 +195,19 @@ public class AerolineaOceanic extends com.oceanic.AerolineaOceanic implements
 	}
 
 	@Override
-	public void reservar(Asiento asiento, Usuario usuario) {
-		AerolineaOceanic.getInstance().reservar(usuario.getDni(),
-				asiento.getNumeroDeVuelo(),
-				Integer.parseInt(asiento.getNumeroDeAsiento()));
-		usuario.getReservas().add(asiento);
+	public boolean reservar(Asiento asiento, Usuario usuario) {
+		if (reservar(usuario.getDni(), asiento.getNumeroDeVuelo(),
+				Integer.parseInt(asiento.getNumeroDeAsiento()))) {
+			usuario.getReservas().add(asiento);
+			return true;
+		}
+		return false;
 	}
 
 	private void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	@Override
 	public String getNombre() {
 		return this.nombre;
