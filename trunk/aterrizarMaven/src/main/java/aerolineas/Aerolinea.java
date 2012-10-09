@@ -16,7 +16,7 @@ public interface Aerolinea {
 
 	public BigDecimal getImpuesto();
 	
-	public void reservar(Asiento asiento, Usuario usuario);
+	public boolean reservar(Asiento asiento, Usuario usuario);
 
 	public String getNombre();
 	

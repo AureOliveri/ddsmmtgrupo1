@@ -40,14 +40,13 @@ public class ModeloBuscador {
 	public Boolean reservar() {
 		Boolean reservaExitosa = false;
 		try {
-			this.usuario.reservar(asientoSeleccionado);
+			reservaExitosa = this.usuario.reservar(asientoSeleccionado);
 			this.setLabel("El asiento "
 					+ asientoSeleccionado.getCodigoAsiento()
 					+ " ha sido reservado exitosamente");
 			this.setBoton("Seguir Buscando");
 			buscador.mostrarAsientos(usuario.getReservas(),
 					usuario.getTipoUsuario());
-			reservaExitosa = true;
 		} catch (AsientoReservadoException e) {
 			this.setLabel("Ha ocurrido un error en la reserva: "
 					+ e.getMessage() + "\n Por favor intente nuevamente");
@@ -56,9 +55,8 @@ public class ModeloBuscador {
 			this.setLabel("Ha ocurrido un error en la reserva: "
 					+ e.getMessage() + "\n Por favor intente nuevamente");
 			this.setBoton("Aceptar");
-		} finally {
-			return reservaExitosa;
 		}
+		return reservaExitosa;
 	}
 
 	public void comprar() {
