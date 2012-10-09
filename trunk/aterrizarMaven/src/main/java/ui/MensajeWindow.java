@@ -17,7 +17,6 @@ public class MensajeWindow extends Dialog<ModeloBuscador> {
 	public MensajeWindow(WindowOwner owner, ModeloBuscador model) {
 		super(owner, model);
 	}
-
 	
 	@Override
 	public void createContents(Panel mainPanel) {
