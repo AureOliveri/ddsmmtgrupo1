@@ -8,6 +8,7 @@ import main.java.fechas.Fecha;
 import main.java.fechas.Hora;
 
 import main.java.aerolineas.Aerolinea;
+import main.java.aerolineas.Aerolineas;
 
 
 public class Vuelo {
@@ -50,7 +51,7 @@ public class Vuelo {
 	public void addAsiento(Asiento a) {
 		this.asientos.add(a);
 	}
-	 
+	
 	 /* SETTERS*/
 	 
 	 public void setOrigen(Ciudad origenASetear){
@@ -141,6 +142,20 @@ public class Vuelo {
 
 	public int getPopularidad() {
 		return popularidad;
+	}
+
+	public boolean esVueloConEscala(Ciudad origenInicial, Ciudad destinoFinal) {
+		
+		for (Vuelo unVuelo : Aerolineas.getVuelosAerolineas()) {
+			if( 
+			this.origen == origenInicial &&
+			unVuelo.origen != this.origen && 
+			unVuelo.origen == this.destino &&
+			unVuelo.destino == destinoFinal){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
