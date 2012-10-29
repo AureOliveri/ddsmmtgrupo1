@@ -6,9 +6,13 @@ import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.fechas.Fecha;
 import main.java.fechas.Hora;
+import main.java.usuarios.Usuario;
+import main.java.usuarios.UsuarioEstandar;
 
 import main.java.aerolineas.Aerolinea;
 import main.java.aerolineas.Aerolineas;
+import main.java.busquedas.Buscador;
+import main.java.busquedas.Busqueda;
 
 
 public class Vuelo {
@@ -157,5 +161,26 @@ public class Vuelo {
 		}
 		return false;
 	}
-
+	
+	public ArrayList<Escala> obtenerEscala(Ciudad origen, Ciudad destino ){
+		ArrayList<Vuelo> vueloOrigen = new ArrayList<Vuelo>();
+		ArrayList<Escala> escalasObtenidas = new ArrayList<Escala>();
+		for(Vuelo vuelo : Aerolineas.getVuelosAerolineas()){
+			if(vuelo.origen.equals(origen)) vueloOrigen.add(vuelo);
+		}
+		Buscador buscador = new Buscador();
+		for(Vuelo vuelo: vueloOrigen){
+			Busqueda busqueda = new Busqueda(vuelo.getDestino(), null, destino, null);
+			ArrayList<Asiento> asientoDestino = buscador.buscarAsientos(busqueda, new Usuario("Nombre", "30000000", new UsuarioEstandar()));
+			ArrayList<Vuelo> vueloDestino = new ArrayList<Vuelo>();
+			for(Asiento asiento : asientoDestino){
+				vueloDestino.add(asiento.getVuelo());
+			}
+			for(Vuelo vueloFinal : vueloDestino){
+				Escala escala = new Escala(vuelo, vueloFinal);
+				escalasObtenidas.add(escala);
+			}
+		}
+		return escalasObtenidas;		
+	}
 }
