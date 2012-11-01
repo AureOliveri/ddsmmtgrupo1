@@ -161,6 +161,17 @@ public class Vuelo {
 		}
 		return false;
 	}
+	public Vuelo getVueloQueHaceEscalaConVos(){
+		
+		for (Vuelo unVuelo : Aerolineas.getVuelosAerolineas()) {
+			if( 
+			unVuelo.origen != this.origen && 
+			unVuelo.origen == this.destino){
+				return unVuelo;
+			}
+		}
+		return null;
+	}
 	
 	public ArrayList<Escala> obtenerEscala(Ciudad origen, Ciudad destino ){
 		ArrayList<Vuelo> vueloOrigen = new ArrayList<Vuelo>();

@@ -38,6 +38,10 @@ public class Aerolineas {
 		for (Vuelo unVuelo : getVuelosAerolineas()) {
 			if(unVuelo.esVueloConEscala(origen,destino)){
 				vuelosConEscala.add(unVuelo);
+				Vuelo vuelo2 = unVuelo.getVueloQueHaceEscalaConVos();
+				if(!(vuelosConEscala.contains(vuelo2))){
+					vuelosConEscala.add(vuelo2);
+				}
 			}
 		}
 		return vuelosConEscala;
