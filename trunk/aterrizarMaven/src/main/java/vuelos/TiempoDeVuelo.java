@@ -81,9 +81,4 @@ public class TiempoDeVuelo {
 		this.enMilisegundos = enMilisegundos;
 	}
 	
-	public long sumar(long unValor){
-		long resultado = 0;
-		
-		return resultado;
-	}
 }
