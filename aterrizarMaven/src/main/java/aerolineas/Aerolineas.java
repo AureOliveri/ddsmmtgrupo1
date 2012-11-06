@@ -6,6 +6,7 @@ import main.java.busquedas.Busqueda;
 import main.java.enumeraciones.Ciudad;
 import main.java.vuelos.Asiento;
 import main.java.vuelos.Vuelo;
+import main.java.vuelos.VueloConEscala;
 
 
 public class Aerolineas {
@@ -32,18 +33,23 @@ public class Aerolineas {
 		return vuelos;
 	}
 	
-	public ArrayList<Vuelo> vuelosConEscala(Ciudad origen,Ciudad destino){
+	public ArrayList<VueloConEscala> vuelosConEscala(Ciudad origen,Ciudad destino){
 		
-		ArrayList<Vuelo> vuelosConEscala = new ArrayList<Vuelo>();
+		ArrayList<VueloConEscala> vuelosConEscala = new ArrayList<VueloConEscala>();
 		for (Vuelo unVuelo : getVuelosAerolineas()) {
 			if(unVuelo.esVueloConEscala(origen,destino)){
-				vuelosConEscala.add(unVuelo);
+				VueloConEscala vuelo = new VueloConEscala(unVuelo, unVuelo.getVueloQueHaceEscalaConVos());
+				if (!vuelosConEscala.contains(vuelo)){
+					vuelosConEscala.add(vuelo);
+				}
+				}			
+				/*vuelosConEscala.add(unVuelo);
 				Vuelo vuelo2 = unVuelo.getVueloQueHaceEscalaConVos();
 				if(!(vuelosConEscala.contains(vuelo2))){
 					vuelosConEscala.add(vuelo2);
-				}
+				}*/
 			}
-		}
+		
 		return vuelosConEscala;
 	}
 	

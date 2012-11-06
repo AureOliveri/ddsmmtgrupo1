@@ -17,17 +17,18 @@ import main.java.busquedas.Busqueda;
 
 public class Vuelo {
 
-	private Hora horaLlegada;
-	private Hora horaSalida;
-	private Ciudad origen;
-	private Ciudad destino;
-	private Fecha fechaLlegada;
-	private Fecha fechaSalida;
-	private String numeroDeVuelo;
+	protected Hora horaLlegada;
+	protected Hora horaSalida;
+	protected Ciudad origen;
+	protected Ciudad destino;
+	protected Fecha fechaLlegada;
+	protected Fecha fechaSalida;
+	protected String numeroDeVuelo;
 	private Aerolinea aerolinea;
-	private TiempoDeVuelo tiempoDeVuelo;
+	protected TiempoDeVuelo tiempoDeVuelo;
 	private int popularidad;
 	private ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+	protected String tipoVuelo;
 	
 	public Vuelo() {}
 	
@@ -44,8 +45,8 @@ public class Vuelo {
 		setNumeroDeVuelo(numeroDeVuelo);
 		setAerolinea(aerolinea);
 		setTiempoDeVuelo(new TiempoDeVuelo(this.fechaSalida, this.fechaLlegada,
-										   this.horaSalida, this.horaLlegada));
-		
+								        this.horaSalida, this.horaLlegada));
+		setTipoVuelo("Directo");
 	}
 
 	public boolean yaNoEstasDisponible(Asiento unAsiento) {
@@ -157,6 +158,7 @@ public class Vuelo {
 			unVuelo.origen == this.destino &&
 			unVuelo.destino == destinoFinal){
 				return true;
+				
 			}
 		}
 		return false;
@@ -193,5 +195,13 @@ public class Vuelo {
 			}
 		}
 		return escalasObtenidas;		
+	}
+
+	public void setTipoVuelo(String tipoVuelo) {
+		this.tipoVuelo = tipoVuelo;
+	}
+
+	public String getTipoVuelo() {
+		return tipoVuelo;
 	}
 }
