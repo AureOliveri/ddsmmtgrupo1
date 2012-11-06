@@ -28,9 +28,7 @@ public class Buscador {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = getAerolineas().filtrarAsientos(busqueda);
 		asientos = aplicarFiltros(busqueda, usuario, asientos);
-		for (Vuelo vuelo : getAerolineas().vuelosConEscala(busqueda.getOrigen(), busqueda.getDestino())) {
-			asientos.addAll(vuelo.getAsientos());
-		}
+		
 		return usuario.getAsientosQueLeCorreponden(asientos,
 				usuario.getTipoUsuario());
 	}
@@ -103,5 +101,13 @@ public class Buscador {
 	public Aerolineas getAerolineas() {
 		return aerolineas;
 	}
-
+	public ArrayList<Asiento> buscarAsientosConEscala(Busqueda busqueda, Usuario usuario){
+		usuario.guardarBusqueda(busqueda);
+		ArrayList<Asiento> asientos = new ArrayList<Asiento>();		
+		for (Vuelo vuelo : getAerolineas().vuelosConEscala(busqueda.getOrigen(), busqueda.getDestino())){
+			asientos.addAll(vuelo.getAsientos());
+		}
+		return usuario.getAsientosQueLeCorreponden(asientos,
+				usuario.getTipoUsuario());
+	}
 }
