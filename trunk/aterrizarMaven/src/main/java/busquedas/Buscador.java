@@ -11,7 +11,7 @@ import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.vuelos.Asiento;
 import main.java.vuelos.Vuelo;
-import main.java.vuelos.VueloConEscala;
+
 
 public class Buscador {
 
@@ -28,7 +28,7 @@ public class Buscador {
 		usuario.guardarBusqueda(busqueda);
 		ArrayList<Asiento> asientos = getAerolineas().filtrarAsientos(busqueda);
 		asientos = aplicarFiltros(busqueda, usuario, asientos);
-		for (VueloConEscala vuelo : getAerolineas().vuelosConEscala(busqueda.getOrigen(), busqueda.getDestino())) {
+		for (Vuelo vuelo : getAerolineas().vuelosConEscala(busqueda.getOrigen(), busqueda.getDestino())) {
 			asientos.addAll(vuelo.getAsientos());
 		}
 		return usuario.getAsientosQueLeCorreponden(asientos,
