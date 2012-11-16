@@ -60,6 +60,12 @@
             <artifactId>arena</artifactId>
             <version>${arena-version}</version>
          </dependency>
+
+	<dependency>
+ 	    <groupId>uqbar</groupId>
+	    <artifactId>arena-pers</artifactId>
+	    <version>${arena-version}</version>
+ 	</dependency>
            
  	<dependency>
  		<groupId>uqbar</groupId>
