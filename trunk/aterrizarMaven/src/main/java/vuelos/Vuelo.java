@@ -2,6 +2,8 @@ package main.java.vuelos;
 
 import java.util.ArrayList;
 
+
+
 import main.java.enumeraciones.Ciudad;
 import main.java.enumeraciones.DisponibilidadDeAsiento;
 import main.java.fechas.Fecha;
@@ -14,9 +16,7 @@ import main.java.aerolineas.Aerolineas;
 import main.java.busquedas.Buscador;
 import main.java.busquedas.Busqueda;
 
-
 public class Vuelo {
-
 	protected Hora horaLlegada;
 	protected Hora horaSalida;
 	protected Ciudad origen;
