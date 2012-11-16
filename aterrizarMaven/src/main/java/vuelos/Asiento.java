@@ -8,6 +8,9 @@ import java.util.Queue;
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.TransactionalAndObservable;
 
+import uqbar.arena.persistence.annotations.PersistentClass;
+import uqbar.arena.persistence.annotations.PersistentField;
+
 import main.java.reservas.Reserva;
 import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
@@ -20,6 +23,7 @@ import main.java.enumeraciones.UbicacionDeAsiento;
 import main.java.fechas.Fecha;
 import main.java.fechas.Hora;
 
+@PersistentClass
 @TransactionalAndObservable
 public class Asiento extends Entity {
 
@@ -282,6 +286,7 @@ public class Asiento extends Entity {
 		this.disponibilidad = disponibilidad;
 	}
 
+	@PersistentField
 	public DisponibilidadDeAsiento getDisponibilidad() {
 		return disponibilidad;
 	}
@@ -310,6 +315,7 @@ public class Asiento extends Entity {
 		this.numeroDeAsiento = numeroDeAsiento;
 	}
 
+	@PersistentField
 	public String getNumeroDeVuelo() {
 		return numeroDeVuelo;
 	}
