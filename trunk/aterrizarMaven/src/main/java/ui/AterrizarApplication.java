@@ -21,5 +21,4 @@ public class AterrizarApplication extends Application {
 	protected Window<?> createMainWindow() {
 		return new AterrizarWindow(this);
 	}
-	
 }
