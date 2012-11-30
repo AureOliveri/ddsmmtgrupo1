@@ -2,18 +2,13 @@ package test.java.testBusquedas;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
 import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import main.java.criterios.CriterioBusqueda;
 import main.java.criterios.CriterioPrecioAscendente;
 import main.java.criterios.CriterioPrecioDescendente;
 import main.java.criterios.CriterioTiempoDeVuelo;
-
-
 import main.java.usuarios.TipoUsuario;
 import main.java.usuarios.Usuario;
 import main.java.usuarios.UsuarioConRecargo;
@@ -283,3 +278,4 @@ public class TestBusquedasLanchita {
 	}
 
 }
+
